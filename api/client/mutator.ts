@@ -4,7 +4,7 @@ const API_URL = process.env.API_URL || 'http://localhost:3388';
 
 export const customInstance = async <T>(
   url: string,
-  config: RequestInit
+  config: RequestInit & { next?: { revalidate?: number } }
 ): Promise<T> => {
   const token = await getAccessToken();
 
@@ -16,6 +16,10 @@ export const customInstance = async <T>(
       ...config.headers,
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json',
+    },
+    next: {
+      revalidate: 3600, // Cache for 1 hour by default
+      ...config.next,
     },
   });
 

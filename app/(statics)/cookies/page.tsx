@@ -1,11 +1,16 @@
 import { Container } from '@/components/common/container.component';
 import { Divider } from '@/components/common/divider.component';
 import { CONTACT_EMAIL, DOMAIN, SITE_NAME } from '@/config/constants';
+import { metadataGenerator } from '@/lib/seo/metadata.generator';
 
 export async function generateMetadata() {
   return {
-    title: 'Cookie Policy',
-    description: 'Cookie Policy',
+    ...metadataGenerator(undefined, {
+      title: 'Cookie Policy',
+      description: 'Cookie Policy',
+      ogType: 'website',
+      slug: 'cookies',
+    }),
     robots: {
       index: false,
       follow: false,

@@ -23,7 +23,7 @@ export function MediaViewer({
             </Dialog.Title>
             <Image
               src={media.src}
-              alt={media.alt || 'Media'}
+              alt={media.alt || 'Media content'}
               width={1600}
               height={1600}
               className='h-auto w-full'

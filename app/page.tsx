@@ -12,7 +12,7 @@ import { getImages } from '@/lib/image.utils';
 import { metadataGenerator } from '@/lib/seo/metadata.generator';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import { cn } from '@/lib/utils';
-import {Metadata} from "next";
+import { Metadata } from "next";
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
@@ -26,10 +26,11 @@ export async function generateMetadata(): Promise<Metadata> {
     const response = await postsControllerFindOneBySlug(domain, slug);
 
     if (response.status !== 200) {
-      return {
+      return metadataGenerator(undefined, {
         title: 'Goker Art',
         description: 'Art and creativity platform',
-      };
+        ogType: 'website',
+      });
     }
 
     const validationResult = postsControllerFindOneBySlugResponse.safeParse(
@@ -45,10 +46,11 @@ export async function generateMetadata(): Promise<Metadata> {
     return metadataGenerator(validationResult.data, { ogType: 'website' });
   } catch (error) {
     console.error('Failed to generate metadata:', error);
-    return {
+    return metadataGenerator(undefined, {
       title: 'Goker Art',
       description: 'Art and creativity platform',
-    };
+      ogType: 'website',
+    });
   }
 }
 
@@ -235,13 +237,12 @@ const Page = async () => {
                 <Image
                   className='w-full object-contain transition-transform duration-300 ease-in-out group-hover:scale-105'
                   src={cover.src}
-                  alt={`Cover for category ${post.title}`}
+                  alt={`Cover image for "${post.title}"`}
                   width={750}
                   height={250}
                   quality={75}
                   decoding='async'
                   sizes='(max-width: 768px) 100vw, 50vw'
-                  blurDataURL={cover.src}
                   priority
                 />
               </Link>

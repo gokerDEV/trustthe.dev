@@ -27,7 +27,7 @@ export default async function Profile({ post }: { post: PostDto }) {
             <Image
               className='h-full w-full rounded-full object-cover object-center'
               src={cover.src}
-              alt={String(post.title)}
+              alt={`Profile picture of ${post.title}`}
               width={300}
               height={300}
               loading='lazy'

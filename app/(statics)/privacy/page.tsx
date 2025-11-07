@@ -1,12 +1,17 @@
 import { Container } from '@/components/common/container.component';
 import { Divider } from '@/components/common/divider.component';
 import { CONTACT_EMAIL, DOMAIN, SITE_NAME } from '@/config/constants';
+import { metadataGenerator } from '@/lib/seo/metadata.generator';
 import Link from 'next/link';
 
 export async function generateMetadata() {
   return {
-    title: 'Privacy Policy',
-    description: 'Privacy Policy',
+    ...metadataGenerator(undefined, {
+      title: 'Privacy Policy',
+      description: 'Privacy Policy',
+      ogType: 'website',
+      slug: 'privacy',
+    }),
     robots: {
       index: false,
       follow: false,
