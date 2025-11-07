@@ -1,0 +1,183 @@
+---
+alwaysApply: true
+---
+
+<context>
+These rules are established for developing an enterprise-level admin client using the Next.js App Router and adopting a fully server-side (SSR/SSG) architecture. The architecture strictly aims to AVOID using client-side JavaScript ('use client').
+</context>
+
+<!-- ───────────── FOUNDATIONS ───────────── -->
+
+<rule id="foundations" severity="error">
+<title>Enterprise Foundations</title>
+<instructions>
+
+SOLID, Clean Code, Reusability: All code must adhere to these principles. Readability and maintainability are the highest priorities.
+
+Strict TypeScript (Strict Mode): The any type will NOT be used under any circumstances. Precise types and discriminated unions must always be preferred.
+
+Performance: The architecture is inherently performant (zero client-side JS). Unnecessary data fetching or render loops must be avoided.
+</instructions>
+</rule>
+
+<rule id="architecture-ssr-only" severity="error">
+<title>Server-First Architecture</title>
+<instructions>
+
+The application architecture is built on the Next.js App Router's Server Components (RSC).
+
+Data fetching and all business logic run entirely on the server.
+
+The 'use client' directive will NOT be used under any circumstances. The project must operate with a zero client-side JavaScript goal.
+
+A BFF (Backend-for-Frontend) or /api proxy layer DOES NOT EXIST. Server components access the API directly and securely.
+</instructions>
+</rule>
+
+<rule id="data-layer-server-only" severity="error">
+<title>Server-Side Data Layer (Orval + Zod)</title>
+<instructions>
+
+The data layer must be managed using Orval (@orval/core).
+
+This automatically generates both the type-safe server-side client and the Zod validation schemas (@orval/zod) from OpenAPI.
+
+The generated client will only be used within Server Components (async Page()), generateMetadata, and generateStaticParams.
+
+Data returned from the API must be validated at runtime (.parse()) within Server Components using the corresponding Zod schema.
+
+It is STRICTLY forbidden to perform any data fetching (fetch, axios) on the client side (in a <script> block) or in the browser.
+
+The pnpm run codegen (or pnpm orval) command must always be run after backend DTO changes.
+</instructions>
+</rule>
+
+<rule id="env-security" severity="error">
+<title>Configuration and Security (Environment)</title>
+<instructions>
+
+All API keys, client_id, client_secret, and other secrets will only be stored in server-side environment variables (.env.local).
+
+The NEXT*PUBLIC* prefix will NOT be used under any circumstances. No secrets or configuration details may be exposed to the client (browser).
+</instructions>
+</rule>
+
+<!-- ───────────── UI SYSTEM ───────────── -->
+
+<rule id="ui-library" severity="error">
+<title>shadcn/ui Usage</title>
+<instructions>
+
+Always prefer existing components under components/ before creating new ones.
+
+If a new primitive is needed, it must be installed via the latest shadcn/ui (npx shadcn@latest add ...) and wrapped according to the project's design tokens.
+
+Components must be reusable, and composition must be preferred over inheritance.
+</instructions>
+</rule>
+
+<rule id="components-structure" severity="warn">
+<title>Component Structure & Naming</title>
+<instructions>
+
+Folders:
+
+components/ui/ → Design primitives (shadcn/ui wrappers; purely presentational).
+
+components/common/ → Reusable generic patterns (tables, dialogs, empty states, breadcrumb).
+
+components/features/ → Domain-aware reusable patterns (e.g., Post, Category, Profile).
+
+Components should not contain business logic; side effects must remain only within server components (RSC).
+</instructions>
+</rule>
+
+<!-- ───────────── ERROR HANDLING ───────────── -->
+
+<rule id="error-handling-server" severity="error">
+<title>Error Handling</title>
+<instructions>
+
+Data fetching (GET) or Zod validation (.parse()) errors must be handled within async components using try/catch blocks.
+
+The notFound() function must be called when a record is not found (404).
+
+Unexpected or critical errors (500) must be caught and displayed to the user via Next.js's built-in error.tsx file.
+</instructions>
+</rule>
+
+<!-- ───────────── OTHER RULES ───────────── -->
+
+<rule id="i18n-server" severity="error">
+<title>Localization (i18next - Server-Side)</title>
+<instructions>
+
+Localization must use i18next.
+
+All translations must be loaded within Server Components using server-side i18next helpers.
+
+The useTranslation() hook (and therefore 'use client') will NOT be used under any circumstances.
+
+All text (errors, titles, toast messages) must come from i18n keys.
+</instructions>
+</rule>
+
+<rule id="loading-states-server" severity="warn">
+<title>Loading & Empty States</title>
+<instructions>
+
+Next.js's built-in loading.tsx file (or Suspense) must be used for asynchronous data loading and route transitions.
+
+Empty state components must clearly guide the next action (e.g., "Return to homepage").
+
+Layout shift (CLS) must be avoided.
+</instructions>
+</rule>
+
+<rule id="performance-server" severity="warn">
+<title>Performance Hygiene</title>
+<instructions>
+
+As the application is 100% server-first, client-side memoization (useMemo, useCallback) is not used.
+
+Data fetching and rendering are on the server. Next.js's cache or revalidate options for fetch calls must be used intentionally.
+
+All components must be Server Components by default.
+</instructions>
+</rule>
+
+<rule id="a11y" severity="warn">
+<title>Accessibility (a11y) & Semantics</title>
+<instructions>
+
+Semantic HTML (e.g., <article>, <button>, <nav>) must be used.
+
+Keyboard navigation and focus management must be ensured.
+
+aria labels must be provided for all interactive elements, including shadcn/ui components.
+</instructions>
+</rule>
+
+<!-- ───────────── PR CHECKLIST ───────────── -->
+
+<rule id="pr-ready-server" severity="info" when="diff|pr">
+<title>PR Readiness Checklist (Frontend - Server-First)</title>
+<instructions>
+
+[ ] pnpm run codegen (Orval) has been run; the client compiles with no diff.
+
+[ ] ABSOLUTELY NO 'use client' directive was used.
+
+[ ] All data fetching is done within Server Components using the Orval client.
+
+[ ] Data returned from the API was validated at runtime using Zod schemas (generated by Orval).
+
+[ ] Error handling is implemented via error.tsx and notFound().
+
+[ ] There are NO environment variables prefixed with NEXT*PUBLIC*.
+
+[ ] any was not used; strict typing rules are passing.
+
+[ ] shadcn/ui components are up-to-date via npx shadcn@latest; no duplicate primitives.
+</instructions>
+</rule>
