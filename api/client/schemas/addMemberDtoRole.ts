@@ -9,13 +9,13 @@
 /**
  * Role to assign to the member
  */
-export type AddMemberDtoRole =
-  (typeof AddMemberDtoRole)[keyof typeof AddMemberDtoRole];
+export type AddMemberDtoRole = typeof AddMemberDtoRole[keyof typeof AddMemberDtoRole];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const AddMemberDtoRole = {
-  owner: "owner",
-  admin: "admin",
-  member: "member",
-  viewer: "viewer",
+  owner: 'owner',
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
 } as const;

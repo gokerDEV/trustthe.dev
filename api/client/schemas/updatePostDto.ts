@@ -5,9 +5,9 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { UpdatePostDtoType } from "./updatePostDtoType";
-import type { UpdatePostDtoStatus } from "./updatePostDtoStatus";
-import type { UpdateFileDto } from "./updateFileDto";
+import type { UpdatePostDtoType } from './updatePostDtoType';
+import type { UpdatePostDtoStatus } from './updatePostDtoStatus';
+import type { UpdateFileDto } from './updateFileDto';
 
 export interface UpdatePostDto {
   /**

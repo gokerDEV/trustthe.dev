@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { Exif } from "./exif";
-import type { Point } from "./point";
+import type { Exif } from './exif';
+import type { Point } from './point';
 
 export interface PostFileDto {
   altText: string;

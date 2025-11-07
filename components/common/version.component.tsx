@@ -28,26 +28,23 @@ export default function Version({
     <div
       data-id='trustthedev'
       data-cy='Version'
-      className={cn(
-        'fixed right-0 bottom-0 z-50 flex items-center',
-        className
-      )}
+      className={cn('fixed right-0 bottom-0 z-50 flex items-center', className)}
     >
       <details className='peer'>
-      <summary
-        className='bg-background/80 dark:bg-background/60 inline-flex cursor-pointer list-none items-center gap-1 rounded-t-sm p-1 py-0.5 mr-1.5 text-[0.6rem] tracking-wide backdrop-blur-md [&::-webkit-details-marker]:hidden shadow'
-        role='button'
-        aria-label='Toggle version information'
-        tabIndex={0}
-      >
-        {icon}
-        {TTD?.version}
-      </summary>
+        <summary
+          className='bg-background/80 dark:bg-background/60 mr-1.5 inline-flex cursor-pointer list-none items-center gap-1 rounded-t-sm p-1 py-0.5 text-[0.6rem] tracking-wide shadow backdrop-blur-md [&::-webkit-details-marker]:hidden'
+          role='button'
+          aria-label='Toggle version information'
+          tabIndex={0}
+        >
+          {icon}
+          {TTD?.version}
+        </summary>
       </details>
 
       <div
         className={cn(
-          'version-card pointer-events-auto absolute right-0 bottom-full w-screen max-w-[360px] mb-1.5 mx-2 font-mono transition-all sm:w-[300px] sm:max-w-[90vw] xl:w-[360px]',
+          'version-card pointer-events-auto absolute right-0 bottom-full mx-2 mb-1.5 w-screen max-w-[360px] font-mono transition-all sm:w-[300px] sm:max-w-[90vw] xl:w-[360px]',
           'invisible opacity-0',
           'sm:peer-hover:visible sm:peer-hover:opacity-100',
           'peer-open:visible peer-open:opacity-100'

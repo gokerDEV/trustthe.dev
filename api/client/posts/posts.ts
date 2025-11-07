@@ -18,798 +18,695 @@ import type {
   PostsControllerFindByTags200,
   PostsControllerFindByTagsParams,
   ResponseIdDto,
-  UpdatePostDto,
-} from ".././schemas";
+  UpdatePostDto
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Create a new post
  */
 export type postsControllerCreateResponse201 = {
-  data: ResponseIdDto;
-  status: 201;
-};
+  data: ResponseIdDto
+  status: 201
+}
 
 export type postsControllerCreateResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerCreateResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerCreateResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerCreateResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerCreateResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerCreateResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerCreateResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerCreateResponseSuccess = (postsControllerCreateResponse201) & {
+  headers: Headers;
 };
-
-export type postsControllerCreateResponseSuccess =
-  postsControllerCreateResponse201 & {
-    headers: Headers;
-  };
-export type postsControllerCreateResponseError = (
-  | postsControllerCreateResponse400
-  | postsControllerCreateResponse401
-  | postsControllerCreateResponse403
-  | postsControllerCreateResponse404
-  | postsControllerCreateResponse409
-  | postsControllerCreateResponse422
-  | postsControllerCreateResponse500
-) & {
+export type postsControllerCreateResponseError = (postsControllerCreateResponse400 | postsControllerCreateResponse401 | postsControllerCreateResponse403 | postsControllerCreateResponse404 | postsControllerCreateResponse409 | postsControllerCreateResponse422 | postsControllerCreateResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerCreateResponse =
-  | postsControllerCreateResponseSuccess
-  | postsControllerCreateResponseError;
+export type postsControllerCreateResponse = (postsControllerCreateResponseSuccess | postsControllerCreateResponseError)
 
 export const getPostsControllerCreateUrl = () => {
-  return `/posts`;
-};
 
-export const postsControllerCreate = async (
-  createPostDto: CreatePostDto,
-  options?: RequestInit,
-): Promise<postsControllerCreateResponse> => {
-  return customInstance<postsControllerCreateResponse>(
-    getPostsControllerCreateUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(createPostDto),
-    },
-  );
-};
+
+  
+
+  return `/posts`
+}
+
+export const postsControllerCreate = async (createPostDto: CreatePostDto, options?: RequestInit): Promise<postsControllerCreateResponse> => {
+  
+  return customInstance<postsControllerCreateResponse>(getPostsControllerCreateUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createPostDto,)
+  }
+);}
+
 
 /**
  * @summary Get post by ID
  */
 export type postsControllerFindOneResponse200 = {
-  data: PostDto;
-  status: 200;
-};
+  data: PostDto
+  status: 200
+}
 
 export type postsControllerFindOneResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindOneResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindOneResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindOneResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindOneResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindOneResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindOneResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindOneResponseSuccess = (postsControllerFindOneResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindOneResponseSuccess =
-  postsControllerFindOneResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindOneResponseError = (
-  | postsControllerFindOneResponse400
-  | postsControllerFindOneResponse401
-  | postsControllerFindOneResponse403
-  | postsControllerFindOneResponse404
-  | postsControllerFindOneResponse409
-  | postsControllerFindOneResponse422
-  | postsControllerFindOneResponse500
-) & {
+export type postsControllerFindOneResponseError = (postsControllerFindOneResponse400 | postsControllerFindOneResponse401 | postsControllerFindOneResponse403 | postsControllerFindOneResponse404 | postsControllerFindOneResponse409 | postsControllerFindOneResponse422 | postsControllerFindOneResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindOneResponse =
-  | postsControllerFindOneResponseSuccess
-  | postsControllerFindOneResponseError;
+export type postsControllerFindOneResponse = (postsControllerFindOneResponseSuccess | postsControllerFindOneResponseError)
 
-export const getPostsControllerFindOneUrl = (id: string) => {
-  return `/posts/${id}`;
-};
+export const getPostsControllerFindOneUrl = (id: string,) => {
 
-export const postsControllerFindOne = async (
-  id: string,
-  options?: RequestInit,
-): Promise<postsControllerFindOneResponse> => {
-  return customInstance<postsControllerFindOneResponse>(
-    getPostsControllerFindOneUrl(id),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/posts/${id}`
+}
+
+export const postsControllerFindOne = async (id: string, options?: RequestInit): Promise<postsControllerFindOneResponse> => {
+  
+  return customInstance<postsControllerFindOneResponse>(getPostsControllerFindOneUrl(id),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Update post by ID
  */
 export type postsControllerUpdateResponse200 = {
-  data: ResponseIdDto;
-  status: 200;
-};
+  data: ResponseIdDto
+  status: 200
+}
 
 export type postsControllerUpdateResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerUpdateResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerUpdateResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerUpdateResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerUpdateResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerUpdateResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerUpdateResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerUpdateResponseSuccess = (postsControllerUpdateResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerUpdateResponseSuccess =
-  postsControllerUpdateResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerUpdateResponseError = (
-  | postsControllerUpdateResponse400
-  | postsControllerUpdateResponse401
-  | postsControllerUpdateResponse403
-  | postsControllerUpdateResponse404
-  | postsControllerUpdateResponse409
-  | postsControllerUpdateResponse422
-  | postsControllerUpdateResponse500
-) & {
+export type postsControllerUpdateResponseError = (postsControllerUpdateResponse400 | postsControllerUpdateResponse401 | postsControllerUpdateResponse403 | postsControllerUpdateResponse404 | postsControllerUpdateResponse409 | postsControllerUpdateResponse422 | postsControllerUpdateResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerUpdateResponse =
-  | postsControllerUpdateResponseSuccess
-  | postsControllerUpdateResponseError;
+export type postsControllerUpdateResponse = (postsControllerUpdateResponseSuccess | postsControllerUpdateResponseError)
 
-export const getPostsControllerUpdateUrl = (id: string) => {
-  return `/posts/${id}`;
-};
+export const getPostsControllerUpdateUrl = (id: string,) => {
 
-export const postsControllerUpdate = async (
-  id: string,
-  updatePostDto: UpdatePostDto,
-  options?: RequestInit,
-): Promise<postsControllerUpdateResponse> => {
-  return customInstance<postsControllerUpdateResponse>(
-    getPostsControllerUpdateUrl(id),
-    {
-      ...options,
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(updatePostDto),
-    },
-  );
-};
+
+  
+
+  return `/posts/${id}`
+}
+
+export const postsControllerUpdate = async (id: string,
+    updatePostDto: UpdatePostDto, options?: RequestInit): Promise<postsControllerUpdateResponse> => {
+  
+  return customInstance<postsControllerUpdateResponse>(getPostsControllerUpdateUrl(id),
+  {      
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updatePostDto,)
+  }
+);}
+
 
 /**
  * @summary Delete post by ID
  */
 export type postsControllerDeleteResponse200 = {
-  data: ResponseIdDto;
-  status: 200;
-};
+  data: ResponseIdDto
+  status: 200
+}
 
 export type postsControllerDeleteResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerDeleteResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerDeleteResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerDeleteResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerDeleteResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerDeleteResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerDeleteResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerDeleteResponseSuccess = (postsControllerDeleteResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerDeleteResponseSuccess =
-  postsControllerDeleteResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerDeleteResponseError = (
-  | postsControllerDeleteResponse400
-  | postsControllerDeleteResponse401
-  | postsControllerDeleteResponse403
-  | postsControllerDeleteResponse404
-  | postsControllerDeleteResponse409
-  | postsControllerDeleteResponse422
-  | postsControllerDeleteResponse500
-) & {
+export type postsControllerDeleteResponseError = (postsControllerDeleteResponse400 | postsControllerDeleteResponse401 | postsControllerDeleteResponse403 | postsControllerDeleteResponse404 | postsControllerDeleteResponse409 | postsControllerDeleteResponse422 | postsControllerDeleteResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerDeleteResponse =
-  | postsControllerDeleteResponseSuccess
-  | postsControllerDeleteResponseError;
+export type postsControllerDeleteResponse = (postsControllerDeleteResponseSuccess | postsControllerDeleteResponseError)
 
-export const getPostsControllerDeleteUrl = (id: string) => {
-  return `/posts/${id}`;
-};
+export const getPostsControllerDeleteUrl = (id: string,) => {
 
-export const postsControllerDelete = async (
-  id: string,
-  options?: RequestInit,
-): Promise<postsControllerDeleteResponse> => {
-  return customInstance<postsControllerDeleteResponse>(
-    getPostsControllerDeleteUrl(id),
-    {
-      ...options,
-      method: "DELETE",
-    },
-  );
-};
+
+  
+
+  return `/posts/${id}`
+}
+
+export const postsControllerDelete = async (id: string, options?: RequestInit): Promise<postsControllerDeleteResponse> => {
+  
+  return customInstance<postsControllerDeleteResponse>(getPostsControllerDeleteUrl(id),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get post by slug and domain
  */
 export type postsControllerFindOneBySlugResponse200 = {
-  data: PostDto;
-  status: 200;
-};
+  data: PostDto
+  status: 200
+}
 
 export type postsControllerFindOneBySlugResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindOneBySlugResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindOneBySlugResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindOneBySlugResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindOneBySlugResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindOneBySlugResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindOneBySlugResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindOneBySlugResponseSuccess = (postsControllerFindOneBySlugResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindOneBySlugResponseSuccess =
-  postsControllerFindOneBySlugResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindOneBySlugResponseError = (
-  | postsControllerFindOneBySlugResponse400
-  | postsControllerFindOneBySlugResponse401
-  | postsControllerFindOneBySlugResponse403
-  | postsControllerFindOneBySlugResponse404
-  | postsControllerFindOneBySlugResponse409
-  | postsControllerFindOneBySlugResponse422
-  | postsControllerFindOneBySlugResponse500
-) & {
+export type postsControllerFindOneBySlugResponseError = (postsControllerFindOneBySlugResponse400 | postsControllerFindOneBySlugResponse401 | postsControllerFindOneBySlugResponse403 | postsControllerFindOneBySlugResponse404 | postsControllerFindOneBySlugResponse409 | postsControllerFindOneBySlugResponse422 | postsControllerFindOneBySlugResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindOneBySlugResponse =
-  | postsControllerFindOneBySlugResponseSuccess
-  | postsControllerFindOneBySlugResponseError;
+export type postsControllerFindOneBySlugResponse = (postsControllerFindOneBySlugResponseSuccess | postsControllerFindOneBySlugResponseError)
 
-export const getPostsControllerFindOneBySlugUrl = (
-  domain: string,
-  slug: string,
-) => {
-  return `/posts/${domain}/by-slug/${slug}`;
-};
+export const getPostsControllerFindOneBySlugUrl = (domain: string,
+    slug: string,) => {
 
-export const postsControllerFindOneBySlug = async (
-  domain: string,
-  slug: string,
-  options?: RequestInit,
-): Promise<postsControllerFindOneBySlugResponse> => {
-  return customInstance<postsControllerFindOneBySlugResponse>(
-    getPostsControllerFindOneBySlugUrl(domain, slug),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/posts/${domain}/by-slug/${slug}`
+}
+
+export const postsControllerFindOneBySlug = async (domain: string,
+    slug: string, options?: RequestInit): Promise<postsControllerFindOneBySlugResponse> => {
+  
+  return customInstance<postsControllerFindOneBySlugResponse>(getPostsControllerFindOneBySlugUrl(domain,slug),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get posts by domain with keyset pagination
  */
 export type postsControllerFindByDomainResponse200 = {
-  data: PostsControllerFindByDomain200;
-  status: 200;
-};
+  data: PostsControllerFindByDomain200
+  status: 200
+}
 
 export type postsControllerFindByDomainResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindByDomainResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindByDomainResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindByDomainResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindByDomainResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindByDomainResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindByDomainResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindByDomainResponseSuccess = (postsControllerFindByDomainResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindByDomainResponseSuccess =
-  postsControllerFindByDomainResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindByDomainResponseError = (
-  | postsControllerFindByDomainResponse400
-  | postsControllerFindByDomainResponse401
-  | postsControllerFindByDomainResponse403
-  | postsControllerFindByDomainResponse404
-  | postsControllerFindByDomainResponse409
-  | postsControllerFindByDomainResponse422
-  | postsControllerFindByDomainResponse500
-) & {
+export type postsControllerFindByDomainResponseError = (postsControllerFindByDomainResponse400 | postsControllerFindByDomainResponse401 | postsControllerFindByDomainResponse403 | postsControllerFindByDomainResponse404 | postsControllerFindByDomainResponse409 | postsControllerFindByDomainResponse422 | postsControllerFindByDomainResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindByDomainResponse =
-  | postsControllerFindByDomainResponseSuccess
-  | postsControllerFindByDomainResponseError;
+export type postsControllerFindByDomainResponse = (postsControllerFindByDomainResponseSuccess | postsControllerFindByDomainResponseError)
 
-export const getPostsControllerFindByDomainUrl = (
-  domain: string,
-  params?: PostsControllerFindByDomainParams,
-) => {
+export const getPostsControllerFindByDomainUrl = (domain: string,
+    params?: PostsControllerFindByDomainParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts/domain/${domain}?${stringifiedParams}`
-    : `/posts/domain/${domain}`;
-};
+  return stringifiedParams.length > 0 ? `/posts/domain/${domain}?${stringifiedParams}` : `/posts/domain/${domain}`
+}
 
-export const postsControllerFindByDomain = async (
-  domain: string,
-  params?: PostsControllerFindByDomainParams,
-  options?: RequestInit,
-): Promise<postsControllerFindByDomainResponse> => {
-  return customInstance<postsControllerFindByDomainResponse>(
-    getPostsControllerFindByDomainUrl(domain, params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsControllerFindByDomain = async (domain: string,
+    params?: PostsControllerFindByDomainParams, options?: RequestInit): Promise<postsControllerFindByDomainResponse> => {
+  
+  return customInstance<postsControllerFindByDomainResponse>(getPostsControllerFindByDomainUrl(domain,params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get posts by status with keyset pagination
  */
 export type postsControllerFindByStatusResponse200 = {
-  data: PostsControllerFindByStatus200;
-  status: 200;
-};
+  data: PostsControllerFindByStatus200
+  status: 200
+}
 
 export type postsControllerFindByStatusResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindByStatusResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindByStatusResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindByStatusResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindByStatusResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindByStatusResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindByStatusResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindByStatusResponseSuccess = (postsControllerFindByStatusResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindByStatusResponseSuccess =
-  postsControllerFindByStatusResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindByStatusResponseError = (
-  | postsControllerFindByStatusResponse400
-  | postsControllerFindByStatusResponse401
-  | postsControllerFindByStatusResponse403
-  | postsControllerFindByStatusResponse404
-  | postsControllerFindByStatusResponse409
-  | postsControllerFindByStatusResponse422
-  | postsControllerFindByStatusResponse500
-) & {
+export type postsControllerFindByStatusResponseError = (postsControllerFindByStatusResponse400 | postsControllerFindByStatusResponse401 | postsControllerFindByStatusResponse403 | postsControllerFindByStatusResponse404 | postsControllerFindByStatusResponse409 | postsControllerFindByStatusResponse422 | postsControllerFindByStatusResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindByStatusResponse =
-  | postsControllerFindByStatusResponseSuccess
-  | postsControllerFindByStatusResponseError;
+export type postsControllerFindByStatusResponse = (postsControllerFindByStatusResponseSuccess | postsControllerFindByStatusResponseError)
 
-export const getPostsControllerFindByStatusUrl = (
-  status: string,
-  params?: PostsControllerFindByStatusParams,
-) => {
+export const getPostsControllerFindByStatusUrl = (status: string,
+    params?: PostsControllerFindByStatusParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts/status/${status}?${stringifiedParams}`
-    : `/posts/status/${status}`;
-};
+  return stringifiedParams.length > 0 ? `/posts/status/${status}?${stringifiedParams}` : `/posts/status/${status}`
+}
 
-export const postsControllerFindByStatus = async (
-  status: string,
-  params?: PostsControllerFindByStatusParams,
-  options?: RequestInit,
-): Promise<postsControllerFindByStatusResponse> => {
-  return customInstance<postsControllerFindByStatusResponse>(
-    getPostsControllerFindByStatusUrl(status, params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsControllerFindByStatus = async (status: string,
+    params?: PostsControllerFindByStatusParams, options?: RequestInit): Promise<postsControllerFindByStatusResponse> => {
+  
+  return customInstance<postsControllerFindByStatusResponse>(getPostsControllerFindByStatusUrl(status,params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get posts by tags with keyset pagination
  */
 export type postsControllerFindByTagsResponse200 = {
-  data: PostsControllerFindByTags200;
-  status: 200;
-};
+  data: PostsControllerFindByTags200
+  status: 200
+}
 
 export type postsControllerFindByTagsResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindByTagsResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindByTagsResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindByTagsResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindByTagsResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindByTagsResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindByTagsResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindByTagsResponseSuccess = (postsControllerFindByTagsResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindByTagsResponseSuccess =
-  postsControllerFindByTagsResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindByTagsResponseError = (
-  | postsControllerFindByTagsResponse400
-  | postsControllerFindByTagsResponse401
-  | postsControllerFindByTagsResponse403
-  | postsControllerFindByTagsResponse404
-  | postsControllerFindByTagsResponse409
-  | postsControllerFindByTagsResponse422
-  | postsControllerFindByTagsResponse500
-) & {
+export type postsControllerFindByTagsResponseError = (postsControllerFindByTagsResponse400 | postsControllerFindByTagsResponse401 | postsControllerFindByTagsResponse403 | postsControllerFindByTagsResponse404 | postsControllerFindByTagsResponse409 | postsControllerFindByTagsResponse422 | postsControllerFindByTagsResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindByTagsResponse =
-  | postsControllerFindByTagsResponseSuccess
-  | postsControllerFindByTagsResponseError;
+export type postsControllerFindByTagsResponse = (postsControllerFindByTagsResponseSuccess | postsControllerFindByTagsResponseError)
 
-export const getPostsControllerFindByTagsUrl = (
-  params?: PostsControllerFindByTagsParams,
-) => {
+export const getPostsControllerFindByTagsUrl = (params?: PostsControllerFindByTagsParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts/by-tags?${stringifiedParams}`
-    : `/posts/by-tags`;
-};
+  return stringifiedParams.length > 0 ? `/posts/by-tags?${stringifiedParams}` : `/posts/by-tags`
+}
 
-export const postsControllerFindByTags = async (
-  params?: PostsControllerFindByTagsParams,
-  options?: RequestInit,
-): Promise<postsControllerFindByTagsResponse> => {
-  return customInstance<postsControllerFindByTagsResponse>(
-    getPostsControllerFindByTagsUrl(params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsControllerFindByTags = async (params?: PostsControllerFindByTagsParams, options?: RequestInit): Promise<postsControllerFindByTagsResponse> => {
+  
+  return customInstance<postsControllerFindByTagsResponse>(getPostsControllerFindByTagsUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get posts by author with keyset pagination
  */
 export type postsControllerFindByAuthorResponse200 = {
-  data: PostsControllerFindByAuthor200;
-  status: 200;
-};
+  data: PostsControllerFindByAuthor200
+  status: 200
+}
 
 export type postsControllerFindByAuthorResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsControllerFindByAuthorResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsControllerFindByAuthorResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsControllerFindByAuthorResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsControllerFindByAuthorResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsControllerFindByAuthorResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsControllerFindByAuthorResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsControllerFindByAuthorResponseSuccess = (postsControllerFindByAuthorResponse200) & {
+  headers: Headers;
 };
-
-export type postsControllerFindByAuthorResponseSuccess =
-  postsControllerFindByAuthorResponse200 & {
-    headers: Headers;
-  };
-export type postsControllerFindByAuthorResponseError = (
-  | postsControllerFindByAuthorResponse400
-  | postsControllerFindByAuthorResponse401
-  | postsControllerFindByAuthorResponse403
-  | postsControllerFindByAuthorResponse404
-  | postsControllerFindByAuthorResponse409
-  | postsControllerFindByAuthorResponse422
-  | postsControllerFindByAuthorResponse500
-) & {
+export type postsControllerFindByAuthorResponseError = (postsControllerFindByAuthorResponse400 | postsControllerFindByAuthorResponse401 | postsControllerFindByAuthorResponse403 | postsControllerFindByAuthorResponse404 | postsControllerFindByAuthorResponse409 | postsControllerFindByAuthorResponse422 | postsControllerFindByAuthorResponse500) & {
   headers: Headers;
 };
 
-export type postsControllerFindByAuthorResponse =
-  | postsControllerFindByAuthorResponseSuccess
-  | postsControllerFindByAuthorResponseError;
+export type postsControllerFindByAuthorResponse = (postsControllerFindByAuthorResponseSuccess | postsControllerFindByAuthorResponseError)
 
-export const getPostsControllerFindByAuthorUrl = (
-  authorId: string,
-  params?: PostsControllerFindByAuthorParams,
-) => {
+export const getPostsControllerFindByAuthorUrl = (authorId: string,
+    params?: PostsControllerFindByAuthorParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts/author/${authorId}?${stringifiedParams}`
-    : `/posts/author/${authorId}`;
-};
+  return stringifiedParams.length > 0 ? `/posts/author/${authorId}?${stringifiedParams}` : `/posts/author/${authorId}`
+}
 
-export const postsControllerFindByAuthor = async (
-  authorId: string,
-  params?: PostsControllerFindByAuthorParams,
-  options?: RequestInit,
-): Promise<postsControllerFindByAuthorResponse> => {
-  return customInstance<postsControllerFindByAuthorResponse>(
-    getPostsControllerFindByAuthorUrl(authorId, params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsControllerFindByAuthor = async (authorId: string,
+    params?: PostsControllerFindByAuthorParams, options?: RequestInit): Promise<postsControllerFindByAuthorResponse> => {
+  
+  return customInstance<postsControllerFindByAuthorResponse>(getPostsControllerFindByAuthorUrl(authorId,params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

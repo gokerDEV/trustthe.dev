@@ -9,10 +9,10 @@
 /**
  * Response type (only "code" supported)
  */
-export type PARRequestDtoResponseType =
-  (typeof PARRequestDtoResponseType)[keyof typeof PARRequestDtoResponseType];
+export type PARRequestDtoResponseType = typeof PARRequestDtoResponseType[keyof typeof PARRequestDtoResponseType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PARRequestDtoResponseType = {
-  code: "code",
+  code: 'code',
 } as const;

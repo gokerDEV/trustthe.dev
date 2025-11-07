@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OpenAIFileRefDto } from "./openAIFileRefDto";
+import type { OpenAIFileRefDto } from './openAIFileRefDto';
 
 export interface OpenAIFileUploadDto {
   /** Array of OpenAI file references */

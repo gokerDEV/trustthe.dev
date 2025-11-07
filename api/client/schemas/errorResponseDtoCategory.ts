@@ -9,17 +9,17 @@
 /**
  * Error category for grouping similar errors
  */
-export type ErrorResponseDtoCategory =
-  (typeof ErrorResponseDtoCategory)[keyof typeof ErrorResponseDtoCategory];
+export type ErrorResponseDtoCategory = typeof ErrorResponseDtoCategory[keyof typeof ErrorResponseDtoCategory];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const ErrorResponseDtoCategory = {
-  AUTHENTICATION: "AUTHENTICATION",
-  AUTHORIZATION: "AUTHORIZATION",
-  VALIDATION: "VALIDATION",
-  NOT_FOUND: "NOT_FOUND",
-  CONFLICT: "CONFLICT",
-  RATE_LIMIT: "RATE_LIMIT",
-  INTERNAL_ERROR: "INTERNAL_ERROR",
-  EXTERNAL_SERVICE_ERROR: "EXTERNAL_SERVICE_ERROR",
+  AUTHENTICATION: 'AUTHENTICATION',
+  AUTHORIZATION: 'AUTHORIZATION',
+  VALIDATION: 'VALIDATION',
+  NOT_FOUND: 'NOT_FOUND',
+  CONFLICT: 'CONFLICT',
+  RATE_LIMIT: 'RATE_LIMIT',
+  INTERNAL_ERROR: 'INTERNAL_ERROR',
+  EXTERNAL_SERVICE_ERROR: 'EXTERNAL_SERVICE_ERROR',
 } as const;

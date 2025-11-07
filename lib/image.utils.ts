@@ -1,4 +1,4 @@
-import type { PostDto, PostFile } from '@/api/client/schemas';
+import type { PostDto, PostFileDto } from '@/api/client/schemas';
 import { imageTypes } from './types';
 
 export function getImages(note: Partial<PostDto>) {
@@ -7,7 +7,7 @@ export function getImages(note: Partial<PostDto>) {
   );
 
   const cover = images?.length
-    ? (images[0] as PostFile)
+    ? (images[0] as PostFileDto)
     : { src: '/placeholder.jpg', altText: note?.title || '' };
 
   return {

@@ -5,40 +5,46 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { FileControllerUploadBody } from ".././schemas";
+import type {
+  FileControllerUploadBody
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 export type fileControllerUploadResponse201 = {
-  data: void;
-  status: 201;
+  data: void
+  status: 201
+}
+    
+export type fileControllerUploadResponseSuccess = (fileControllerUploadResponse201) & {
+  headers: Headers;
 };
+;
 
-export type fileControllerUploadResponseSuccess =
-  fileControllerUploadResponse201 & {
-    headers: Headers;
-  };
-export type fileControllerUploadResponse = fileControllerUploadResponseSuccess;
+export type fileControllerUploadResponse = (fileControllerUploadResponseSuccess)
 
 export const getFileControllerUploadUrl = () => {
-  return `/file/upload`;
-};
 
-export const fileControllerUpload = async (
-  fileControllerUploadBody: FileControllerUploadBody,
-  options?: RequestInit,
-): Promise<fileControllerUploadResponse> => {
-  const formData = new FormData();
-  if (fileControllerUploadBody.file !== undefined) {
-    formData.append(`file`, fileControllerUploadBody.file);
+
+  
+
+  return `/file/upload`
+}
+
+export const fileControllerUpload = async (fileControllerUploadBody: FileControllerUploadBody, options?: RequestInit): Promise<fileControllerUploadResponse> => {
+    const formData = new FormData();
+if(fileControllerUploadBody.file !== undefined) {
+ formData.append(`file`, fileControllerUploadBody.file)
+ }
+
+  return customInstance<fileControllerUploadResponse>(getFileControllerUploadUrl(),
+  {      
+    ...options,
+    method: 'POST'
+    ,
+    body: 
+      formData,
   }
+);}
 
-  return customInstance<fileControllerUploadResponse>(
-    getFileControllerUploadUrl(),
-    {
-      ...options,
-      method: "POST",
-      body: formData,
-    },
-  );
-};
+

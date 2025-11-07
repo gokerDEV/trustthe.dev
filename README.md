@@ -277,7 +277,7 @@ Automatic metadata generation for all pages:
 ```typescript
 export async function generateMetadata({ params }): Promise<Metadata> {
   // Fetch data and generate metadata
-  return metadataGenerator(post, { ogType: "article" });
+  return metadataGenerator(post, { ogType: 'article' });
 }
 ```
 
@@ -345,8 +345,8 @@ try {
   const response = await apiCall();
   // Handle response
 } catch (error) {
-  if (process.env.NODE_ENV === "development") {
-    console.error("Error:", error);
+  if (process.env.NODE_ENV === 'development') {
+    console.error('Error:', error);
   }
   // Handle error appropriately
   throw error; // Let error.tsx handle unexpected errors
@@ -358,8 +358,8 @@ try {
 All console statements must be wrapped in development checks:
 
 ```typescript
-if (process.env.NODE_ENV === "development") {
-  console.log("Debug info");
+if (process.env.NODE_ENV === 'development') {
+  console.log('Debug info');
 }
 ```
 

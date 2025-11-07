@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { ConfigurationResponseDtoCategory } from "./configurationResponseDtoCategory";
-import type { ConfigurationResponseDtoConfig } from "./configurationResponseDtoConfig";
+import type { ConfigurationResponseDtoCategory } from './configurationResponseDtoCategory';
+import type { ConfigurationResponseDtoConfig } from './configurationResponseDtoConfig';
 
 export interface ConfigurationResponseDto {
   /** Configuration ID */

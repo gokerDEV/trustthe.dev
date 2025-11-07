@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { ResendOtpDtoType } from "./resendOtpDtoType";
+import type { ResendOtpDtoType } from './resendOtpDtoType';
 
 export interface ResendOtpDto {
   /** The identifier for OTP (email, phone, userId, etc.) */

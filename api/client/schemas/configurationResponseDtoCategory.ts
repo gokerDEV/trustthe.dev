@@ -9,15 +9,15 @@
 /**
  * Configuration category
  */
-export type ConfigurationResponseDtoCategory =
-  (typeof ConfigurationResponseDtoCategory)[keyof typeof ConfigurationResponseDtoCategory];
+export type ConfigurationResponseDtoCategory = typeof ConfigurationResponseDtoCategory[keyof typeof ConfigurationResponseDtoCategory];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const ConfigurationResponseDtoCategory = {
-  tenant: "tenant",
-  mail: "mail",
-  sms: "sms",
-  storage: "storage",
-  oauth: "oauth",
-  attestation: "attestation",
+  tenant: 'tenant',
+  mail: 'mail',
+  sms: 'sms',
+  storage: 'storage',
+  oauth: 'oauth',
+  attestation: 'attestation',
 } as const;

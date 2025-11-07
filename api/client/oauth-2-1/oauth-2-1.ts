@@ -16,369 +16,329 @@ import type {
   OAuthTokenRequestDto,
   OAuthTokenResponseDto,
   PARRequestDto,
-  PARResponseDto,
-} from ".././schemas";
+  PARResponseDto
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * Universal token endpoint supporting client_credentials, authorization_code, and refresh_token grant types. RFC 6749 compliant with form-encoded requests and JSON responses. Requires client authentication (Basic or POST). PKCE validation for authorization_code grant.
  * @summary OAuth 2.1 Token Endpoint
  */
 export type oAuthControllerTokenResponse200 = {
-  data: OAuthTokenResponseDto;
-  status: 200;
-};
+  data: OAuthTokenResponseDto
+  status: 200
+}
 
 export type oAuthControllerTokenResponse400 = {
-  data: OAuthErrorResponseDto;
-  status: 400;
-};
+  data: OAuthErrorResponseDto
+  status: 400
+}
 
 export type oAuthControllerTokenResponse401 = {
-  data: OAuthErrorResponseDto;
-  status: 401;
+  data: OAuthErrorResponseDto
+  status: 401
+}
+    
+export type oAuthControllerTokenResponseSuccess = (oAuthControllerTokenResponse200) & {
+  headers: Headers;
 };
-
-export type oAuthControllerTokenResponseSuccess =
-  oAuthControllerTokenResponse200 & {
-    headers: Headers;
-  };
-export type oAuthControllerTokenResponseError = (
-  | oAuthControllerTokenResponse400
-  | oAuthControllerTokenResponse401
-) & {
+export type oAuthControllerTokenResponseError = (oAuthControllerTokenResponse400 | oAuthControllerTokenResponse401) & {
   headers: Headers;
 };
 
-export type oAuthControllerTokenResponse =
-  | oAuthControllerTokenResponseSuccess
-  | oAuthControllerTokenResponseError;
+export type oAuthControllerTokenResponse = (oAuthControllerTokenResponseSuccess | oAuthControllerTokenResponseError)
 
 export const getOAuthControllerTokenUrl = () => {
-  return `/oauth/token`;
-};
 
-export const oAuthControllerToken = async (
-  oAuthTokenRequestDto: OAuthTokenRequestDto,
-  options?: RequestInit,
-): Promise<oAuthControllerTokenResponse> => {
-  const formUrlEncoded = new URLSearchParams();
-  formUrlEncoded.append(`grant_type`, oAuthTokenRequestDto.grant_type);
-  if (oAuthTokenRequestDto.client_id !== undefined) {
-    formUrlEncoded.append(`client_id`, oAuthTokenRequestDto.client_id);
-  }
-  if (oAuthTokenRequestDto.client_secret !== undefined) {
-    formUrlEncoded.append(`client_secret`, oAuthTokenRequestDto.client_secret);
-  }
-  if (oAuthTokenRequestDto.code !== undefined) {
-    formUrlEncoded.append(`code`, oAuthTokenRequestDto.code);
-  }
-  if (oAuthTokenRequestDto.code_verifier !== undefined) {
-    formUrlEncoded.append(`code_verifier`, oAuthTokenRequestDto.code_verifier);
-  }
-  if (oAuthTokenRequestDto.redirect_uri !== undefined) {
-    formUrlEncoded.append(`redirect_uri`, oAuthTokenRequestDto.redirect_uri);
-  }
-  if (oAuthTokenRequestDto.refresh_token !== undefined) {
-    formUrlEncoded.append(`refresh_token`, oAuthTokenRequestDto.refresh_token);
-  }
-  if (oAuthTokenRequestDto.scope !== undefined) {
-    formUrlEncoded.append(`scope`, oAuthTokenRequestDto.scope);
-  }
 
-  return customInstance<oAuthControllerTokenResponse>(
-    getOAuthControllerTokenUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        ...options?.headers,
-      },
-      body: formUrlEncoded,
-    },
-  );
-};
+  
+
+  return `/oauth/token`
+}
+
+export const oAuthControllerToken = async (oAuthTokenRequestDto: OAuthTokenRequestDto, options?: RequestInit): Promise<oAuthControllerTokenResponse> => {
+    const formUrlEncoded = new URLSearchParams();
+formUrlEncoded.append(`grant_type`, oAuthTokenRequestDto.grant_type)
+if(oAuthTokenRequestDto.client_id !== undefined) {
+ formUrlEncoded.append(`client_id`, oAuthTokenRequestDto.client_id)
+ }
+if(oAuthTokenRequestDto.client_secret !== undefined) {
+ formUrlEncoded.append(`client_secret`, oAuthTokenRequestDto.client_secret)
+ }
+if(oAuthTokenRequestDto.code !== undefined) {
+ formUrlEncoded.append(`code`, oAuthTokenRequestDto.code)
+ }
+if(oAuthTokenRequestDto.code_verifier !== undefined) {
+ formUrlEncoded.append(`code_verifier`, oAuthTokenRequestDto.code_verifier)
+ }
+if(oAuthTokenRequestDto.redirect_uri !== undefined) {
+ formUrlEncoded.append(`redirect_uri`, oAuthTokenRequestDto.redirect_uri)
+ }
+if(oAuthTokenRequestDto.refresh_token !== undefined) {
+ formUrlEncoded.append(`refresh_token`, oAuthTokenRequestDto.refresh_token)
+ }
+if(oAuthTokenRequestDto.scope !== undefined) {
+ formUrlEncoded.append(`scope`, oAuthTokenRequestDto.scope)
+ }
+
+  return customInstance<oAuthControllerTokenResponse>(getOAuthControllerTokenUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...options?.headers },
+    body: 
+      formUrlEncoded,
+  }
+);}
+
 
 /**
  * Generates authorization code with PKCE for mobile clients or via PAR for confidential clients. Supports request_uri from POST /oauth/par (RFC 9126). Requires system browser (no embedded WebViews per RFC 8252). Redirects to redirect_uri with code and state parameters.
  * @summary OAuth 2.1 Authorization Endpoint
  */
 export type authorizeControllerAuthorizeResponse302 = {
-  data: void;
-  status: 302;
-};
+  data: void
+  status: 302
+}
 
 export type authorizeControllerAuthorizeResponse401 = {
-  data: void;
-  status: 401;
-};
-export type authorizeControllerAuthorizeResponseError = (
-  | authorizeControllerAuthorizeResponse302
-  | authorizeControllerAuthorizeResponse401
-) & {
+  data: void
+  status: 401
+}
+    
+;
+export type authorizeControllerAuthorizeResponseError = (authorizeControllerAuthorizeResponse302 | authorizeControllerAuthorizeResponse401) & {
   headers: Headers;
 };
 
-export type authorizeControllerAuthorizeResponse =
-  authorizeControllerAuthorizeResponseError;
+export type authorizeControllerAuthorizeResponse = (authorizeControllerAuthorizeResponseError)
 
-export const getAuthorizeControllerAuthorizeUrl = (
-  params?: AuthorizeControllerAuthorizeParams,
-) => {
+export const getAuthorizeControllerAuthorizeUrl = (params?: AuthorizeControllerAuthorizeParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/oauth/authorize?${stringifiedParams}`
-    : `/oauth/authorize`;
-};
+  return stringifiedParams.length > 0 ? `/oauth/authorize?${stringifiedParams}` : `/oauth/authorize`
+}
 
-export const authorizeControllerAuthorize = async (
-  params?: AuthorizeControllerAuthorizeParams,
-  options?: RequestInit,
-): Promise<authorizeControllerAuthorizeResponse> => {
-  return customInstance<authorizeControllerAuthorizeResponse>(
-    getAuthorizeControllerAuthorizeUrl(params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const authorizeControllerAuthorize = async (params?: AuthorizeControllerAuthorizeParams, options?: RequestInit): Promise<authorizeControllerAuthorizeResponse> => {
+  
+  return customInstance<authorizeControllerAuthorizeResponse>(getAuthorizeControllerAuthorizeUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * Verifies mobile device legitimacy via iOS App Attest or Android Play Integrity. Returns short-lived attestation token for use in authorization code exchange.
  * @summary Device Attestation for Mobile Clients
  */
 export type attestControllerAttestResponse200 = {
-  data: AttestResponseDto;
-  status: 200;
-};
+  data: AttestResponseDto
+  status: 200
+}
 
 export type attestControllerAttestResponse401 = {
-  data: void;
-  status: 401;
-};
+  data: void
+  status: 401
+}
 
 export type attestControllerAttestResponse415 = {
-  data: void;
-  status: 415;
+  data: void
+  status: 415
+}
+    
+export type attestControllerAttestResponseSuccess = (attestControllerAttestResponse200) & {
+  headers: Headers;
 };
-
-export type attestControllerAttestResponseSuccess =
-  attestControllerAttestResponse200 & {
-    headers: Headers;
-  };
-export type attestControllerAttestResponseError = (
-  | attestControllerAttestResponse401
-  | attestControllerAttestResponse415
-) & {
+export type attestControllerAttestResponseError = (attestControllerAttestResponse401 | attestControllerAttestResponse415) & {
   headers: Headers;
 };
 
-export type attestControllerAttestResponse =
-  | attestControllerAttestResponseSuccess
-  | attestControllerAttestResponseError;
+export type attestControllerAttestResponse = (attestControllerAttestResponseSuccess | attestControllerAttestResponseError)
 
 export const getAttestControllerAttestUrl = () => {
-  return `/oauth/attest`;
-};
 
-export const attestControllerAttest = async (
-  attestRequestDto: AttestRequestDto,
-  options?: RequestInit,
-): Promise<attestControllerAttestResponse> => {
-  return customInstance<attestControllerAttestResponse>(
-    getAttestControllerAttestUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(attestRequestDto),
-    },
-  );
-};
+
+  
+
+  return `/oauth/attest`
+}
+
+export const attestControllerAttest = async (attestRequestDto: AttestRequestDto, options?: RequestInit): Promise<attestControllerAttestResponse> => {
+  
+  return customInstance<attestControllerAttestResponse>(getAttestControllerAttestUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      attestRequestDto,)
+  }
+);}
+
 
 /**
  * Validates access tokens and returns metadata. Requires confidential client authentication (Basic Auth).
  * @summary Token Introspection (RFC 7662)
  */
 export type oAuthControllerIntrospectResponse200 = {
-  data: OAuthIntrospectResponseDto;
-  status: 200;
-};
+  data: OAuthIntrospectResponseDto
+  status: 200
+}
 
 export type oAuthControllerIntrospectResponse401 = {
-  data: OAuthErrorResponseDto;
-  status: 401;
+  data: OAuthErrorResponseDto
+  status: 401
+}
+    
+export type oAuthControllerIntrospectResponseSuccess = (oAuthControllerIntrospectResponse200) & {
+  headers: Headers;
+};
+export type oAuthControllerIntrospectResponseError = (oAuthControllerIntrospectResponse401) & {
+  headers: Headers;
 };
 
-export type oAuthControllerIntrospectResponseSuccess =
-  oAuthControllerIntrospectResponse200 & {
-    headers: Headers;
-  };
-export type oAuthControllerIntrospectResponseError =
-  oAuthControllerIntrospectResponse401 & {
-    headers: Headers;
-  };
-
-export type oAuthControllerIntrospectResponse =
-  | oAuthControllerIntrospectResponseSuccess
-  | oAuthControllerIntrospectResponseError;
+export type oAuthControllerIntrospectResponse = (oAuthControllerIntrospectResponseSuccess | oAuthControllerIntrospectResponseError)
 
 export const getOAuthControllerIntrospectUrl = () => {
-  return `/oauth/introspect`;
-};
 
-export const oAuthControllerIntrospect = async (
-  oAuthIntrospectRequestDto: OAuthIntrospectRequestDto,
-  options?: RequestInit,
-): Promise<oAuthControllerIntrospectResponse> => {
-  const formUrlEncoded = new URLSearchParams();
-  formUrlEncoded.append(`token`, oAuthIntrospectRequestDto.token);
-  if (oAuthIntrospectRequestDto.token_type_hint !== undefined) {
-    formUrlEncoded.append(
-      `token_type_hint`,
-      oAuthIntrospectRequestDto.token_type_hint,
-    );
+
+  
+
+  return `/oauth/introspect`
+}
+
+export const oAuthControllerIntrospect = async (oAuthIntrospectRequestDto: OAuthIntrospectRequestDto, options?: RequestInit): Promise<oAuthControllerIntrospectResponse> => {
+    const formUrlEncoded = new URLSearchParams();
+formUrlEncoded.append(`token`, oAuthIntrospectRequestDto.token)
+if(oAuthIntrospectRequestDto.token_type_hint !== undefined) {
+ formUrlEncoded.append(`token_type_hint`, oAuthIntrospectRequestDto.token_type_hint)
+ }
+
+  return customInstance<oAuthControllerIntrospectResponse>(getOAuthControllerIntrospectUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...options?.headers },
+    body: 
+      formUrlEncoded,
   }
+);}
 
-  return customInstance<oAuthControllerIntrospectResponse>(
-    getOAuthControllerIntrospectUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        ...options?.headers,
-      },
-      body: formUrlEncoded,
-    },
-  );
-};
 
 /**
  * Revokes access or refresh tokens. Requires confidential client authentication (Basic Auth). Always returns 200 OK per RFC 7009.
  * @summary Token Revocation (RFC 7009)
  */
 export type oAuthControllerRevokeResponse200 = {
-  data: void;
-  status: 200;
-};
+  data: void
+  status: 200
+}
 
 export type oAuthControllerRevokeResponse401 = {
-  data: OAuthErrorResponseDto;
-  status: 401;
+  data: OAuthErrorResponseDto
+  status: 401
+}
+    
+export type oAuthControllerRevokeResponseSuccess = (oAuthControllerRevokeResponse200) & {
+  headers: Headers;
+};
+export type oAuthControllerRevokeResponseError = (oAuthControllerRevokeResponse401) & {
+  headers: Headers;
 };
 
-export type oAuthControllerRevokeResponseSuccess =
-  oAuthControllerRevokeResponse200 & {
-    headers: Headers;
-  };
-export type oAuthControllerRevokeResponseError =
-  oAuthControllerRevokeResponse401 & {
-    headers: Headers;
-  };
-
-export type oAuthControllerRevokeResponse =
-  | oAuthControllerRevokeResponseSuccess
-  | oAuthControllerRevokeResponseError;
+export type oAuthControllerRevokeResponse = (oAuthControllerRevokeResponseSuccess | oAuthControllerRevokeResponseError)
 
 export const getOAuthControllerRevokeUrl = () => {
-  return `/oauth/revoke`;
-};
 
-export const oAuthControllerRevoke = async (
-  oAuthRevokeRequestDto: OAuthRevokeRequestDto,
-  options?: RequestInit,
-): Promise<oAuthControllerRevokeResponse> => {
-  const formUrlEncoded = new URLSearchParams();
-  formUrlEncoded.append(`token`, oAuthRevokeRequestDto.token);
-  if (oAuthRevokeRequestDto.token_type_hint !== undefined) {
-    formUrlEncoded.append(
-      `token_type_hint`,
-      oAuthRevokeRequestDto.token_type_hint,
-    );
+
+  
+
+  return `/oauth/revoke`
+}
+
+export const oAuthControllerRevoke = async (oAuthRevokeRequestDto: OAuthRevokeRequestDto, options?: RequestInit): Promise<oAuthControllerRevokeResponse> => {
+    const formUrlEncoded = new URLSearchParams();
+formUrlEncoded.append(`token`, oAuthRevokeRequestDto.token)
+if(oAuthRevokeRequestDto.token_type_hint !== undefined) {
+ formUrlEncoded.append(`token_type_hint`, oAuthRevokeRequestDto.token_type_hint)
+ }
+
+  return customInstance<oAuthControllerRevokeResponse>(getOAuthControllerRevokeUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', ...options?.headers },
+    body: 
+      formUrlEncoded,
   }
+);}
 
-  return customInstance<oAuthControllerRevokeResponse>(
-    getOAuthControllerRevokeUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        ...options?.headers,
-      },
-      body: formUrlEncoded,
-    },
-  );
-};
 
 /**
  * Allows confidential clients to push authorization parameters to the server before redirecting the user. Returns a request_uri to use in /oauth/authorize. Requires client authentication (HTTP Basic or POST body).
  * @summary Pushed Authorization Request (RFC 9126)
  */
 export type pARControllerPushAuthorizationRequestResponse201 = {
-  data: PARResponseDto;
-  status: 201;
-};
+  data: PARResponseDto
+  status: 201
+}
 
 export type pARControllerPushAuthorizationRequestResponse400 = {
-  data: void;
-  status: 400;
-};
+  data: void
+  status: 400
+}
 
 export type pARControllerPushAuthorizationRequestResponse401 = {
-  data: void;
-  status: 401;
-};
+  data: void
+  status: 401
+}
 
 export type pARControllerPushAuthorizationRequestResponse415 = {
-  data: void;
-  status: 415;
+  data: void
+  status: 415
+}
+    
+export type pARControllerPushAuthorizationRequestResponseSuccess = (pARControllerPushAuthorizationRequestResponse201) & {
+  headers: Headers;
 };
-
-export type pARControllerPushAuthorizationRequestResponseSuccess =
-  pARControllerPushAuthorizationRequestResponse201 & {
-    headers: Headers;
-  };
-export type pARControllerPushAuthorizationRequestResponseError = (
-  | pARControllerPushAuthorizationRequestResponse400
-  | pARControllerPushAuthorizationRequestResponse401
-  | pARControllerPushAuthorizationRequestResponse415
-) & {
+export type pARControllerPushAuthorizationRequestResponseError = (pARControllerPushAuthorizationRequestResponse400 | pARControllerPushAuthorizationRequestResponse401 | pARControllerPushAuthorizationRequestResponse415) & {
   headers: Headers;
 };
 
-export type pARControllerPushAuthorizationRequestResponse =
-  | pARControllerPushAuthorizationRequestResponseSuccess
-  | pARControllerPushAuthorizationRequestResponseError;
+export type pARControllerPushAuthorizationRequestResponse = (pARControllerPushAuthorizationRequestResponseSuccess | pARControllerPushAuthorizationRequestResponseError)
 
 export const getPARControllerPushAuthorizationRequestUrl = () => {
-  return `/oauth/par`;
-};
 
-export const pARControllerPushAuthorizationRequest = async (
-  pARRequestDto: PARRequestDto,
-  options?: RequestInit,
-): Promise<pARControllerPushAuthorizationRequestResponse> => {
-  return customInstance<pARControllerPushAuthorizationRequestResponse>(
-    getPARControllerPushAuthorizationRequestUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(pARRequestDto),
-    },
-  );
-};
+
+  
+
+  return `/oauth/par`
+}
+
+export const pARControllerPushAuthorizationRequest = async (pARRequestDto: PARRequestDto, options?: RequestInit): Promise<pARControllerPushAuthorizationRequestResponse> => {
+  
+  return customInstance<pARControllerPushAuthorizationRequestResponse>(getPARControllerPushAuthorizationRequestUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      pARRequestDto,)
+  }
+);}
+
+

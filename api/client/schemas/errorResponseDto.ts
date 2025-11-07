@@ -5,11 +5,11 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { ErrorResponseDtoContext } from "./errorResponseDtoContext";
-import type { ErrorResponseDtoDetails } from "./errorResponseDtoDetails";
-import type { ErrorResponseDtoCategory } from "./errorResponseDtoCategory";
-import type { ErrorResponseDtoSeverity } from "./errorResponseDtoSeverity";
-import type { ErrorResponseDtoValidationsItem } from "./errorResponseDtoValidationsItem";
+import type { ErrorResponseDtoContext } from './errorResponseDtoContext';
+import type { ErrorResponseDtoDetails } from './errorResponseDtoDetails';
+import type { ErrorResponseDtoCategory } from './errorResponseDtoCategory';
+import type { ErrorResponseDtoSeverity } from './errorResponseDtoSeverity';
+import type { ErrorResponseDtoValidationsItem } from './errorResponseDtoValidationsItem';
 
 export interface ErrorResponseDto {
   /** HTTP status code */

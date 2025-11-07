@@ -9,21 +9,21 @@
 /**
  * Communication purpose
  */
-export type CreateCommunicationTemplateDtoPurpose =
-  (typeof CreateCommunicationTemplateDtoPurpose)[keyof typeof CreateCommunicationTemplateDtoPurpose];
+export type CreateCommunicationTemplateDtoPurpose = typeof CreateCommunicationTemplateDtoPurpose[keyof typeof CreateCommunicationTemplateDtoPurpose];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const CreateCommunicationTemplateDtoPurpose = {
-  invite: "invite",
-  verify: "verify",
-  recovery: "recovery",
-  discount: "discount",
-  reset_password: "reset_password",
-  welcome: "welcome",
-  notification: "notification",
-  alert: "alert",
-  reminder: "reminder",
-  promotion: "promotion",
-  newsletter: "newsletter",
-  announcement: "announcement",
+  invite: 'invite',
+  verify: 'verify',
+  recovery: 'recovery',
+  discount: 'discount',
+  reset_password: 'reset_password',
+  welcome: 'welcome',
+  notification: 'notification',
+  alert: 'alert',
+  reminder: 'reminder',
+  promotion: 'promotion',
+  newsletter: 'newsletter',
+  announcement: 'announcement',
 } as const;

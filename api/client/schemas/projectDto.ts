@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { ProjectDtoScopesItem } from "./projectDtoScopesItem";
+import type { ProjectDtoScopesItem } from './projectDtoScopesItem';
 
 export interface ProjectDto {
   /** The name of the project */

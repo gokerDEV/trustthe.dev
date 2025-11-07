@@ -6,21 +6,21 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export type CreatePostDtoStatus =
-  (typeof CreatePostDtoStatus)[keyof typeof CreatePostDtoStatus];
+export type CreatePostDtoStatus = typeof CreatePostDtoStatus[keyof typeof CreatePostDtoStatus];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const CreatePostDtoStatus = {
-  draft: "draft",
-  hidden: "hidden",
-  pending: "pending",
-  scheduled: "scheduled",
-  paused: "paused",
-  active: "active",
-  completed: "completed",
-  published: "published",
-  cancelled: "cancelled",
-  expired: "expired",
-  accepted: "accepted",
-  rejected: "rejected",
+  draft: 'draft',
+  hidden: 'hidden',
+  pending: 'pending',
+  scheduled: 'scheduled',
+  paused: 'paused',
+  active: 'active',
+  completed: 'completed',
+  published: 'published',
+  cancelled: 'cancelled',
+  expired: 'expired',
+  accepted: 'accepted',
+  rejected: 'rejected',
 } as const;

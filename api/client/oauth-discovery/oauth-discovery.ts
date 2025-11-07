@@ -7,103 +7,116 @@
  */
 import type {
   DiscoveryControllerGetAuthorizationServerMetadata200,
-  DiscoveryControllerGetJWKS200,
-} from ".././schemas";
+  DiscoveryControllerGetJWKS200
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * Returns OpenID Provider metadata for automatic client configuration.
  * @summary OpenID Connect Discovery (OIDC Core 1.0)
  */
 export type discoveryControllerGetOpenIDConfigurationResponse200 = {
-  data: void;
-  status: 200;
+  data: void
+  status: 200
+}
+    
+export type discoveryControllerGetOpenIDConfigurationResponseSuccess = (discoveryControllerGetOpenIDConfigurationResponse200) & {
+  headers: Headers;
 };
+;
 
-export type discoveryControllerGetOpenIDConfigurationResponseSuccess =
-  discoveryControllerGetOpenIDConfigurationResponse200 & {
-    headers: Headers;
-  };
-export type discoveryControllerGetOpenIDConfigurationResponse =
-  discoveryControllerGetOpenIDConfigurationResponseSuccess;
+export type discoveryControllerGetOpenIDConfigurationResponse = (discoveryControllerGetOpenIDConfigurationResponseSuccess)
 
 export const getDiscoveryControllerGetOpenIDConfigurationUrl = () => {
-  return `/.well-known/openid-configuration`;
-};
 
-export const discoveryControllerGetOpenIDConfiguration = async (
-  options?: RequestInit,
-): Promise<discoveryControllerGetOpenIDConfigurationResponse> => {
-  return customInstance<discoveryControllerGetOpenIDConfigurationResponse>(
-    getDiscoveryControllerGetOpenIDConfigurationUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/.well-known/openid-configuration`
+}
+
+export const discoveryControllerGetOpenIDConfiguration = async ( options?: RequestInit): Promise<discoveryControllerGetOpenIDConfigurationResponse> => {
+  
+  return customInstance<discoveryControllerGetOpenIDConfigurationResponse>(getDiscoveryControllerGetOpenIDConfigurationUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * Returns server metadata including supported endpoints, grant types, and capabilities. Clients can use this for automatic configuration discovery.
  * @summary OAuth 2.0 Authorization Server Metadata (RFC 8414)
  */
 export type discoveryControllerGetAuthorizationServerMetadataResponse200 = {
-  data: DiscoveryControllerGetAuthorizationServerMetadata200;
-  status: 200;
+  data: DiscoveryControllerGetAuthorizationServerMetadata200
+  status: 200
+}
+    
+export type discoveryControllerGetAuthorizationServerMetadataResponseSuccess = (discoveryControllerGetAuthorizationServerMetadataResponse200) & {
+  headers: Headers;
 };
+;
 
-export type discoveryControllerGetAuthorizationServerMetadataResponseSuccess =
-  discoveryControllerGetAuthorizationServerMetadataResponse200 & {
-    headers: Headers;
-  };
-export type discoveryControllerGetAuthorizationServerMetadataResponse =
-  discoveryControllerGetAuthorizationServerMetadataResponseSuccess;
+export type discoveryControllerGetAuthorizationServerMetadataResponse = (discoveryControllerGetAuthorizationServerMetadataResponseSuccess)
 
 export const getDiscoveryControllerGetAuthorizationServerMetadataUrl = () => {
-  return `/.well-known/oauth-authorization-server`;
-};
 
-export const discoveryControllerGetAuthorizationServerMetadata = async (
-  options?: RequestInit,
-): Promise<discoveryControllerGetAuthorizationServerMetadataResponse> => {
-  return customInstance<discoveryControllerGetAuthorizationServerMetadataResponse>(
-    getDiscoveryControllerGetAuthorizationServerMetadataUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/.well-known/oauth-authorization-server`
+}
+
+export const discoveryControllerGetAuthorizationServerMetadata = async ( options?: RequestInit): Promise<discoveryControllerGetAuthorizationServerMetadataResponse> => {
+  
+  return customInstance<discoveryControllerGetAuthorizationServerMetadataResponse>(getDiscoveryControllerGetAuthorizationServerMetadataUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * Returns public keys for JWT signature verification. Clients should cache keys and refresh on signature verification failure.
  * @summary JSON Web Key Set (RFC 7517)
  */
 export type discoveryControllerGetJWKSResponse200 = {
-  data: DiscoveryControllerGetJWKS200;
-  status: 200;
+  data: DiscoveryControllerGetJWKS200
+  status: 200
+}
+    
+export type discoveryControllerGetJWKSResponseSuccess = (discoveryControllerGetJWKSResponse200) & {
+  headers: Headers;
 };
+;
 
-export type discoveryControllerGetJWKSResponseSuccess =
-  discoveryControllerGetJWKSResponse200 & {
-    headers: Headers;
-  };
-export type discoveryControllerGetJWKSResponse =
-  discoveryControllerGetJWKSResponseSuccess;
+export type discoveryControllerGetJWKSResponse = (discoveryControllerGetJWKSResponseSuccess)
 
 export const getDiscoveryControllerGetJWKSUrl = () => {
-  return `/.well-known/jwks.json`;
-};
 
-export const discoveryControllerGetJWKS = async (
-  options?: RequestInit,
-): Promise<discoveryControllerGetJWKSResponse> => {
-  return customInstance<discoveryControllerGetJWKSResponse>(
-    getDiscoveryControllerGetJWKSUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/.well-known/jwks.json`
+}
+
+export const discoveryControllerGetJWKS = async ( options?: RequestInit): Promise<discoveryControllerGetJWKSResponse> => {
+  
+  return customInstance<discoveryControllerGetJWKSResponse>(getDiscoveryControllerGetJWKSUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

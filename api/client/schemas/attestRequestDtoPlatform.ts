@@ -9,11 +9,11 @@
 /**
  * Platform identifier
  */
-export type AttestRequestDtoPlatform =
-  (typeof AttestRequestDtoPlatform)[keyof typeof AttestRequestDtoPlatform];
+export type AttestRequestDtoPlatform = typeof AttestRequestDtoPlatform[keyof typeof AttestRequestDtoPlatform];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const AttestRequestDtoPlatform = {
-  ios: "ios",
-  android: "android",
+  ios: 'ios',
+  android: 'android',
 } as const;

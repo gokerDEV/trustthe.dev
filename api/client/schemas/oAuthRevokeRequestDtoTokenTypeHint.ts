@@ -9,11 +9,11 @@
 /**
  * Hint about the type of token
  */
-export type OAuthRevokeRequestDtoTokenTypeHint =
-  (typeof OAuthRevokeRequestDtoTokenTypeHint)[keyof typeof OAuthRevokeRequestDtoTokenTypeHint];
+export type OAuthRevokeRequestDtoTokenTypeHint = typeof OAuthRevokeRequestDtoTokenTypeHint[keyof typeof OAuthRevokeRequestDtoTokenTypeHint];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const OAuthRevokeRequestDtoTokenTypeHint = {
-  access_token: "access_token",
-  refresh_token: "refresh_token",
+  access_token: 'access_token',
+  refresh_token: 'refresh_token',
 } as const;

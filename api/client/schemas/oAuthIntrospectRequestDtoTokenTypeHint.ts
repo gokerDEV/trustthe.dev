@@ -9,11 +9,11 @@
 /**
  * Hint about the type of token
  */
-export type OAuthIntrospectRequestDtoTokenTypeHint =
-  (typeof OAuthIntrospectRequestDtoTokenTypeHint)[keyof typeof OAuthIntrospectRequestDtoTokenTypeHint];
+export type OAuthIntrospectRequestDtoTokenTypeHint = typeof OAuthIntrospectRequestDtoTokenTypeHint[keyof typeof OAuthIntrospectRequestDtoTokenTypeHint];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const OAuthIntrospectRequestDtoTokenTypeHint = {
-  access_token: "access_token",
-  refresh_token: "refresh_token",
+  access_token: 'access_token',
+  refresh_token: 'refresh_token',
 } as const;

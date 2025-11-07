@@ -4,7 +4,7 @@ const API_URL = process.env.API_URL || 'http://localhost:3388';
 
 export const customInstance = async <T>(
   url: string,
-  config: RequestInit & { next?: { revalidate?: number } }
+  config: RequestInit & { next?: { revalidate?: number | false } }
 ): Promise<T> => {
   const token = await getAccessToken();
 

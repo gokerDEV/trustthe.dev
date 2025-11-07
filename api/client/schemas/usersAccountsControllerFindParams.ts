@@ -7,11 +7,11 @@
  */
 
 export type UsersAccountsControllerFindParams = {
-  provider: string;
-  identity: string;
-  isVerified: boolean;
-  /**
-   * Whether this account is the primary account for the user
-   */
-  isPrimary: boolean;
+provider: string;
+identity: string;
+isVerified: boolean;
+/**
+ * Whether this account is the primary account for the user
+ */
+isPrimary: boolean;
 };

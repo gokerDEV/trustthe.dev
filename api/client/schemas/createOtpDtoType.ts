@@ -9,14 +9,14 @@
 /**
  * Type of OTP operation
  */
-export type CreateOtpDtoType =
-  (typeof CreateOtpDtoType)[keyof typeof CreateOtpDtoType];
+export type CreateOtpDtoType = typeof CreateOtpDtoType[keyof typeof CreateOtpDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const CreateOtpDtoType = {
-  invite: "invite",
-  verify: "verify",
-  recovery: "recovery",
-  discount: "discount",
-  reset_password: "reset_password",
+  invite: 'invite',
+  verify: 'verify',
+  recovery: 'recovery',
+  discount: 'discount',
+  reset_password: 'reset_password',
 } as const;

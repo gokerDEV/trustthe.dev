@@ -9,16 +9,16 @@
 /**
  * Communication channel
  */
-export type CreateCommunicationTemplateDtoChannel =
-  (typeof CreateCommunicationTemplateDtoChannel)[keyof typeof CreateCommunicationTemplateDtoChannel];
+export type CreateCommunicationTemplateDtoChannel = typeof CreateCommunicationTemplateDtoChannel[keyof typeof CreateCommunicationTemplateDtoChannel];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const CreateCommunicationTemplateDtoChannel = {
-  email: "email",
-  sms: "sms",
-  push: "push",
-  webhook: "webhook",
-  slack: "slack",
-  discord: "discord",
-  telegram: "telegram",
+  email: 'email',
+  sms: 'sms',
+  push: 'push',
+  webhook: 'webhook',
+  slack: 'slack',
+  discord: 'discord',
+  telegram: 'telegram',
 } as const;

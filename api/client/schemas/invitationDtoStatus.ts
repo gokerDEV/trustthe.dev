@@ -9,21 +9,21 @@
 /**
  * Invitation status
  */
-export type InvitationDtoStatus =
-  (typeof InvitationDtoStatus)[keyof typeof InvitationDtoStatus];
+export type InvitationDtoStatus = typeof InvitationDtoStatus[keyof typeof InvitationDtoStatus];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const InvitationDtoStatus = {
-  draft: "draft",
-  hidden: "hidden",
-  pending: "pending",
-  scheduled: "scheduled",
-  paused: "paused",
-  active: "active",
-  completed: "completed",
-  published: "published",
-  cancelled: "cancelled",
-  expired: "expired",
-  accepted: "accepted",
-  rejected: "rejected",
+  draft: 'draft',
+  hidden: 'hidden',
+  pending: 'pending',
+  scheduled: 'scheduled',
+  paused: 'paused',
+  active: 'active',
+  completed: 'completed',
+  published: 'published',
+  cancelled: 'cancelled',
+  expired: 'expired',
+  accepted: 'accepted',
+  rejected: 'rejected',
 } as const;

@@ -9,14 +9,14 @@
 /**
  * Type of OTP operation
  */
-export type VerifyOtpDtoType =
-  (typeof VerifyOtpDtoType)[keyof typeof VerifyOtpDtoType];
+export type VerifyOtpDtoType = typeof VerifyOtpDtoType[keyof typeof VerifyOtpDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const VerifyOtpDtoType = {
-  invite: "invite",
-  verify: "verify",
-  recovery: "recovery",
-  discount: "discount",
-  reset_password: "reset_password",
+  invite: 'invite',
+  verify: 'verify',
+  recovery: 'recovery',
+  discount: 'discount',
+  reset_password: 'reset_password',
 } as const;

@@ -1,16 +1,14 @@
 import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
 import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
-import type { PostDto } from '@/api/client/schemas';
 import { postsQueryControllerFindAllResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
 import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
-import Breadcrumb from '@/components/common/breadcrumb.component';
-import { Category } from '@/components/features/category.component';
-import { Post } from '@/components/features/post.component';
-import Profile from '@/components/features/profile.component';
+import { ServerErrorBoundary } from '@/components/common/error-boundary.component';
+import { PostContent } from '@/components/features/post-content.component';
 import { getApiDomain } from '@/lib/api/domain';
+import { validateApiResponse } from '@/lib/api/validation.utils';
+import { Logger } from '@/lib/logger';
 import { metadataGenerator } from '@/lib/seo/metadata.generator';
 import { asSlug } from '@/lib/seo/url-slug.utils';
-import { notFound } from 'next/navigation';
 
 export const revalidate = 2592000;
 export const dynamicParams = true;
@@ -34,17 +32,13 @@ export async function generateStaticParams() {
     }
 
     // Zod validation (enterprise requirement per next-client.mdc)
-    const validationResult = postsQueryControllerFindAllResponse.safeParse(
-      response.data
+    const validationResult = validateApiResponse(
+      response.data,
+      postsQueryControllerFindAllResponse,
+      'generateStaticParams'
     );
 
     if (!validationResult.success) {
-      if (process.env.NODE_ENV === 'development') {
-        console.warn(
-          'Zod validation failed for postsQueryControllerFindAll:',
-          validationResult.error.errors
-        );
-      }
       return [];
     }
 
@@ -61,9 +55,10 @@ export async function generateStaticParams() {
 
     return paths;
   } catch (error) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error generating static params:', error);
-    }
+    Logger.error('Error generating static params', {
+      error: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     // Return empty array on error - pages will be generated on-demand
     return [];
   }
@@ -74,43 +69,36 @@ export async function generateMetadata({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  try {
-    const { slug } = await params;
-    const domain = getApiDomain();
-    const response = await postsControllerFindOneBySlug(domain, slug);
+  const { slug } = await params;
+  const domain = getApiDomain();
+  const response = await postsControllerFindOneBySlug(domain, slug);
 
-    if (response.status !== 200) {
-      return {
-        title: 'Post not found',
-        description: 'The requested post could not be found.',
-      };
-    }
-
-    const validationResult = postsControllerFindOneBySlugResponse.safeParse(
-      response.data
-    );
-
-    if (!validationResult.success) {
-      // Fallback metadata if validation fails
-      const post = response.data as PostDto;
-      // Auto-detect OG type: 'article' for posts, 'website' for others
-      const ogType = post.type === 'post' ? 'article' : 'website';
-      return metadataGenerator(post, { ogType });
-    }
-
-    // Auto-detect OG type: 'article' for posts, 'website' for others
-    const ogType = validationResult.data.type === 'post' ? 'article' : 'website';
-    return metadataGenerator(validationResult.data, { ogType });
-  } catch (error) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error generating metadata:', error);
-    }
-    // Return fallback metadata on error
+  if (response.status !== 200) {
     return {
       title: 'Post not found',
       description: 'The requested post could not be found.',
     };
   }
+
+  const validationResult = validateApiResponse(
+    response.data,
+    postsControllerFindOneBySlugResponse,
+    'generateMetadata'
+  );
+
+  const post = validationResult.success
+    ? validationResult.data
+    : (response.data as Parameters<typeof metadataGenerator>[0] | undefined);
+
+  if (!post) {
+    return {
+      title: 'Post not found',
+      description: 'The requested post could not be found.',
+    };
+  }
+
+  const ogType = post.type === 'post' ? 'article' : 'website';
+  return metadataGenerator(post, { ogType });
 }
 
 export default async function Page({
@@ -118,78 +106,20 @@ export default async function Page({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  try {
-    const { slug } = await params;
-    const domain = getApiDomain();
-    const response = await postsControllerFindOneBySlug(domain, asSlug(slug));
+  const { slug } = await params;
+  const domain = getApiDomain();
+  const response = await postsControllerFindOneBySlug(domain, asSlug(slug));
 
-    if (response.status !== 200) {
-      if (process.env.NODE_ENV === 'development') {
-        console.error('API Error Response:', {
-          status: response.status,
-          data: response.data,
-          request: {
-            domain,
-            slug: asSlug(slug),
-          },
-        });
-      }
-      return notFound();
+  const post = ServerErrorBoundary.handleApiResponseWithValidation(
+    response.status,
+    response.data,
+    postsControllerFindOneBySlugResponse,
+    {
+      operation: 'postsControllerFindOneBySlug',
+      domain,
+      slug: asSlug(slug),
     }
+  );
 
-    // Use safeParse to handle validation errors gracefully
-    const validationResult = postsControllerFindOneBySlugResponse.safeParse(
-      response.data
-    );
-
-    if (!validationResult.success) {
-      // Log validation errors in development
-      if (process.env.NODE_ENV === 'development') {
-        console.warn(
-          'Zod validation failed for post:',
-          validationResult.error.errors
-        );
-        console.warn('Raw API response:', JSON.stringify(response.data, null, 2));
-      }
-
-      const post = response.data as PostDto;
-
-      const type = post.tags?.includes('profile')
-        ? 'profile'
-        : post.type || 'post';
-
-      return (
-        <div className='w-full max-w-full p-4 lg:p-8'>
-          <Breadcrumb
-            className='text-xs uppercase'
-            paths={[{ children: post.slug }]}
-          />
-          {type === 'category' && <Category post={post} />}
-          {type === 'post' && <Post post={post} />}
-        </div>
-      );
-    }
-
-    const post = validationResult.data;
-    const type = post.tags?.includes('profile') ? 'profile' : post.type || 'post';
-
-    return (
-      <div className='w-full max-w-full p-4 lg:p-8 pt-4!'>
-        <Breadcrumb
-          className='text-xs uppercase'
-          paths={[{ children: post.slug }]}
-        />
-        {type === 'category' && <Category post={post} />}
-        {type === 'post' && <Post post={post} />}
-        {type === 'profile' && <Profile post={post} />}
-      </div>
-    );
-  } catch (error) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Error loading post page:', error);
-    }
-    // Let error.tsx handle unexpected errors by rethrowing
-    // This ensures proper error boundary handling
-    throw error;
-  }
+  return <PostContent post={post} />;
 }

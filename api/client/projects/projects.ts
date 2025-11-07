@@ -9,168 +9,153 @@ import type {
   CreateProjectDto,
   ErrorResponseDto,
   OkDto,
-  ProjectsCrudControllerFindAll200,
-} from ".././schemas";
+  ProjectsCrudControllerFindAll200
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Create an item
  */
 export type projectsCrudControllerCreateResponse201 = {
-  data: OkDto;
-  status: 201;
-};
+  data: OkDto
+  status: 201
+}
 
 export type projectsCrudControllerCreateResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type projectsCrudControllerCreateResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type projectsCrudControllerCreateResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type projectsCrudControllerCreateResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type projectsCrudControllerCreateResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type projectsCrudControllerCreateResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type projectsCrudControllerCreateResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type projectsCrudControllerCreateResponseSuccess = (projectsCrudControllerCreateResponse201) & {
+  headers: Headers;
 };
-
-export type projectsCrudControllerCreateResponseSuccess =
-  projectsCrudControllerCreateResponse201 & {
-    headers: Headers;
-  };
-export type projectsCrudControllerCreateResponseError = (
-  | projectsCrudControllerCreateResponse400
-  | projectsCrudControllerCreateResponse401
-  | projectsCrudControllerCreateResponse403
-  | projectsCrudControllerCreateResponse404
-  | projectsCrudControllerCreateResponse409
-  | projectsCrudControllerCreateResponse422
-  | projectsCrudControllerCreateResponse500
-) & {
+export type projectsCrudControllerCreateResponseError = (projectsCrudControllerCreateResponse400 | projectsCrudControllerCreateResponse401 | projectsCrudControllerCreateResponse403 | projectsCrudControllerCreateResponse404 | projectsCrudControllerCreateResponse409 | projectsCrudControllerCreateResponse422 | projectsCrudControllerCreateResponse500) & {
   headers: Headers;
 };
 
-export type projectsCrudControllerCreateResponse =
-  | projectsCrudControllerCreateResponseSuccess
-  | projectsCrudControllerCreateResponseError;
+export type projectsCrudControllerCreateResponse = (projectsCrudControllerCreateResponseSuccess | projectsCrudControllerCreateResponseError)
 
 export const getProjectsCrudControllerCreateUrl = () => {
-  return `/projects`;
-};
 
-export const projectsCrudControllerCreate = async (
-  createProjectDto: CreateProjectDto,
-  options?: RequestInit,
-): Promise<projectsCrudControllerCreateResponse> => {
-  return customInstance<projectsCrudControllerCreateResponse>(
-    getProjectsCrudControllerCreateUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(createProjectDto),
-    },
-  );
-};
+
+  
+
+  return `/projects`
+}
+
+export const projectsCrudControllerCreate = async (createProjectDto: CreateProjectDto, options?: RequestInit): Promise<projectsCrudControllerCreateResponse> => {
+  
+  return customInstance<projectsCrudControllerCreateResponse>(getProjectsCrudControllerCreateUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      createProjectDto,)
+  }
+);}
+
 
 /**
  * @summary List of all items
  */
 export type projectsCrudControllerFindAllResponse200 = {
-  data: ProjectsCrudControllerFindAll200;
-  status: 200;
-};
+  data: ProjectsCrudControllerFindAll200
+  status: 200
+}
 
 export type projectsCrudControllerFindAllResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type projectsCrudControllerFindAllResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type projectsCrudControllerFindAllResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type projectsCrudControllerFindAllResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type projectsCrudControllerFindAllResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type projectsCrudControllerFindAllResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type projectsCrudControllerFindAllResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type projectsCrudControllerFindAllResponseSuccess = (projectsCrudControllerFindAllResponse200) & {
+  headers: Headers;
 };
-
-export type projectsCrudControllerFindAllResponseSuccess =
-  projectsCrudControllerFindAllResponse200 & {
-    headers: Headers;
-  };
-export type projectsCrudControllerFindAllResponseError = (
-  | projectsCrudControllerFindAllResponse400
-  | projectsCrudControllerFindAllResponse401
-  | projectsCrudControllerFindAllResponse403
-  | projectsCrudControllerFindAllResponse404
-  | projectsCrudControllerFindAllResponse409
-  | projectsCrudControllerFindAllResponse422
-  | projectsCrudControllerFindAllResponse500
-) & {
+export type projectsCrudControllerFindAllResponseError = (projectsCrudControllerFindAllResponse400 | projectsCrudControllerFindAllResponse401 | projectsCrudControllerFindAllResponse403 | projectsCrudControllerFindAllResponse404 | projectsCrudControllerFindAllResponse409 | projectsCrudControllerFindAllResponse422 | projectsCrudControllerFindAllResponse500) & {
   headers: Headers;
 };
 
-export type projectsCrudControllerFindAllResponse =
-  | projectsCrudControllerFindAllResponseSuccess
-  | projectsCrudControllerFindAllResponseError;
+export type projectsCrudControllerFindAllResponse = (projectsCrudControllerFindAllResponseSuccess | projectsCrudControllerFindAllResponseError)
 
 export const getProjectsCrudControllerFindAllUrl = () => {
-  return `/projects`;
-};
 
-export const projectsCrudControllerFindAll = async (
-  options?: RequestInit,
-): Promise<projectsCrudControllerFindAllResponse> => {
-  return customInstance<projectsCrudControllerFindAllResponse>(
-    getProjectsCrudControllerFindAllUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/projects`
+}
+
+export const projectsCrudControllerFindAll = async ( options?: RequestInit): Promise<projectsCrudControllerFindAllResponse> => {
+  
+  return customInstance<projectsCrudControllerFindAllResponse>(getProjectsCrudControllerFindAllUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

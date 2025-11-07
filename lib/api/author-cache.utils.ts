@@ -1,9 +1,10 @@
-import type { PostDto } from '@/api/client/schemas';
 import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
+import type { PostDto } from '@/api/client/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
 import { getApiDomain } from '@/lib/api/domain';
-import { safeParsePostBySlug } from '@/lib/api/validation.utils';
-import { cache } from 'react';
+import { validateApiResponse } from '@/lib/api/validation.utils';
 import { unstable_cache } from 'next/cache';
+import { cache } from 'react';
 
 /**
  * Cached author post fetcher
@@ -18,8 +19,19 @@ const getAuthorPostUncached = async (slug: string): Promise<PostDto | null> => {
     return null;
   }
 
-  const data = safeParsePostBySlug(response.data, `author post ${slug}`);
-  return data;
+  const validationResult = validateApiResponse(
+    response.data,
+    postsControllerFindOneBySlugResponse,
+    `author post ${slug}`
+  );
+
+  if (validationResult.success) {
+    return validationResult.data;
+  }
+
+  // Graceful fallback: use raw data if validation fails
+  const fallbackData = validationResult.rawData as PostDto | null;
+  return fallbackData ?? null;
 };
 
 /**

@@ -5,215 +5,215 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { PostsControllerFindByStatusSort } from "./postsControllerFindByStatusSort";
+import type { PostsControllerFindByStatusSort } from './postsControllerFindByStatusSort';
 
 export type PostsControllerFindByStatusParams = {
-  /**
-   * Number of items to return (1-100, default: 20)
-   */
-  limit?: number;
-  /**
-   * Cursor token for next page (forward pagination)
-   */
-  after?: string;
-  /**
-   * Cursor token for previous page (backward pagination)
-   */
-  before?: string;
-  /**
-   * Sort field with optional '-' prefix for descending. Allowed fields: title, slug, createdAt, updatedAt
-   */
-  sort?: PostsControllerFindByStatusSort;
-  /**
-   * Filter by projectId
-   */
-  projectId?: string;
-  /**
-   * Filter by domain (exact match)
-   */
-  domain?: string;
-  /**
-   * Filter where domain contains the value (case-sensitive)
-   */
-  "domain.contains"?: string;
-  /**
-   * Filter where domain contains the value (case-insensitive)
-   */
-  "domain.icontains"?: string;
-  /**
-   * Filter where domain starts with the value (case-sensitive)
-   */
-  "domain.startsWith"?: string;
-  /**
-   * Filter where domain starts with the value (case-insensitive)
-   */
-  "domain.istartswith"?: string;
-  /**
-   * Filter by title (exact match)
-   */
-  title?: string;
-  /**
-   * Filter where title contains the value (case-sensitive)
-   */
-  "title.contains"?: string;
-  /**
-   * Filter where title contains the value (case-insensitive)
-   */
-  "title.icontains"?: string;
-  /**
-   * Filter where title starts with the value (case-sensitive)
-   */
-  "title.startsWith"?: string;
-  /**
-   * Filter where title starts with the value (case-insensitive)
-   */
-  "title.istartswith"?: string;
-  /**
-   * Filter by slug (exact match)
-   */
-  slug?: string;
-  /**
-   * Filter where slug contains the value (case-sensitive)
-   */
-  "slug.contains"?: string;
-  /**
-   * Filter where slug contains the value (case-insensitive)
-   */
-  "slug.icontains"?: string;
-  /**
-   * Filter where slug starts with the value (case-sensitive)
-   */
-  "slug.startsWith"?: string;
-  /**
-   * Filter where slug starts with the value (case-insensitive)
-   */
-  "slug.istartswith"?: string;
-  /**
-   * Filter by description (exact match)
-   */
-  description?: string;
-  /**
-   * Filter where description contains the value (case-sensitive)
-   */
-  "description.contains"?: string;
-  /**
-   * Filter where description contains the value (case-insensitive)
-   */
-  "description.icontains"?: string;
-  /**
-   * Filter where description starts with the value (case-sensitive)
-   */
-  "description.startsWith"?: string;
-  /**
-   * Filter where description starts with the value (case-insensitive)
-   */
-  "description.istartswith"?: string;
-  /**
-   * Filter by tags (exact match)
-   */
-  tags?: string;
-  /**
-   * Filter where tags contains the value (case-sensitive)
-   */
-  "tags.contains"?: string;
-  /**
-   * Filter where tags contains the value (case-insensitive)
-   */
-  "tags.icontains"?: string;
-  /**
-   * Filter where tags starts with the value (case-sensitive)
-   */
-  "tags.startsWith"?: string;
-  /**
-   * Filter where tags starts with the value (case-insensitive)
-   */
-  "tags.istartswith"?: string;
-  /**
-   * Filter by type (exact match)
-   */
-  type?: string;
-  /**
-   * Filter where type contains the value (case-sensitive)
-   */
-  "type.contains"?: string;
-  /**
-   * Filter where type contains the value (case-insensitive)
-   */
-  "type.icontains"?: string;
-  /**
-   * Filter where type starts with the value (case-sensitive)
-   */
-  "type.startsWith"?: string;
-  /**
-   * Filter where type starts with the value (case-insensitive)
-   */
-  "type.istartswith"?: string;
-  /**
-   * Filter by status (exact match)
-   */
-  status?: string;
-  /**
-   * Filter where status contains the value (case-sensitive)
-   */
-  "status.contains"?: string;
-  /**
-   * Filter where status contains the value (case-insensitive)
-   */
-  "status.icontains"?: string;
-  /**
-   * Filter where status starts with the value (case-sensitive)
-   */
-  "status.startsWith"?: string;
-  /**
-   * Filter where status starts with the value (case-insensitive)
-   */
-  "status.istartswith"?: string;
-  /**
-   * Filter by authorId
-   */
-  authorId?: string;
-  /**
-   * Filter by categories
-   */
-  categories?: string;
-  /**
-   * Filter by createdAt (exact match, ISO date string for dates)
-   */
-  createdAt?: string;
-  /**
-   * Filter where createdAt is greater than
-   */
-  "createdAt.gt"?: string;
-  /**
-   * Filter where createdAt is greater than or equal
-   */
-  "createdAt.gte"?: string;
-  /**
-   * Filter where createdAt is less than
-   */
-  "createdAt.lt"?: string;
-  /**
-   * Filter where createdAt is less than or equal
-   */
-  "createdAt.lte"?: string;
-  /**
-   * Filter by updatedAt (exact match, ISO date string for dates)
-   */
-  updatedAt?: string;
-  /**
-   * Filter where updatedAt is greater than
-   */
-  "updatedAt.gt"?: string;
-  /**
-   * Filter where updatedAt is greater than or equal
-   */
-  "updatedAt.gte"?: string;
-  /**
-   * Filter where updatedAt is less than
-   */
-  "updatedAt.lt"?: string;
-  /**
-   * Filter where updatedAt is less than or equal
-   */
-  "updatedAt.lte"?: string;
+/**
+ * Number of items to return (1-100, default: 20)
+ */
+limit?: number;
+/**
+ * Cursor token for next page (forward pagination)
+ */
+after?: string;
+/**
+ * Cursor token for previous page (backward pagination)
+ */
+before?: string;
+/**
+ * Sort field with optional '-' prefix for descending. Allowed fields: title, slug, createdAt, updatedAt
+ */
+sort?: PostsControllerFindByStatusSort;
+/**
+ * Filter by projectId
+ */
+projectId?: string;
+/**
+ * Filter by domain (exact match)
+ */
+domain?: string;
+/**
+ * Filter where domain contains the value (case-sensitive)
+ */
+'domain.contains'?: string;
+/**
+ * Filter where domain contains the value (case-insensitive)
+ */
+'domain.icontains'?: string;
+/**
+ * Filter where domain starts with the value (case-sensitive)
+ */
+'domain.startsWith'?: string;
+/**
+ * Filter where domain starts with the value (case-insensitive)
+ */
+'domain.istartswith'?: string;
+/**
+ * Filter by title (exact match)
+ */
+title?: string;
+/**
+ * Filter where title contains the value (case-sensitive)
+ */
+'title.contains'?: string;
+/**
+ * Filter where title contains the value (case-insensitive)
+ */
+'title.icontains'?: string;
+/**
+ * Filter where title starts with the value (case-sensitive)
+ */
+'title.startsWith'?: string;
+/**
+ * Filter where title starts with the value (case-insensitive)
+ */
+'title.istartswith'?: string;
+/**
+ * Filter by slug (exact match)
+ */
+slug?: string;
+/**
+ * Filter where slug contains the value (case-sensitive)
+ */
+'slug.contains'?: string;
+/**
+ * Filter where slug contains the value (case-insensitive)
+ */
+'slug.icontains'?: string;
+/**
+ * Filter where slug starts with the value (case-sensitive)
+ */
+'slug.startsWith'?: string;
+/**
+ * Filter where slug starts with the value (case-insensitive)
+ */
+'slug.istartswith'?: string;
+/**
+ * Filter by description (exact match)
+ */
+description?: string;
+/**
+ * Filter where description contains the value (case-sensitive)
+ */
+'description.contains'?: string;
+/**
+ * Filter where description contains the value (case-insensitive)
+ */
+'description.icontains'?: string;
+/**
+ * Filter where description starts with the value (case-sensitive)
+ */
+'description.startsWith'?: string;
+/**
+ * Filter where description starts with the value (case-insensitive)
+ */
+'description.istartswith'?: string;
+/**
+ * Filter by tags (exact match)
+ */
+tags?: string;
+/**
+ * Filter where tags contains the value (case-sensitive)
+ */
+'tags.contains'?: string;
+/**
+ * Filter where tags contains the value (case-insensitive)
+ */
+'tags.icontains'?: string;
+/**
+ * Filter where tags starts with the value (case-sensitive)
+ */
+'tags.startsWith'?: string;
+/**
+ * Filter where tags starts with the value (case-insensitive)
+ */
+'tags.istartswith'?: string;
+/**
+ * Filter by type (exact match)
+ */
+type?: string;
+/**
+ * Filter where type contains the value (case-sensitive)
+ */
+'type.contains'?: string;
+/**
+ * Filter where type contains the value (case-insensitive)
+ */
+'type.icontains'?: string;
+/**
+ * Filter where type starts with the value (case-sensitive)
+ */
+'type.startsWith'?: string;
+/**
+ * Filter where type starts with the value (case-insensitive)
+ */
+'type.istartswith'?: string;
+/**
+ * Filter by status (exact match)
+ */
+status?: string;
+/**
+ * Filter where status contains the value (case-sensitive)
+ */
+'status.contains'?: string;
+/**
+ * Filter where status contains the value (case-insensitive)
+ */
+'status.icontains'?: string;
+/**
+ * Filter where status starts with the value (case-sensitive)
+ */
+'status.startsWith'?: string;
+/**
+ * Filter where status starts with the value (case-insensitive)
+ */
+'status.istartswith'?: string;
+/**
+ * Filter by authorId
+ */
+authorId?: string;
+/**
+ * Filter by categories
+ */
+categories?: string;
+/**
+ * Filter by createdAt (exact match, ISO date string for dates)
+ */
+createdAt?: string;
+/**
+ * Filter where createdAt is greater than
+ */
+'createdAt.gt'?: string;
+/**
+ * Filter where createdAt is greater than or equal
+ */
+'createdAt.gte'?: string;
+/**
+ * Filter where createdAt is less than
+ */
+'createdAt.lt'?: string;
+/**
+ * Filter where createdAt is less than or equal
+ */
+'createdAt.lte'?: string;
+/**
+ * Filter by updatedAt (exact match, ISO date string for dates)
+ */
+updatedAt?: string;
+/**
+ * Filter where updatedAt is greater than
+ */
+'updatedAt.gt'?: string;
+/**
+ * Filter where updatedAt is greater than or equal
+ */
+'updatedAt.gte'?: string;
+/**
+ * Filter where updatedAt is less than
+ */
+'updatedAt.lt'?: string;
+/**
+ * Filter where updatedAt is less than or equal
+ */
+'updatedAt.lte'?: string;
 };

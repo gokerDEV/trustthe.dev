@@ -35,7 +35,6 @@ export async function Post({ post }: { post: PostDto }) {
 
   const isPlaceholder = cover.src.includes('goker-bg');
 
-
   return (
     <>
       <article itemScope itemType='https://schema.org/Article' className='pb-8'>

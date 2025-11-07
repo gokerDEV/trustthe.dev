@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OAuthIntrospectRequestDtoTokenTypeHint } from "./oAuthIntrospectRequestDtoTokenTypeHint";
+import type { OAuthIntrospectRequestDtoTokenTypeHint } from './oAuthIntrospectRequestDtoTokenTypeHint';
 
 export interface OAuthIntrospectRequestDto {
   /** The token to introspect */

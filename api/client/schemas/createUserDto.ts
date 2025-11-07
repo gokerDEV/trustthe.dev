@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { Account } from "./account";
+import type { Account } from './account';
 
 export interface CreateUserDto {
   /**

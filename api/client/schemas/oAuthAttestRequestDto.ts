@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OAuthAttestRequestDtoPlatform } from "./oAuthAttestRequestDtoPlatform";
+import type { OAuthAttestRequestDtoPlatform } from './oAuthAttestRequestDtoPlatform';
 
 export interface OAuthAttestRequestDto {
   /** Client ID of the mobile app */

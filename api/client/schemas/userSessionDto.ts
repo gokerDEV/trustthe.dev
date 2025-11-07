@@ -5,9 +5,9 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { UserSessionDtoDevice } from "./userSessionDtoDevice";
-import type { UserSessionDtoBrowser } from "./userSessionDtoBrowser";
-import type { UserSessionDtoLocation } from "./userSessionDtoLocation";
+import type { UserSessionDtoDevice } from './userSessionDtoDevice';
+import type { UserSessionDtoBrowser } from './userSessionDtoBrowser';
+import type { UserSessionDtoLocation } from './userSessionDtoLocation';
 
 export interface UserSessionDto {
   /** Session key */

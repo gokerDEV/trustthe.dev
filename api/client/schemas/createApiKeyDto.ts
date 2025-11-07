@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { CreateApiKeyDtoType } from "./createApiKeyDtoType";
+import type { CreateApiKeyDtoType } from './createApiKeyDtoType';
 
 export interface CreateApiKeyDto {
   /** Name of the API key */

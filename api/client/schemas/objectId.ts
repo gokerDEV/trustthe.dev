@@ -6,6 +6,4 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export interface ObjectId {
-  [key: string]: unknown;
-}
+export interface ObjectId { [key: string]: unknown }

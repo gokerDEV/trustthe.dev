@@ -1,8 +1,10 @@
-import type { PostDto } from '@/api/client/schemas';
 import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
+import type { PostDto } from '@/api/client/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
 import { PostCard } from '@/components/features/post-card.component';
 import { PINNED_POSTS } from '@/config/constants';
-import { safeParsePostBySlug } from '@/lib/api/validation.utils';
+import { validateApiResponse } from '@/lib/api/validation.utils';
+import { Logger } from '@/lib/logger';
 
 export async function PinnedPosts() {
   const list: PostDto[] = [];
@@ -12,23 +14,29 @@ export async function PinnedPosts() {
       try {
         const response = await postsControllerFindOneBySlug(domain, slug);
         if (response.status === 200) {
-          const post = safeParsePostBySlug(
+          const validationResult = validateApiResponse(
             response.data,
+            postsControllerFindOneBySlugResponse,
             `pinned post ${slug}`
           );
-          list.push(post);
+
+          if (validationResult.success) {
+            list.push(validationResult.data);
+          } else {
+            // Graceful fallback: use raw data if validation fails
+            const fallbackPost = validationResult.rawData as PostDto;
+            if (fallbackPost) {
+              list.push(fallbackPost);
+            }
+          }
         }
       } catch (error) {
-        if (process.env.NODE_ENV === 'development') {
-          console.error(`Failed to fetch pinned post ${slug}:`, {
-            error,
-            errorMessage:
-              error instanceof Error ? error.message : String(error),
-            errorStack: error instanceof Error ? error.stack : undefined,
-          });
-        } else {
-          console.error(`Failed to fetch pinned post ${slug}:`, error);
-        }
+        Logger.error(`Failed to fetch pinned post ${slug}`, {
+          error: error instanceof Error ? error.message : String(error),
+          stack: error instanceof Error ? error.stack : undefined,
+          domain,
+          slug,
+        });
       }
     })
   );

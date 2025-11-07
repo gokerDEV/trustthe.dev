@@ -9,11 +9,11 @@
 /**
  * Platform (ios or android)
  */
-export type OAuthAttestRequestDtoPlatform =
-  (typeof OAuthAttestRequestDtoPlatform)[keyof typeof OAuthAttestRequestDtoPlatform];
+export type OAuthAttestRequestDtoPlatform = typeof OAuthAttestRequestDtoPlatform[keyof typeof OAuthAttestRequestDtoPlatform];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const OAuthAttestRequestDtoPlatform = {
-  ios: "ios",
-  android: "android",
+  ios: 'ios',
+  android: 'android',
 } as const;

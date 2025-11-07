@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OAuthErrorResponseDtoError } from "./oAuthErrorResponseDtoError";
+import type { OAuthErrorResponseDtoError } from './oAuthErrorResponseDtoError';
 
 export interface OAuthErrorResponseDto {
   /** Error code */

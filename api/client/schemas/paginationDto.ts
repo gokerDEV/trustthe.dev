@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { ObjectId } from "./objectId";
-import type { PaginationDtoFilter } from "./paginationDtoFilter";
+import type { ObjectId } from './objectId';
+import type { PaginationDtoFilter } from './paginationDtoFilter';
 
 export interface PaginationDto {
   /** Cursor for the next page of results */

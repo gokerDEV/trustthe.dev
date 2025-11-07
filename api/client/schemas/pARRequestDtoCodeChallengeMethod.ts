@@ -9,10 +9,10 @@
 /**
  * PKCE code challenge method
  */
-export type PARRequestDtoCodeChallengeMethod =
-  (typeof PARRequestDtoCodeChallengeMethod)[keyof typeof PARRequestDtoCodeChallengeMethod];
+export type PARRequestDtoCodeChallengeMethod = typeof PARRequestDtoCodeChallengeMethod[keyof typeof PARRequestDtoCodeChallengeMethod];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PARRequestDtoCodeChallengeMethod = {
-  S256: "S256",
+  S256: 'S256',
 } as const;

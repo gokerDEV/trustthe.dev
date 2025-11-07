@@ -5,77 +5,82 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Get server information
  */
 export type appControllerGetServerInfoResponse200 = {
-  data: void;
-  status: 200;
+  data: void
+  status: 200
+}
+    
+export type appControllerGetServerInfoResponseSuccess = (appControllerGetServerInfoResponse200) & {
+  headers: Headers;
 };
+;
 
-export type appControllerGetServerInfoResponseSuccess =
-  appControllerGetServerInfoResponse200 & {
-    headers: Headers;
-  };
-export type appControllerGetServerInfoResponse =
-  appControllerGetServerInfoResponseSuccess;
+export type appControllerGetServerInfoResponse = (appControllerGetServerInfoResponseSuccess)
 
 export const getAppControllerGetServerInfoUrl = () => {
-  return `/`;
-};
 
-export const appControllerGetServerInfo = async (
-  options?: RequestInit,
-): Promise<appControllerGetServerInfoResponse> => {
-  return customInstance<appControllerGetServerInfoResponse>(
-    getAppControllerGetServerInfoUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/`
+}
+
+export const appControllerGetServerInfo = async ( options?: RequestInit): Promise<appControllerGetServerInfoResponse> => {
+  
+  return customInstance<appControllerGetServerInfoResponse>(getAppControllerGetServerInfoUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get application health status
  */
 export type appControllerGetHealthResponse200 = {
-  data: void;
-  status: 200;
-};
+  data: void
+  status: 200
+}
 
 export type appControllerGetHealthResponse503 = {
-  data: void;
-  status: 503;
+  data: void
+  status: 503
+}
+    
+export type appControllerGetHealthResponseSuccess = (appControllerGetHealthResponse200) & {
+  headers: Headers;
+};
+export type appControllerGetHealthResponseError = (appControllerGetHealthResponse503) & {
+  headers: Headers;
 };
 
-export type appControllerGetHealthResponseSuccess =
-  appControllerGetHealthResponse200 & {
-    headers: Headers;
-  };
-export type appControllerGetHealthResponseError =
-  appControllerGetHealthResponse503 & {
-    headers: Headers;
-  };
-
-export type appControllerGetHealthResponse =
-  | appControllerGetHealthResponseSuccess
-  | appControllerGetHealthResponseError;
+export type appControllerGetHealthResponse = (appControllerGetHealthResponseSuccess | appControllerGetHealthResponseError)
 
 export const getAppControllerGetHealthUrl = () => {
-  return `/health`;
-};
 
-export const appControllerGetHealth = async (
-  options?: RequestInit,
-): Promise<appControllerGetHealthResponse> => {
-  return customInstance<appControllerGetHealthResponse>(
-    getAppControllerGetHealthUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/health`
+}
+
+export const appControllerGetHealth = async ( options?: RequestInit): Promise<appControllerGetHealthResponse> => {
+  
+  return customInstance<appControllerGetHealthResponse>(getAppControllerGetHealthUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

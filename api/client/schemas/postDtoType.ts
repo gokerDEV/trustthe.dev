@@ -6,11 +6,12 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export type PostDtoType = (typeof PostDtoType)[keyof typeof PostDtoType];
+export type PostDtoType = typeof PostDtoType[keyof typeof PostDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PostDtoType = {
-  category: "category",
-  post: "post",
-  article: "article",
+  category: 'category',
+  post: 'post',
+  article: 'article',
 } as const;

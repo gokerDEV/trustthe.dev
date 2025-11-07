@@ -7,8 +7,8 @@
  */
 
 export type GptPostControllerSearchPostsParams = {
-  /**
-   * Search query for finding relevant posts
-   */
-  q: string;
+/**
+ * Search query for finding relevant posts
+ */
+q: string;
 };

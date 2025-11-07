@@ -5,11 +5,11 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { PostDtoType } from "./postDtoType";
-import type { PostDtoStatus } from "./postDtoStatus";
-import type { PostFileDto } from "./postFileDto";
-import type { AuthorDto } from "./authorDto";
-import type { CategoryDto } from "./categoryDto";
+import type { PostDtoType } from './postDtoType';
+import type { PostDtoStatus } from './postDtoStatus';
+import type { PostFileDto } from './postFileDto';
+import type { AuthorDto } from './authorDto';
+import type { CategoryDto } from './categoryDto';
 
 export interface PostDto {
   readonly createdAt: string;

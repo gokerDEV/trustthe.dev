@@ -9,13 +9,13 @@
 /**
  * New role for the member
  */
-export type ChangeMemberRoleDtoRole =
-  (typeof ChangeMemberRoleDtoRole)[keyof typeof ChangeMemberRoleDtoRole];
+export type ChangeMemberRoleDtoRole = typeof ChangeMemberRoleDtoRole[keyof typeof ChangeMemberRoleDtoRole];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const ChangeMemberRoleDtoRole = {
-  owner: "owner",
-  admin: "admin",
-  member: "member",
-  viewer: "viewer",
+  owner: 'owner',
+  admin: 'admin',
+  member: 'member',
+  viewer: 'viewer',
 } as const;

@@ -10,171 +10,154 @@ import type {
   ErrorResponseDto,
   ResendOtpDto,
   VerifyOtpDto,
-  VerifyOtpResponseDto,
-} from ".././schemas";
+  VerifyOtpResponseDto
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Verify OTP and get token
  */
 export type otpControllerVerifyResponse200 = {
-  data: VerifyOtpResponseDto;
-  status: 200;
-};
+  data: VerifyOtpResponseDto
+  status: 200
+}
 
 export type otpControllerVerifyResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type otpControllerVerifyResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type otpControllerVerifyResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type otpControllerVerifyResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type otpControllerVerifyResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type otpControllerVerifyResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type otpControllerVerifyResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type otpControllerVerifyResponseSuccess = (otpControllerVerifyResponse200) & {
+  headers: Headers;
 };
-
-export type otpControllerVerifyResponseSuccess =
-  otpControllerVerifyResponse200 & {
-    headers: Headers;
-  };
-export type otpControllerVerifyResponseError = (
-  | otpControllerVerifyResponse400
-  | otpControllerVerifyResponse401
-  | otpControllerVerifyResponse403
-  | otpControllerVerifyResponse404
-  | otpControllerVerifyResponse409
-  | otpControllerVerifyResponse422
-  | otpControllerVerifyResponse500
-) & {
+export type otpControllerVerifyResponseError = (otpControllerVerifyResponse400 | otpControllerVerifyResponse401 | otpControllerVerifyResponse403 | otpControllerVerifyResponse404 | otpControllerVerifyResponse409 | otpControllerVerifyResponse422 | otpControllerVerifyResponse500) & {
   headers: Headers;
 };
 
-export type otpControllerVerifyResponse =
-  | otpControllerVerifyResponseSuccess
-  | otpControllerVerifyResponseError;
+export type otpControllerVerifyResponse = (otpControllerVerifyResponseSuccess | otpControllerVerifyResponseError)
 
 export const getOtpControllerVerifyUrl = () => {
-  return `/otp/verify`;
-};
 
-export const otpControllerVerify = async (
-  verifyOtpDto: VerifyOtpDto,
-  options?: RequestInit,
-): Promise<otpControllerVerifyResponse> => {
-  return customInstance<otpControllerVerifyResponse>(
-    getOtpControllerVerifyUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(verifyOtpDto),
-    },
-  );
-};
+
+  
+
+  return `/otp/verify`
+}
+
+export const otpControllerVerify = async (verifyOtpDto: VerifyOtpDto, options?: RequestInit): Promise<otpControllerVerifyResponse> => {
+  
+  return customInstance<otpControllerVerifyResponse>(getOtpControllerVerifyUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      verifyOtpDto,)
+  }
+);}
+
 
 /**
  * @summary Resend OTP for end user
  */
 export type otpControllerResendForUserResponse200 = {
-  data: CreateOtpResponseDto;
-  status: 200;
-};
+  data: CreateOtpResponseDto
+  status: 200
+}
 
 export type otpControllerResendForUserResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type otpControllerResendForUserResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type otpControllerResendForUserResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type otpControllerResendForUserResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type otpControllerResendForUserResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type otpControllerResendForUserResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type otpControllerResendForUserResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type otpControllerResendForUserResponseSuccess = (otpControllerResendForUserResponse200) & {
+  headers: Headers;
 };
-
-export type otpControllerResendForUserResponseSuccess =
-  otpControllerResendForUserResponse200 & {
-    headers: Headers;
-  };
-export type otpControllerResendForUserResponseError = (
-  | otpControllerResendForUserResponse400
-  | otpControllerResendForUserResponse401
-  | otpControllerResendForUserResponse403
-  | otpControllerResendForUserResponse404
-  | otpControllerResendForUserResponse409
-  | otpControllerResendForUserResponse422
-  | otpControllerResendForUserResponse500
-) & {
+export type otpControllerResendForUserResponseError = (otpControllerResendForUserResponse400 | otpControllerResendForUserResponse401 | otpControllerResendForUserResponse403 | otpControllerResendForUserResponse404 | otpControllerResendForUserResponse409 | otpControllerResendForUserResponse422 | otpControllerResendForUserResponse500) & {
   headers: Headers;
 };
 
-export type otpControllerResendForUserResponse =
-  | otpControllerResendForUserResponseSuccess
-  | otpControllerResendForUserResponseError;
+export type otpControllerResendForUserResponse = (otpControllerResendForUserResponseSuccess | otpControllerResendForUserResponseError)
 
 export const getOtpControllerResendForUserUrl = () => {
-  return `/otp/resend`;
-};
 
-export const otpControllerResendForUser = async (
-  resendOtpDto: ResendOtpDto,
-  options?: RequestInit,
-): Promise<otpControllerResendForUserResponse> => {
-  return customInstance<otpControllerResendForUserResponse>(
-    getOtpControllerResendForUserUrl(),
-    {
-      ...options,
-      method: "POST",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(resendOtpDto),
-    },
-  );
-};
+
+  
+
+  return `/otp/resend`
+}
+
+export const otpControllerResendForUser = async (resendOtpDto: ResendOtpDto, options?: RequestInit): Promise<otpControllerResendForUserResponse> => {
+  
+  return customInstance<otpControllerResendForUserResponse>(getOtpControllerResendForUserUrl(),
+  {      
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      resendOtpDto,)
+  }
+);}
+
+

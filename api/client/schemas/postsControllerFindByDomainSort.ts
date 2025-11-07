@@ -6,17 +6,17 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export type PostsControllerFindByDomainSort =
-  (typeof PostsControllerFindByDomainSort)[keyof typeof PostsControllerFindByDomainSort];
+export type PostsControllerFindByDomainSort = typeof PostsControllerFindByDomainSort[keyof typeof PostsControllerFindByDomainSort];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PostsControllerFindByDomainSort = {
-  title: "title",
-  slug: "slug",
-  createdAt: "createdAt",
-  updatedAt: "updatedAt",
-  "-title": "-title",
-  "-slug": "-slug",
-  "-createdAt": "-createdAt",
-  "-updatedAt": "-updatedAt",
+  title: 'title',
+  slug: 'slug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  '-title': '-title',
+  '-slug': '-slug',
+  '-createdAt': '-createdAt',
+  '-updatedAt': '-updatedAt',
 } as const;

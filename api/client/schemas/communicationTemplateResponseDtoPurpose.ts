@@ -9,21 +9,21 @@
 /**
  * Communication purpose
  */
-export type CommunicationTemplateResponseDtoPurpose =
-  (typeof CommunicationTemplateResponseDtoPurpose)[keyof typeof CommunicationTemplateResponseDtoPurpose];
+export type CommunicationTemplateResponseDtoPurpose = typeof CommunicationTemplateResponseDtoPurpose[keyof typeof CommunicationTemplateResponseDtoPurpose];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const CommunicationTemplateResponseDtoPurpose = {
-  invite: "invite",
-  verify: "verify",
-  recovery: "recovery",
-  discount: "discount",
-  reset_password: "reset_password",
-  welcome: "welcome",
-  notification: "notification",
-  alert: "alert",
-  reminder: "reminder",
-  promotion: "promotion",
-  newsletter: "newsletter",
-  announcement: "announcement",
+  invite: 'invite',
+  verify: 'verify',
+  recovery: 'recovery',
+  discount: 'discount',
+  reset_password: 'reset_password',
+  welcome: 'welcome',
+  notification: 'notification',
+  alert: 'alert',
+  reminder: 'reminder',
+  promotion: 'promotion',
+  newsletter: 'newsletter',
+  announcement: 'announcement',
 } as const;

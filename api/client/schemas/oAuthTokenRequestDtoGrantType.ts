@@ -9,12 +9,12 @@
 /**
  * OAuth 2.1 grant type
  */
-export type OAuthTokenRequestDtoGrantType =
-  (typeof OAuthTokenRequestDtoGrantType)[keyof typeof OAuthTokenRequestDtoGrantType];
+export type OAuthTokenRequestDtoGrantType = typeof OAuthTokenRequestDtoGrantType[keyof typeof OAuthTokenRequestDtoGrantType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const OAuthTokenRequestDtoGrantType = {
-  client_credentials: "client_credentials",
-  authorization_code: "authorization_code",
-  refresh_token: "refresh_token",
+  client_credentials: 'client_credentials',
+  authorization_code: 'authorization_code',
+  refresh_token: 'refresh_token',
 } as const;

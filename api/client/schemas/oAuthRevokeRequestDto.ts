@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OAuthRevokeRequestDtoTokenTypeHint } from "./oAuthRevokeRequestDtoTokenTypeHint";
+import type { OAuthRevokeRequestDtoTokenTypeHint } from './oAuthRevokeRequestDtoTokenTypeHint';
 
 export interface OAuthRevokeRequestDto {
   /** The token to revoke */

@@ -6,17 +6,17 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export type PostsQueryControllerFindAllSort =
-  (typeof PostsQueryControllerFindAllSort)[keyof typeof PostsQueryControllerFindAllSort];
+export type PostsQueryControllerFindAllSort = typeof PostsQueryControllerFindAllSort[keyof typeof PostsQueryControllerFindAllSort];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PostsQueryControllerFindAllSort = {
-  title: "title",
-  slug: "slug",
-  createdAt: "createdAt",
-  updatedAt: "updatedAt",
-  "-title": "-title",
-  "-slug": "-slug",
-  "-createdAt": "-createdAt",
-  "-updatedAt": "-updatedAt",
+  title: 'title',
+  slug: 'slug',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  '-title': '-title',
+  '-slug': '-slug',
+  '-createdAt': '-createdAt',
+  '-updatedAt': '-updatedAt',
 } as const;

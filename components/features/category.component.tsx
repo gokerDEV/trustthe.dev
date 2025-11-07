@@ -24,7 +24,13 @@ const INITIAL_STATIC_POSTS_LIMIT = 60;
  */
 const PAGINATION_LIMIT = 72;
 
-export async function Category({ post }: { post: PostDto }) {
+export async function Category({
+  post,
+  onlyUnCategoried = false,
+}: {
+  post: PostDto;
+  onlyUnCategoried?: boolean;
+}) {
   if (!post?.slug) notFound();
 
   const markdown = parseMarkdown(post?.content || '');
@@ -33,7 +39,7 @@ export async function Category({ post }: { post: PostDto }) {
   // Fetch initial static posts for SEO and initial render (reduced count for performance)
   const response = await postsQueryControllerFindAll({
     domain,
-    categories: post.id,
+    categories: onlyUnCategoried ? 'null' : post.id,
     type: 'post',
     status: 'published',
     limit: INITIAL_STATIC_POSTS_LIMIT,
@@ -48,7 +54,7 @@ export async function Category({ post }: { post: PostDto }) {
       : { items: [], meta: undefined };
 
   const coverRatio = coverRatios(post.slug);
-  const prefix = asPrefix(post.slug);
+  const prefix = onlyUnCategoried ? '' : asPrefix(post.slug);
 
   return (
     <>
@@ -83,12 +89,14 @@ export async function Category({ post }: { post: PostDto }) {
         </section>
 
         {/* Client-side pagination component - zero requests until user interaction */}
-       {data.meta?.hasNextPage && <PostPaginationWrapper
-          categoryId={post.id}
-          domain={domain}
-          prefix={prefix}
-          paginationLimit={PAGINATION_LIMIT}
-        />}
+        {data.meta?.hasNextPage && (
+          <PostPaginationWrapper
+            categoryId={post.id}
+            domain={domain}
+            prefix={prefix}
+            paginationLimit={PAGINATION_LIMIT}
+          />
+        )}
       </div>
       <CollectionPageJsonLd data={post} />
     </>

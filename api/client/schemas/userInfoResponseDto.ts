@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { UserInfoResponseDtoAddress } from "./userInfoResponseDtoAddress";
+import type { UserInfoResponseDtoAddress } from './userInfoResponseDtoAddress';
 
 export interface UserInfoResponseDto {
   /** Subject - unique identifier for the end-user (REQUIRED) */

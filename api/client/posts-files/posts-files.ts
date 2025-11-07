@@ -10,266 +10,237 @@ import type {
   PostsFileControllerUploadFileBody,
   ResponseIdDto,
   ResponseStatusDto,
-  UpdatePostFileDto,
-} from ".././schemas";
+  UpdatePostFileDto
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Upload file to post
  */
 export type postsFileControllerUploadFileResponse200 = {
-  data: ResponseStatusDto;
-  status: 200;
-};
+  data: ResponseStatusDto
+  status: 200
+}
 
 export type postsFileControllerUploadFileResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsFileControllerUploadFileResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsFileControllerUploadFileResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsFileControllerUploadFileResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsFileControllerUploadFileResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsFileControllerUploadFileResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsFileControllerUploadFileResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsFileControllerUploadFileResponseSuccess = (postsFileControllerUploadFileResponse200) & {
+  headers: Headers;
 };
-
-export type postsFileControllerUploadFileResponseSuccess =
-  postsFileControllerUploadFileResponse200 & {
-    headers: Headers;
-  };
-export type postsFileControllerUploadFileResponseError = (
-  | postsFileControllerUploadFileResponse400
-  | postsFileControllerUploadFileResponse401
-  | postsFileControllerUploadFileResponse403
-  | postsFileControllerUploadFileResponse404
-  | postsFileControllerUploadFileResponse409
-  | postsFileControllerUploadFileResponse422
-  | postsFileControllerUploadFileResponse500
-) & {
+export type postsFileControllerUploadFileResponseError = (postsFileControllerUploadFileResponse400 | postsFileControllerUploadFileResponse401 | postsFileControllerUploadFileResponse403 | postsFileControllerUploadFileResponse404 | postsFileControllerUploadFileResponse409 | postsFileControllerUploadFileResponse422 | postsFileControllerUploadFileResponse500) & {
   headers: Headers;
 };
 
-export type postsFileControllerUploadFileResponse =
-  | postsFileControllerUploadFileResponseSuccess
-  | postsFileControllerUploadFileResponseError;
+export type postsFileControllerUploadFileResponse = (postsFileControllerUploadFileResponseSuccess | postsFileControllerUploadFileResponseError)
 
-export const getPostsFileControllerUploadFileUrl = (post: string) => {
-  return `/posts/${post}/files`;
-};
+export const getPostsFileControllerUploadFileUrl = (post: string,) => {
 
-export const postsFileControllerUploadFile = async (
-  post: string,
-  postsFileControllerUploadFileBody: PostsFileControllerUploadFileBody,
-  options?: RequestInit,
-): Promise<postsFileControllerUploadFileResponse> => {
-  const formData = new FormData();
-  formData.append(`file`, postsFileControllerUploadFileBody.file);
-  if (postsFileControllerUploadFileBody.exif !== undefined) {
-    formData.append(`exif`, postsFileControllerUploadFileBody.exif);
+
+  
+
+  return `/posts/${post}/files`
+}
+
+export const postsFileControllerUploadFile = async (post: string,
+    postsFileControllerUploadFileBody: PostsFileControllerUploadFileBody, options?: RequestInit): Promise<postsFileControllerUploadFileResponse> => {
+    const formData = new FormData();
+formData.append(`file`, postsFileControllerUploadFileBody.file)
+if(postsFileControllerUploadFileBody.exif !== undefined) {
+ formData.append(`exif`, postsFileControllerUploadFileBody.exif)
+ }
+
+  return customInstance<postsFileControllerUploadFileResponse>(getPostsFileControllerUploadFileUrl(post),
+  {      
+    ...options,
+    method: 'POST'
+    ,
+    body: 
+      formData,
   }
+);}
 
-  return customInstance<postsFileControllerUploadFileResponse>(
-    getPostsFileControllerUploadFileUrl(post),
-    {
-      ...options,
-      method: "POST",
-      body: formData,
-    },
-  );
-};
 
 /**
  * @summary Update file metadata
  */
 export type postsFileControllerUpdateFileResponse200 = {
-  data: ResponseIdDto;
-  status: 200;
-};
+  data: ResponseIdDto
+  status: 200
+}
 
 export type postsFileControllerUpdateFileResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsFileControllerUpdateFileResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsFileControllerUpdateFileResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsFileControllerUpdateFileResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsFileControllerUpdateFileResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsFileControllerUpdateFileResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsFileControllerUpdateFileResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsFileControllerUpdateFileResponseSuccess = (postsFileControllerUpdateFileResponse200) & {
+  headers: Headers;
 };
-
-export type postsFileControllerUpdateFileResponseSuccess =
-  postsFileControllerUpdateFileResponse200 & {
-    headers: Headers;
-  };
-export type postsFileControllerUpdateFileResponseError = (
-  | postsFileControllerUpdateFileResponse400
-  | postsFileControllerUpdateFileResponse401
-  | postsFileControllerUpdateFileResponse403
-  | postsFileControllerUpdateFileResponse404
-  | postsFileControllerUpdateFileResponse409
-  | postsFileControllerUpdateFileResponse422
-  | postsFileControllerUpdateFileResponse500
-) & {
+export type postsFileControllerUpdateFileResponseError = (postsFileControllerUpdateFileResponse400 | postsFileControllerUpdateFileResponse401 | postsFileControllerUpdateFileResponse403 | postsFileControllerUpdateFileResponse404 | postsFileControllerUpdateFileResponse409 | postsFileControllerUpdateFileResponse422 | postsFileControllerUpdateFileResponse500) & {
   headers: Headers;
 };
 
-export type postsFileControllerUpdateFileResponse =
-  | postsFileControllerUpdateFileResponseSuccess
-  | postsFileControllerUpdateFileResponseError;
+export type postsFileControllerUpdateFileResponse = (postsFileControllerUpdateFileResponseSuccess | postsFileControllerUpdateFileResponseError)
 
-export const getPostsFileControllerUpdateFileUrl = (
-  post: string,
-  id: string,
-) => {
-  return `/posts/${post}/files/${id}`;
-};
+export const getPostsFileControllerUpdateFileUrl = (post: string,
+    id: string,) => {
 
-export const postsFileControllerUpdateFile = async (
-  post: string,
-  id: string,
-  updatePostFileDto: UpdatePostFileDto,
-  options?: RequestInit,
-): Promise<postsFileControllerUpdateFileResponse> => {
-  return customInstance<postsFileControllerUpdateFileResponse>(
-    getPostsFileControllerUpdateFileUrl(post, id),
-    {
-      ...options,
-      method: "PATCH",
-      headers: { "Content-Type": "application/json", ...options?.headers },
-      body: JSON.stringify(updatePostFileDto),
-    },
-  );
-};
+
+  
+
+  return `/posts/${post}/files/${id}`
+}
+
+export const postsFileControllerUpdateFile = async (post: string,
+    id: string,
+    updatePostFileDto: UpdatePostFileDto, options?: RequestInit): Promise<postsFileControllerUpdateFileResponse> => {
+  
+  return customInstance<postsFileControllerUpdateFileResponse>(getPostsFileControllerUpdateFileUrl(post,id),
+  {      
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      updatePostFileDto,)
+  }
+);}
+
 
 /**
  * @summary Delete file from post
  */
 export type postsFileControllerDeleteFileResponse200 = {
-  data: ResponseStatusDto;
-  status: 200;
-};
+  data: ResponseStatusDto
+  status: 200
+}
 
 export type postsFileControllerDeleteFileResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsFileControllerDeleteFileResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsFileControllerDeleteFileResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsFileControllerDeleteFileResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsFileControllerDeleteFileResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsFileControllerDeleteFileResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsFileControllerDeleteFileResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsFileControllerDeleteFileResponseSuccess = (postsFileControllerDeleteFileResponse200) & {
+  headers: Headers;
 };
-
-export type postsFileControllerDeleteFileResponseSuccess =
-  postsFileControllerDeleteFileResponse200 & {
-    headers: Headers;
-  };
-export type postsFileControllerDeleteFileResponseError = (
-  | postsFileControllerDeleteFileResponse400
-  | postsFileControllerDeleteFileResponse401
-  | postsFileControllerDeleteFileResponse403
-  | postsFileControllerDeleteFileResponse404
-  | postsFileControllerDeleteFileResponse409
-  | postsFileControllerDeleteFileResponse422
-  | postsFileControllerDeleteFileResponse500
-) & {
+export type postsFileControllerDeleteFileResponseError = (postsFileControllerDeleteFileResponse400 | postsFileControllerDeleteFileResponse401 | postsFileControllerDeleteFileResponse403 | postsFileControllerDeleteFileResponse404 | postsFileControllerDeleteFileResponse409 | postsFileControllerDeleteFileResponse422 | postsFileControllerDeleteFileResponse500) & {
   headers: Headers;
 };
 
-export type postsFileControllerDeleteFileResponse =
-  | postsFileControllerDeleteFileResponseSuccess
-  | postsFileControllerDeleteFileResponseError;
+export type postsFileControllerDeleteFileResponse = (postsFileControllerDeleteFileResponseSuccess | postsFileControllerDeleteFileResponseError)
 
-export const getPostsFileControllerDeleteFileUrl = (
-  post: string,
-  id: string,
-) => {
-  return `/posts/${post}/files/${id}`;
-};
+export const getPostsFileControllerDeleteFileUrl = (post: string,
+    id: string,) => {
 
-export const postsFileControllerDeleteFile = async (
-  post: string,
-  id: string,
-  options?: RequestInit,
-): Promise<postsFileControllerDeleteFileResponse> => {
-  return customInstance<postsFileControllerDeleteFileResponse>(
-    getPostsFileControllerDeleteFileUrl(post, id),
-    {
-      ...options,
-      method: "DELETE",
-    },
-  );
-};
+
+  
+
+  return `/posts/${post}/files/${id}`
+}
+
+export const postsFileControllerDeleteFile = async (post: string,
+    id: string, options?: RequestInit): Promise<postsFileControllerDeleteFileResponse> => {
+  
+  return customInstance<postsFileControllerDeleteFileResponse>(getPostsFileControllerDeleteFileUrl(post,id),
+  {      
+    ...options,
+    method: 'DELETE'
+    
+    
+  }
+);}
+
+

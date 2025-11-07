@@ -9,15 +9,15 @@
 /**
  * Configuration category
  */
-export type SaveConfigurationDtoCategory =
-  (typeof SaveConfigurationDtoCategory)[keyof typeof SaveConfigurationDtoCategory];
+export type SaveConfigurationDtoCategory = typeof SaveConfigurationDtoCategory[keyof typeof SaveConfigurationDtoCategory];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const SaveConfigurationDtoCategory = {
-  tenant: "tenant",
-  mail: "mail",
-  sms: "sms",
-  storage: "storage",
-  oauth: "oauth",
-  attestation: "attestation",
+  tenant: 'tenant',
+  mail: 'mail',
+  sms: 'sms',
+  storage: 'storage',
+  oauth: 'oauth',
+  attestation: 'attestation',
 } as const;

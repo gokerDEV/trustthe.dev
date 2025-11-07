@@ -9,10 +9,11 @@
 /**
  * Client type (determines grant types and fields)
  */
-export type ApiKeyDtoType = (typeof ApiKeyDtoType)[keyof typeof ApiKeyDtoType];
+export type ApiKeyDtoType = typeof ApiKeyDtoType[keyof typeof ApiKeyDtoType];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const ApiKeyDtoType = {
-  confidential: "confidential",
-  mobile: "mobile",
+  confidential: 'confidential',
+  mobile: 'mobile',
 } as const;

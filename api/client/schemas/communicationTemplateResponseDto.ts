@@ -5,9 +5,9 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { CommunicationTemplateResponseDtoProjectId } from "./communicationTemplateResponseDtoProjectId";
-import type { CommunicationTemplateResponseDtoPurpose } from "./communicationTemplateResponseDtoPurpose";
-import type { CommunicationTemplateResponseDtoChannel } from "./communicationTemplateResponseDtoChannel";
+import type { CommunicationTemplateResponseDtoProjectId } from './communicationTemplateResponseDtoProjectId';
+import type { CommunicationTemplateResponseDtoPurpose } from './communicationTemplateResponseDtoPurpose';
+import type { CommunicationTemplateResponseDtoChannel } from './communicationTemplateResponseDtoChannel';
 
 export interface CommunicationTemplateResponseDto {
   /** The unique id */

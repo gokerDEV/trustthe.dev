@@ -5,7 +5,7 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { DiscoveryControllerGetJWKS200KeysItem } from "./discoveryControllerGetJWKS200KeysItem";
+import type { DiscoveryControllerGetJWKS200KeysItem } from './discoveryControllerGetJWKS200KeysItem';
 
 export type DiscoveryControllerGetJWKS200 = {
   keys?: DiscoveryControllerGetJWKS200KeysItem[];

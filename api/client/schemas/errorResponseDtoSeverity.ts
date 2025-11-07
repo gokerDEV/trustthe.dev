@@ -9,13 +9,13 @@
 /**
  * Error severity level
  */
-export type ErrorResponseDtoSeverity =
-  (typeof ErrorResponseDtoSeverity)[keyof typeof ErrorResponseDtoSeverity];
+export type ErrorResponseDtoSeverity = typeof ErrorResponseDtoSeverity[keyof typeof ErrorResponseDtoSeverity];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const ErrorResponseDtoSeverity = {
-  LOW: "LOW",
-  MEDIUM: "MEDIUM",
-  HIGH: "HIGH",
-  CRITICAL: "CRITICAL",
+  LOW: 'LOW',
+  MEDIUM: 'MEDIUM',
+  HIGH: 'HIGH',
+  CRITICAL: 'CRITICAL',
 } as const;

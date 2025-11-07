@@ -10,195 +10,166 @@ import type {
   PostsQueryControllerFindAll200,
   PostsQueryControllerFindAllParams,
   PostsQueryControllerFindSitemap200,
-  PostsQueryControllerFindSitemapParams,
-} from ".././schemas";
+  PostsQueryControllerFindSitemapParams
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * @summary Get all posts with pagination
  */
 export type postsQueryControllerFindAllResponse200 = {
-  data: PostsQueryControllerFindAll200;
-  status: 200;
-};
+  data: PostsQueryControllerFindAll200
+  status: 200
+}
 
 export type postsQueryControllerFindAllResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsQueryControllerFindAllResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsQueryControllerFindAllResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsQueryControllerFindAllResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsQueryControllerFindAllResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsQueryControllerFindAllResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsQueryControllerFindAllResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsQueryControllerFindAllResponseSuccess = (postsQueryControllerFindAllResponse200) & {
+  headers: Headers;
 };
-
-export type postsQueryControllerFindAllResponseSuccess =
-  postsQueryControllerFindAllResponse200 & {
-    headers: Headers;
-  };
-export type postsQueryControllerFindAllResponseError = (
-  | postsQueryControllerFindAllResponse400
-  | postsQueryControllerFindAllResponse401
-  | postsQueryControllerFindAllResponse403
-  | postsQueryControllerFindAllResponse404
-  | postsQueryControllerFindAllResponse409
-  | postsQueryControllerFindAllResponse422
-  | postsQueryControllerFindAllResponse500
-) & {
+export type postsQueryControllerFindAllResponseError = (postsQueryControllerFindAllResponse400 | postsQueryControllerFindAllResponse401 | postsQueryControllerFindAllResponse403 | postsQueryControllerFindAllResponse404 | postsQueryControllerFindAllResponse409 | postsQueryControllerFindAllResponse422 | postsQueryControllerFindAllResponse500) & {
   headers: Headers;
 };
 
-export type postsQueryControllerFindAllResponse =
-  | postsQueryControllerFindAllResponseSuccess
-  | postsQueryControllerFindAllResponseError;
+export type postsQueryControllerFindAllResponse = (postsQueryControllerFindAllResponseSuccess | postsQueryControllerFindAllResponseError)
 
-export const getPostsQueryControllerFindAllUrl = (
-  params?: PostsQueryControllerFindAllParams,
-) => {
+export const getPostsQueryControllerFindAllUrl = (params?: PostsQueryControllerFindAllParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts?${stringifiedParams}`
-    : `/posts`;
-};
+  return stringifiedParams.length > 0 ? `/posts?${stringifiedParams}` : `/posts`
+}
 
-export const postsQueryControllerFindAll = async (
-  params?: PostsQueryControllerFindAllParams,
-  options?: RequestInit,
-): Promise<postsQueryControllerFindAllResponse> => {
-  return customInstance<postsQueryControllerFindAllResponse>(
-    getPostsQueryControllerFindAllUrl(params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsQueryControllerFindAll = async (params?: PostsQueryControllerFindAllParams, options?: RequestInit): Promise<postsQueryControllerFindAllResponse> => {
+  
+  return customInstance<postsQueryControllerFindAllResponse>(getPostsQueryControllerFindAllUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
 
 /**
  * @summary Get published posts for sitemap generation
  */
 export type postsQueryControllerFindSitemapResponse200 = {
-  data: PostsQueryControllerFindSitemap200;
-  status: 200;
-};
+  data: PostsQueryControllerFindSitemap200
+  status: 200
+}
 
 export type postsQueryControllerFindSitemapResponse400 = {
-  data: ErrorResponseDto;
-  status: 400;
-};
+  data: ErrorResponseDto
+  status: 400
+}
 
 export type postsQueryControllerFindSitemapResponse401 = {
-  data: ErrorResponseDto;
-  status: 401;
-};
+  data: ErrorResponseDto
+  status: 401
+}
 
 export type postsQueryControllerFindSitemapResponse403 = {
-  data: ErrorResponseDto;
-  status: 403;
-};
+  data: ErrorResponseDto
+  status: 403
+}
 
 export type postsQueryControllerFindSitemapResponse404 = {
-  data: ErrorResponseDto;
-  status: 404;
-};
+  data: ErrorResponseDto
+  status: 404
+}
 
 export type postsQueryControllerFindSitemapResponse409 = {
-  data: ErrorResponseDto;
-  status: 409;
-};
+  data: ErrorResponseDto
+  status: 409
+}
 
 export type postsQueryControllerFindSitemapResponse422 = {
-  data: ErrorResponseDto;
-  status: 422;
-};
+  data: ErrorResponseDto
+  status: 422
+}
 
 export type postsQueryControllerFindSitemapResponse500 = {
-  data: ErrorResponseDto;
-  status: 500;
+  data: ErrorResponseDto
+  status: 500
+}
+    
+export type postsQueryControllerFindSitemapResponseSuccess = (postsQueryControllerFindSitemapResponse200) & {
+  headers: Headers;
 };
-
-export type postsQueryControllerFindSitemapResponseSuccess =
-  postsQueryControllerFindSitemapResponse200 & {
-    headers: Headers;
-  };
-export type postsQueryControllerFindSitemapResponseError = (
-  | postsQueryControllerFindSitemapResponse400
-  | postsQueryControllerFindSitemapResponse401
-  | postsQueryControllerFindSitemapResponse403
-  | postsQueryControllerFindSitemapResponse404
-  | postsQueryControllerFindSitemapResponse409
-  | postsQueryControllerFindSitemapResponse422
-  | postsQueryControllerFindSitemapResponse500
-) & {
+export type postsQueryControllerFindSitemapResponseError = (postsQueryControllerFindSitemapResponse400 | postsQueryControllerFindSitemapResponse401 | postsQueryControllerFindSitemapResponse403 | postsQueryControllerFindSitemapResponse404 | postsQueryControllerFindSitemapResponse409 | postsQueryControllerFindSitemapResponse422 | postsQueryControllerFindSitemapResponse500) & {
   headers: Headers;
 };
 
-export type postsQueryControllerFindSitemapResponse =
-  | postsQueryControllerFindSitemapResponseSuccess
-  | postsQueryControllerFindSitemapResponseError;
+export type postsQueryControllerFindSitemapResponse = (postsQueryControllerFindSitemapResponseSuccess | postsQueryControllerFindSitemapResponseError)
 
-export const getPostsQueryControllerFindSitemapUrl = (
-  params?: PostsQueryControllerFindSitemapParams,
-) => {
+export const getPostsQueryControllerFindSitemapUrl = (params?: PostsQueryControllerFindSitemapParams,) => {
   const normalizedParams = new URLSearchParams();
 
   Object.entries(params || {}).forEach(([key, value]) => {
+    
     if (value !== undefined) {
-      normalizedParams.append(key, value === null ? "null" : value.toString());
+      normalizedParams.append(key, value === null ? 'null' : value.toString())
     }
   });
 
   const stringifiedParams = normalizedParams.toString();
 
-  return stringifiedParams.length > 0
-    ? `/posts/sitemap?${stringifiedParams}`
-    : `/posts/sitemap`;
-};
+  return stringifiedParams.length > 0 ? `/posts/sitemap?${stringifiedParams}` : `/posts/sitemap`
+}
 
-export const postsQueryControllerFindSitemap = async (
-  params?: PostsQueryControllerFindSitemapParams,
-  options?: RequestInit,
-): Promise<postsQueryControllerFindSitemapResponse> => {
-  return customInstance<postsQueryControllerFindSitemapResponse>(
-    getPostsQueryControllerFindSitemapUrl(params),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+export const postsQueryControllerFindSitemap = async (params?: PostsQueryControllerFindSitemapParams, options?: RequestInit): Promise<postsQueryControllerFindSitemapResponse> => {
+  
+  return customInstance<postsQueryControllerFindSitemapResponse>(getPostsQueryControllerFindSitemapUrl(params),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

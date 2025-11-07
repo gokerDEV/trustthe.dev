@@ -5,49 +5,53 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { OAuthErrorResponseDto, UserInfoResponseDto } from ".././schemas";
+import type {
+  OAuthErrorResponseDto,
+  UserInfoResponseDto
+} from '.././schemas';
 
-import { customInstance } from ".././mutator";
+import { customInstance } from '.././mutator';
 
 /**
  * Returns user claims based on access token scopes. Requires "openid" scope. Additional claims returned based on "profile", "email", "phone", and "address" scopes.
  * @summary OIDC UserInfo Endpoint
  */
 export type userInfoControllerGetUserInfoResponse200 = {
-  data: UserInfoResponseDto;
-  status: 200;
-};
+  data: UserInfoResponseDto
+  status: 200
+}
 
 export type userInfoControllerGetUserInfoResponse401 = {
-  data: OAuthErrorResponseDto;
-  status: 401;
+  data: OAuthErrorResponseDto
+  status: 401
+}
+    
+export type userInfoControllerGetUserInfoResponseSuccess = (userInfoControllerGetUserInfoResponse200) & {
+  headers: Headers;
+};
+export type userInfoControllerGetUserInfoResponseError = (userInfoControllerGetUserInfoResponse401) & {
+  headers: Headers;
 };
 
-export type userInfoControllerGetUserInfoResponseSuccess =
-  userInfoControllerGetUserInfoResponse200 & {
-    headers: Headers;
-  };
-export type userInfoControllerGetUserInfoResponseError =
-  userInfoControllerGetUserInfoResponse401 & {
-    headers: Headers;
-  };
-
-export type userInfoControllerGetUserInfoResponse =
-  | userInfoControllerGetUserInfoResponseSuccess
-  | userInfoControllerGetUserInfoResponseError;
+export type userInfoControllerGetUserInfoResponse = (userInfoControllerGetUserInfoResponseSuccess | userInfoControllerGetUserInfoResponseError)
 
 export const getUserInfoControllerGetUserInfoUrl = () => {
-  return `/oauth/userinfo`;
-};
 
-export const userInfoControllerGetUserInfo = async (
-  options?: RequestInit,
-): Promise<userInfoControllerGetUserInfoResponse> => {
-  return customInstance<userInfoControllerGetUserInfoResponse>(
-    getUserInfoControllerGetUserInfoUrl(),
-    {
-      ...options,
-      method: "GET",
-    },
-  );
-};
+
+  
+
+  return `/oauth/userinfo`
+}
+
+export const userInfoControllerGetUserInfo = async ( options?: RequestInit): Promise<userInfoControllerGetUserInfoResponse> => {
+  
+  return customInstance<userInfoControllerGetUserInfoResponse>(getUserInfoControllerGetUserInfoUrl(),
+  {      
+    ...options,
+    method: 'GET'
+    
+    
+  }
+);}
+
+

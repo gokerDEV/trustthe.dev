@@ -6,11 +6,11 @@
  * OpenAPI spec version: 0.0.3
  */
 
-export type PageMetaDtoOrder =
-  (typeof PageMetaDtoOrder)[keyof typeof PageMetaDtoOrder];
+export type PageMetaDtoOrder = typeof PageMetaDtoOrder[keyof typeof PageMetaDtoOrder];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const PageMetaDtoOrder = {
-  asc: "asc",
-  desc: "desc",
+  asc: 'asc',
+  desc: 'desc',
 } as const;

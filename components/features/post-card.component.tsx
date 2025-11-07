@@ -1,14 +1,14 @@
 import type { PostDto } from '@/api/client/schemas';
+import { AuthorClient } from '@/components/features/author-client.component';
+import { Author } from '@/components/features/author.component';
 import { Categories } from '@/components/features/categories.component';
 import { Tags } from '@/components/features/tags.component';
+import { Card, CardContent } from '@/components/ui/card';
 import { getImages } from '@/lib/image.utils';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Card, CardContent } from '../ui/card';
-import { AuthorClient } from './author-client.component';
-import { Author } from './author.component';
 
 type Props = Partial<PostDto> & {
   className?: string;

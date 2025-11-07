@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { PostsAnalyticsControllerGetPostStatistics200ByTypeItem } from "./postsAnalyticsControllerGetPostStatistics200ByTypeItem";
-import type { PostsAnalyticsControllerGetPostStatistics200ByStatusItem } from "./postsAnalyticsControllerGetPostStatistics200ByStatusItem";
+import type { PostsAnalyticsControllerGetPostStatistics200ByTypeItem } from './postsAnalyticsControllerGetPostStatistics200ByTypeItem';
+import type { PostsAnalyticsControllerGetPostStatistics200ByStatusItem } from './postsAnalyticsControllerGetPostStatistics200ByStatusItem';
 
 export type PostsAnalyticsControllerGetPostStatistics200 = {
   total?: number;

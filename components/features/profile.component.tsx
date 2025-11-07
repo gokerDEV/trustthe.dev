@@ -55,7 +55,7 @@ export default async function Profile({ post }: { post: PostDto }) {
                 href={`${v}`}
                 aria-labelledby={`goker on ${k}`}
                 title={`goker on ${k}`}
-                className='flex items-center justify-center m-1 p-1 w-12 h-12 cursor-pointer leading-10 transition-all hover:text-4xl hover:text-black/90 dark:hover:text-white/90'
+                className='m-1 flex h-12 w-12 cursor-pointer items-center justify-center p-1 leading-10 transition-all hover:text-4xl hover:text-black/90 dark:hover:text-white/90'
               >
                 <i className={`icon-${k}`} />
               </a>

@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { PARRequestDtoResponseType } from "./pARRequestDtoResponseType";
-import type { PARRequestDtoCodeChallengeMethod } from "./pARRequestDtoCodeChallengeMethod";
+import type { PARRequestDtoResponseType } from './pARRequestDtoResponseType';
+import type { PARRequestDtoCodeChallengeMethod } from './pARRequestDtoCodeChallengeMethod';
 
 export interface PARRequestDto {
   /** Response type (only "code" supported) */

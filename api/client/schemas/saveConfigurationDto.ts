@@ -5,8 +5,8 @@
  * Stack: Nest.js + MongoDB + Mongoose + Redis - OAuth 2.1 Compliant
  * OpenAPI spec version: 0.0.3
  */
-import type { SaveConfigurationDtoCategory } from "./saveConfigurationDtoCategory";
-import type { SaveConfigurationDtoConfig } from "./saveConfigurationDtoConfig";
+import type { SaveConfigurationDtoCategory } from './saveConfigurationDtoCategory';
+import type { SaveConfigurationDtoConfig } from './saveConfigurationDtoConfig';
 
 export interface SaveConfigurationDto {
   /** Configuration category */

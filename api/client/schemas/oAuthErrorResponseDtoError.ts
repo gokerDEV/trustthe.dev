@@ -9,22 +9,22 @@
 /**
  * Error code
  */
-export type OAuthErrorResponseDtoError =
-  (typeof OAuthErrorResponseDtoError)[keyof typeof OAuthErrorResponseDtoError];
+export type OAuthErrorResponseDtoError = typeof OAuthErrorResponseDtoError[keyof typeof OAuthErrorResponseDtoError];
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare
+
+ 
 export const OAuthErrorResponseDtoError = {
-  invalid_request: "invalid_request",
-  invalid_client: "invalid_client",
-  invalid_grant: "invalid_grant",
-  unauthorized_client: "unauthorized_client",
-  unsupported_grant_type: "unsupported_grant_type",
-  invalid_scope: "invalid_scope",
-  insufficient_scope: "insufficient_scope",
-  invalid_token: "invalid_token",
-  expired_token: "expired_token",
-  attestation_required: "attestation_required",
-  attestation_failed: "attestation_failed",
-  invalid_nonce: "invalid_nonce",
-  replay_detected: "replay_detected",
+  invalid_request: 'invalid_request',
+  invalid_client: 'invalid_client',
+  invalid_grant: 'invalid_grant',
+  unauthorized_client: 'unauthorized_client',
+  unsupported_grant_type: 'unsupported_grant_type',
+  invalid_scope: 'invalid_scope',
+  insufficient_scope: 'insufficient_scope',
+  invalid_token: 'invalid_token',
+  expired_token: 'expired_token',
+  attestation_required: 'attestation_required',
+  attestation_failed: 'attestation_failed',
+  invalid_nonce: 'invalid_nonce',
+  replay_detected: 'replay_detected',
 } as const;
