@@ -15,7 +15,7 @@ export function MediaViewer({
   return (
     <Dialog.Root open={open} onOpenChange={onClose}>
       <Dialog.Portal>
-        <Dialog.Overlay className='fixed inset-0 z-50 bg-black/60' />
+        <Dialog.Overlay className='fixed inset-0 z-50 bg-black/60 backdrop-blur-sm' />
         <Dialog.Content className='fixed top-1/2 left-1/2 z-50 w-full max-w-6xl -translate-x-1/2 -translate-y-1/2 p-4 outline-none'>
           <div className='bg-background rounded-md p-4 shadow-lg sm:p-6'>
             <Dialog.Title className='mr-10 mb-2 text-lg leading-tight font-bold'>

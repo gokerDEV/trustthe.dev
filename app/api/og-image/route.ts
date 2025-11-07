@@ -37,7 +37,9 @@ export async function GET(request: NextRequest) {
       },
     });
   } catch (error) {
-    console.error('Error processing image:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error processing image:', error);
+    }
     return new Response('Error processing image', { status: 500 });
   }
 }

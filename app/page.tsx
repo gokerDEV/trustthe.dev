@@ -45,7 +45,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
     return metadataGenerator(validationResult.data, { ogType: 'website' });
   } catch (error) {
-    console.error('Failed to generate metadata:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Failed to generate metadata:', error);
+    }
     return metadataGenerator(undefined, {
       title: 'Goker Art',
       description: 'Art and creativity platform',
@@ -158,9 +160,8 @@ const Page = async () => {
         errorMessage: error instanceof Error ? error.message : String(error),
         errorStack: error instanceof Error ? error.stack : undefined,
       });
-    } else {
-      console.error('Failed to load page data:', error);
     }
+    // In production, errors are handled silently and notFound() is called
     notFound();
   }
 

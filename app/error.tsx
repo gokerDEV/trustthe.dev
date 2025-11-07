@@ -15,7 +15,9 @@ export default function Error({
 }) {
   const [prompt, setPrompt] = useState<string>();
   useEffect(() => {
-    console.error(error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error(error);
+    }
     const url = new URL(window.location.href);
     // Use setTimeout to avoid synchronous setState in effect
     setTimeout(() => {

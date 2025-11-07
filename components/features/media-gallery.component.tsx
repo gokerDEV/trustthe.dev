@@ -27,7 +27,7 @@ export default function Component({
             k > 0 && (
               <button
                 key={i.id}
-                className='aspect-[3/2] w-full cursor-pointer overflow-hidden rounded-md shadow-sm'
+                className='aspect-3/2 w-full cursor-pointer overflow-hidden rounded-md shadow-sm'
                 onClick={() => setSelected(i)}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
