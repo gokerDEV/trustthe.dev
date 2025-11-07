@@ -7,7 +7,7 @@ import { asPrefix, tagPrefix } from '@/lib/seo/url-slug.utils';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtuosoMasonry } from '@virtuoso.dev/masonry';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { PostCard } from './post-card.component';
+import { PostCardClient } from './post-card-client.component';
 
 interface PostPaginationProps {
   categoryId?: string;
@@ -50,12 +50,7 @@ function createPostCardItemContent(_prefix: string, useTagPrefix: boolean) {
 
     return (
       <div className='mb-8'>
-        <PostCard
-          {...post}
-          coverRatio={coverRatio}
-          prefix={prefix}
-          useClientAuthor={true}
-        />
+        <PostCardClient {...post} coverRatio={coverRatio} prefix={prefix} />
       </div>
     );
   };

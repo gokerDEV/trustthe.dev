@@ -1,15 +1,19 @@
+'use client';
+
 import type { PostDto } from '@/api/client/schemas';
-import { Author } from '@/components/features/author.component';
+import { AuthorClient } from '@/components/features/author-client.component';
 import { getImages } from '@/lib/image.utils';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import { PostCardView } from './post-card-view.component';
 
 /**
- * Server-side PostCard component
- * Fetches author post data server-side with caching
+ * Client-side PostCard component wrapper
+ * Used when PostCard needs to be rendered in client components
+ * Uses AuthorClient for client-side author fetching
  * Uses PostCardView for presentation (reusable HTML/styling)
+ * For SEO-optimized post display, use the server-side PostCard component
  */
-export async function PostCard({
+export function PostCardClient({
   domain,
   title,
   slug,
@@ -32,8 +36,11 @@ export async function PostCard({
   loading?: 'lazy' | 'eager';
 }) {
   const { cover } = getImages({ files });
-  const host =
-    (String(process.env.DOMAIN) !== domain ? 'https://' + domain : '') || '';
+  // In client components, compare post domain with current window hostname
+  // If different, use absolute URL; otherwise use relative URL
+  const currentHostname =
+    typeof window !== 'undefined' ? window.location.hostname : '';
+  const host = domain && domain !== currentHostname ? `https://${domain}` : '';
   const href = `${host}/${asUrl(slug, prefix)}`;
 
   const { width, height } = {
@@ -43,7 +50,7 @@ export async function PostCard({
   }[coverRatio] || { width: 900, height: 300 };
 
   const authorComponent = author ? (
-    <Author author={author} createdAt={createdAt} updatedAt={updatedAt} />
+    <AuthorClient author={author} createdAt={createdAt} updatedAt={updatedAt} />
   ) : null;
 
   return (

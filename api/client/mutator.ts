@@ -4,7 +4,8 @@ const API_URL = process.env.API_URL || 'http://localhost:3388';
 
 export const customInstance = async <T>(
   url: string,
-  config: RequestInit & { next?: { revalidate?: number | false } }
+  config: RequestInit & { next?: { revalidate?: number | false };
+  cache?: RequestCache; }
 ): Promise<T> => {
   const token = await getAccessToken();
 
@@ -18,9 +19,10 @@ export const customInstance = async <T>(
       'Content-Type': 'application/json',
     },
     next: {
-      revalidate: 3600, // Cache for 1 hour by default
+      revalidate: config.next?.revalidate, 
       ...config.next,
     },
+    cache: config.cache,
   });
 
   const data = await response.json();

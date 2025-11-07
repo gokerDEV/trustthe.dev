@@ -17,7 +17,10 @@ const API_LIMIT = 10000; // Sitemap API max limit
 export async function generateSitemaps(): Promise<Array<{ id: number }>> {
   try {
     // Fetch post statistics to get total published count
-    const response = await postsAnalyticsControllerGetPostStatistics();
+    const response = await postsAnalyticsControllerGetPostStatistics({
+      next: { revalidate: 36000 },
+      cache: 'force-cache',
+    });
 
     if (response.status !== 200) {
       // Return only static pages sitemap if stats fetch fails
