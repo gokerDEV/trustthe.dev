@@ -1,4 +1,4 @@
-import type { AuthorDto, CategoryDto } from '@/api/client/schemas';
+import type { CategoryDto } from '@/api/client/schemas';
 import { Categories } from '@/components/features/categories.component';
 import { Tags } from '@/components/features/tags.component';
 import { Card, CardContent } from '@/components/ui/card';
@@ -38,7 +38,6 @@ interface PostCardViewProps {
  */
 export function PostCardView({
   title,
-  slug,
   href,
   cover,
   coverWidth,

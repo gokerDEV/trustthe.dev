@@ -56,7 +56,6 @@ export function PostCardClient({
   return (
     <PostCardView
       title={title || ''}
-      slug={slug || ''}
       href={href}
       cover={cover}
       coverWidth={width}
