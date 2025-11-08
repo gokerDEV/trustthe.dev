@@ -1,13 +1,13 @@
-import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
-import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
+import { PostContent } from '@/components/features/post-content.component';
+import { postsQueryControllerFindAll } from '@/kodkafa/client/posts-query/posts-query';
+import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
 import {
   PageMetaDto,
   PostDto,
   PostsQueryControllerFindAll200,
-} from '@/api/client/schemas';
-import { postsQueryControllerFindAllResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
-import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
-import { PostContent } from '@/components/features/post-content.component';
+} from '@/kodkafa/client/schemas';
+import { postsQueryControllerFindAllResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
 import { metadataGenerator } from '@/lib/seo/metadata.generator';

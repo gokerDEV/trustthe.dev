@@ -1,6 +1,6 @@
 'use client';
 
-import type { AuthorDto, PostDto, PostFileDto } from '@/api/client/schemas';
+import type { AuthorDto, PostDto, PostFileDto } from '@/kodkafa/client/schemas';
 import { getImages } from '@/lib/image.utils';
 import { useQuery } from '@tanstack/react-query';
 import { AuthorView } from './author-view.component';
@@ -60,8 +60,6 @@ export function AuthorClient({
   // Get first name for avatar fallback
   const firstName = author.name.split(' ')[0];
   const initials = firstName.charAt(0).toUpperCase();
-
-  const publishedAt = updatedAt > createdAt ? updatedAt : createdAt;
 
   // Show loading state with basic author info (using AuthorView for consistency)
   if (isLoading) {

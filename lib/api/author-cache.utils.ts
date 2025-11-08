@@ -1,6 +1,6 @@
-import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
-import type { PostDto } from '@/api/client/schemas';
-import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
+import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
+import type { PostDto } from '@/kodkafa/client/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { validateApiResponse } from '@/lib/api/validation.utils';
 import { unstable_cache } from 'next/cache';

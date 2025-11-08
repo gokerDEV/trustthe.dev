@@ -1,4 +1,3 @@
-import type { PostDto } from '@/api/client/schemas';
 import DaysAgo from '@/components/common/days-ago.component';
 import { Markdown } from '@/components/common/markdown.component';
 import { Author } from '@/components/features/author.component';
@@ -6,6 +5,7 @@ import { Categories } from '@/components/features/categories.component';
 import { LazyMediaGallery } from '@/components/features/lazy-media-gallery.component';
 import { ShareButtons } from '@/components/features/share-buttons.component';
 import { Tags } from '@/components/features/tags.component';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import { getDescription, getImages } from '@/lib/image.utils';
 import { parseMarkdown } from '@/lib/markdown';
 import { cn } from '@/lib/utils';

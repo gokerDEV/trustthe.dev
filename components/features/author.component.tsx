@@ -1,6 +1,6 @@
-import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
-import type { AuthorDto, PostDto } from '@/api/client/schemas';
-import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
+import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
+import type { AuthorDto, PostDto } from '@/kodkafa/client/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
 import { getImages } from '@/lib/image.utils';

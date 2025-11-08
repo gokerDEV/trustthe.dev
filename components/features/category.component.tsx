@@ -1,20 +1,20 @@
-import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
-import type {
-  PageMetaDto,
-  PostDto,
-  PostsQueryControllerFindAll200,
-} from '@/api/client/schemas';
 import { Markdown } from '@/components/common/markdown.component';
 import { PostCard } from '@/components/features/post-card.component';
 import { PostPaginationWrapper } from '@/components/features/post-pagination-wrapper.component';
 import { coverRatios } from '@/config/navigation';
+import { postsQueryControllerFindAll } from '@/kodkafa/client/posts-query/posts-query';
+import type {
+  PageMetaDto,
+  PostDto,
+  PostsQueryControllerFindAll200,
+} from '@/kodkafa/client/schemas';
 import { getApiDomain } from '@/lib/api/domain';
 import { parseMarkdown } from '@/lib/markdown';
 import { asPrefix } from '@/lib/seo/url-slug.utils';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 
-import { postsQueryControllerFindAllResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
+import { postsQueryControllerFindAllResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
 import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
 import { CollectionPageJsonLd } from './json-ld.component';
 

@@ -5,18 +5,18 @@ export default defineConfig({
     input: {
       target: `${process.env.API_URL || 'http://localhost:3388'}/doc-json`,
       override: {
-        transformer: './api/orval-transformer.mjs',
+        transformer: './kodkafa/orval-transformer.mjs',
       },
     },
     output: {
-      target: './api/client',
+      target: './kodkafa/client',
       client: 'fetch',
       mode: 'tags-split',
-      schemas: './api/client/schemas',
+      schemas: './kodkafa/client/schemas',
       mock: false,
       override: {
         mutator: {
-          path: './api/client/mutator.ts',
+          path: './kodkafa/client/mutator.ts',
           name: 'customInstance',
         },
       },
@@ -29,13 +29,13 @@ export default defineConfig({
     input: {
       target: `${process.env.API_URL || 'http://localhost:3388'}/doc-json`,
       override: {
-        transformer: './api/orval-transformer.mjs',
+        transformer: './kodkafa/orval-transformer.mjs',
       },
     },
     output: {
       mode: 'tags-split',
       client: 'zod',
-      target: './api/client/schemas',
+      target: './kodkafa/client/schemas',
       fileExtension: '.zod.ts',
     },
   },

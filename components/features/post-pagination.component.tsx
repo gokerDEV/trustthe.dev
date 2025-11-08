@@ -1,8 +1,8 @@
 'use client';
 
-import type { PostDto } from '@/api/client/schemas';
 import { Button } from '@/components/ui/button';
 import { coverRatios } from '@/config/navigation';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import { asPrefix, tagPrefix } from '@/lib/seo/url-slug.utils';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtuosoMasonry } from '@virtuoso.dev/masonry';

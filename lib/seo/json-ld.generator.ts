@@ -1,7 +1,6 @@
 // src/lib/metadata/jsonLdGenerator.ts
 // Generates JSON-LD objects for Schema.org structured data
 
-import type { PostDto } from '@/api/client/schemas';
 import {
   AUTHOR_NAME,
   AUTHOR_URL,
@@ -12,6 +11,7 @@ import {
   ORGANIZATION_URL,
   SITE_NAME,
 } from '@/config/constants';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import {
   AboutPage,
   Article,

@@ -1,7 +1,6 @@
 // src/lib/metadata/metaGenerator.ts
 // Generates the Next.js Metadata object, focusing on Open Graph & Twitter Cards
 
-import type { PostDto } from '@/api/client/schemas';
 import {
   AUTHOR_NAME,
   AUTHOR_URL,
@@ -13,6 +12,7 @@ import {
   TWITTER_CARD_TYPE,
   TWITTER_HANDLE,
 } from '@/config/constants';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import { Metadata } from 'next';
 import { OgType } from './metadata.types'; // Adjust path
 import { getCanonicalUrl, getImageData, getPageTitle } from './metadata.utils'; // Adjust path

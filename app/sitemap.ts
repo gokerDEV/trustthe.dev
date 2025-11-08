@@ -1,7 +1,7 @@
-import { postsAnalyticsControllerGetPostStatistics } from '@/api/client/posts-analytics/posts-analytics';
-import { postsQueryControllerFindSitemap } from '@/api/client/posts-query/posts-query';
-import { postsQueryControllerFindSitemapResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
 import { BASE_URL } from '@/config/constants';
+import { postsAnalyticsControllerGetPostStatistics } from '@/kodkafa/client/posts-analytics/posts-analytics';
+import { postsQueryControllerFindSitemap } from '@/kodkafa/client/posts-query/posts-query';
+import { postsQueryControllerFindSitemapResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import type { MetadataRoute } from 'next';

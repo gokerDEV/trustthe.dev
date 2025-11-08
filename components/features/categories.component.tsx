@@ -1,5 +1,5 @@
-import { CategoryDto } from '@/api/client';
 import { Badge } from '@/components/ui/badge';
+import { CategoryDto } from '@/kodkafa/client';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 

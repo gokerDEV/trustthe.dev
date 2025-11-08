@@ -1,13 +1,13 @@
-import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
-import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
-import type { PostDto } from '@/api/client/schemas';
-import { postsQueryControllerFindAllResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
-import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
 import { Container } from '@/components/common/container.component';
 import { EmptyState } from '@/components/common/empty-state.component';
 import GokerIshPrompt from '@/components/features/goker-ish-propt.component';
 import LogoAnimation from '@/components/features/logo-animation.component';
 import { PinnedPosts } from '@/components/features/pinned-posts.component';
+import { postsQueryControllerFindAll } from '@/kodkafa/client/posts-query/posts-query';
+import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
+import type { PostDto } from '@/kodkafa/client/schemas';
+import { postsQueryControllerFindAllResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { validateApiResponse } from '@/lib/api/validation.utils';
 import { getImages } from '@/lib/image.utils';

@@ -1,7 +1,7 @@
-import type { CategoryDto } from '@/api/client/schemas';
 import { Categories } from '@/components/features/categories.component';
 import { Tags } from '@/components/features/tags.component';
 import { Card, CardContent } from '@/components/ui/card';
+import type { CategoryDto } from '@/kodkafa/client/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';

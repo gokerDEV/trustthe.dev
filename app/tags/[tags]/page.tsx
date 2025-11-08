@@ -1,9 +1,9 @@
-import { postsAnalyticsControllerGetTagCloudByDomain } from '@/api/client/posts-analytics/posts-analytics';
-import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
-import type { PostDto } from '@/api/client/schemas';
 import Breadcrumb from '@/components/common/breadcrumb.component';
 import { PostCard } from '@/components/features/post-card.component';
 import { PostPaginationWrapper } from '@/components/features/post-pagination-wrapper.component';
+import { postsAnalyticsControllerGetTagCloudByDomain } from '@/kodkafa/client/posts-analytics/posts-analytics';
+import { postsQueryControllerFindAll } from '@/kodkafa/client/posts-query/posts-query';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import { getApiDomain } from '@/lib/api/domain';
 import { metadataGenerator } from '@/lib/seo/metadata.generator';
 import { getPageDescription, getPageTitle } from '@/lib/seo/metadata.utils';

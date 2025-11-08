@@ -1,4 +1,4 @@
-import type { ErrorResponseDto } from '@/api/client/schemas';
+import type { ErrorResponseDto } from '@/kodkafa/client/schemas';
 import { Logger } from '@/lib/logger';
 import { notFound } from 'next/navigation';
 

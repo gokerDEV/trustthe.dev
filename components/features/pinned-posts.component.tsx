@@ -1,8 +1,8 @@
-import { postsControllerFindOneBySlug } from '@/api/client/posts/posts';
-import type { PostDto } from '@/api/client/schemas';
-import { postsControllerFindOneBySlugResponse } from '@/api/client/schemas/posts/posts.zod';
 import { PostCard } from '@/components/features/post-card.component';
 import { PINNED_POSTS } from '@/config/constants';
+import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
+import type { PostDto } from '@/kodkafa/client/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
 import { validateApiResponse } from '@/lib/api/validation.utils';
 import { Logger } from '@/lib/logger';
 

@@ -1,6 +1,6 @@
-import type { PostDto } from '@/api/client/schemas';
 import { Markdown } from '@/components/common/markdown.component';
 import { PROFILES } from '@/config/constants';
+import type { PostDto } from '@/kodkafa/client/schemas';
 import { getImages } from '@/lib/image.utils';
 import { parseMarkdown } from '@/lib/markdown';
 import Image from 'next/image';
