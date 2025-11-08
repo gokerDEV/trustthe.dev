@@ -14,7 +14,6 @@ interface CoverImage {
 
 interface PostCardViewProps {
   title: string;
-  slug: string;
   href: string;
   cover: CoverImage;
   coverWidth: number;
