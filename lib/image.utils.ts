@@ -1,7 +1,7 @@
 import type { PostDto, PostFileDto } from '@/api/client/schemas';
 import { imageTypes } from './types';
 
-export function getImages(note: Partial<PostDto>) {
+export function getImages(note: Partial<PostDto> | null) {
   const images = note?.files?.filter((i) =>
     imageTypes.includes(String(i?.type))
   );

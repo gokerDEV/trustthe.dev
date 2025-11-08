@@ -2,34 +2,27 @@ import DaysAgo from '@/components/common/days-ago.component';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Link from 'next/link';
 
-interface CoverImage {
-  src: string;
-  altText?: string;
-}
-
 interface AuthorViewProps {
   authorName: string;
   displayTitle: string;
-  authorHref: string;
-  cover: CoverImage | null;
+  authorHref: string | null;
+  cover: {
+    src: string;
+    altText?: string;
+  };
   initials: string;
-  publishedAt: string;
-  hasAuthorPost: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
-/**
- * Pure presentational component for Author display
- * Contains only HTML structure and styling - no data fetching or business logic
- * Reusable by both server-side (Author) and client-side (AuthorClient) components
- */
 export function AuthorView({
   authorName,
   displayTitle,
   authorHref,
   cover,
   initials,
-  publishedAt,
-  hasAuthorPost,
+  createdAt,
+  updatedAt,
 }: AuthorViewProps) {
   return (
     <div
@@ -39,7 +32,7 @@ export function AuthorView({
       data-role='creator'
       aria-label={`Author block: Created by ${displayTitle}`}
     >
-      {hasAuthorPost ? (
+      {authorHref ? (
         <Link href={authorHref} aria-label={`Visit profile of ${displayTitle}`}>
           <Avatar className='h-10 w-10'>
             <AvatarImage
@@ -60,7 +53,7 @@ export function AuthorView({
       )}
       <div className='grow'>
         <p className='text-sm font-medium text-gray-900 dark:text-gray-200'>
-          {hasAuthorPost ? (
+          {authorHref ? (
             <Link href={authorHref} className='hover:underline'>
               Created by{' '}
               <strong className='tracking-wide'>{displayTitle}</strong>
@@ -72,8 +65,16 @@ export function AuthorView({
             </>
           )}
         </p>
-        <div className='text-muted-foreground text-sm'>
-          <DaysAgo date={publishedAt} />
+        <div className='text-muted-foreground flex items-center gap-2 text-sm'>
+          <DaysAgo date={createdAt} />
+          {createdAt !== updatedAt && (
+            <>
+              <span className='-ml-1'>·</span>
+              <span className='italic'>
+                (Updated <DaysAgo date={updatedAt} />)
+              </span>
+            </>
+          )}
         </div>
       </div>
     </div>

@@ -1,5 +1,9 @@
 import { postsQueryControllerFindAll } from '@/api/client/posts-query/posts-query';
-import type { PostDto } from '@/api/client/schemas';
+import type {
+  PageMetaDto,
+  PostDto,
+  PostsQueryControllerFindAll200,
+} from '@/api/client/schemas';
 import { Markdown } from '@/components/common/markdown.component';
 import { PostCard } from '@/components/features/post-card.component';
 import { PostPaginationWrapper } from '@/components/features/post-pagination-wrapper.component';
@@ -10,18 +14,19 @@ import { asPrefix } from '@/lib/seo/url-slug.utils';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 
+import { postsQueryControllerFindAllResponse } from '@/api/client/schemas/posts-query/posts-query.zod';
+import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
 import { CollectionPageJsonLd } from './json-ld.component';
 
 /**
  * Initial static posts limit for SEO and initial render performance.
  * Reduced count ensures fast initial page load while maintaining SEO value.
- */
-const INITIAL_STATIC_POSTS_LIMIT = 60;
-
-/**
+ *
  * Pagination limit for client-side data fetching.
  * Should be more than initial limit to provide smooth content transition.
  */
+
+const INITIAL_STATIC_POSTS_LIMIT = 60;
 const PAGINATION_LIMIT = 72;
 
 export async function Category({
@@ -36,22 +41,19 @@ export async function Category({
   const markdown = parseMarkdown(post?.content || '');
 
   const domain = getApiDomain();
-  // Fetch initial static posts for SEO and initial render (reduced count for performance)
-  const response = await postsQueryControllerFindAll({
-    domain,
-    categories: onlyUnCategoried ? 'null' : post.id,
-    type: 'post',
-    status: 'published',
-    limit: INITIAL_STATIC_POSTS_LIMIT,
+  const data = await fetchAndValidate<PostsQueryControllerFindAll200>({
+    fetcher: () =>
+      postsQueryControllerFindAll({
+        domain,
+        categories: onlyUnCategoried ? 'null' : post.id,
+        type: 'post',
+        status: 'published',
+        limit: INITIAL_STATIC_POSTS_LIMIT,
+      }),
+    schema: postsQueryControllerFindAllResponse,
+    context: `Category posts for ${post.slug} - ${post.id}`,
+    defaultData: { items: [] as PostDto[], meta: {} as PageMetaDto },
   });
-
-  const data =
-    response.status === 200 && response.data?.items
-      ? {
-          items: response.data.items,
-          meta: response.data.meta,
-        }
-      : { items: [], meta: undefined };
 
   const coverRatio = coverRatios(post.slug);
   const prefix = onlyUnCategoried ? '' : asPrefix(post.slug);
@@ -76,7 +78,7 @@ export async function Category({
           className='3xl:grid-cols-5 grid grid-cols-1 gap-x-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
           aria-label={`Posts in category ${post.title}`}
         >
-          {data?.items?.map((postItem: PostDto, index: number) => (
+          {data.items?.map((postItem: PostDto, index: number) => (
             <article key={`static-post-${postItem.slug}`} className='mb-8'>
               <PostCard
                 {...postItem}

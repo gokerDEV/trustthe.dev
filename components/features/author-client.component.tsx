@@ -1,6 +1,6 @@
 'use client';
 
-import type { AuthorDto, PostDto } from '@/api/client/schemas';
+import type { AuthorDto, PostDto, PostFileDto } from '@/api/client/schemas';
 import { getImages } from '@/lib/image.utils';
 import { useQuery } from '@tanstack/react-query';
 import { AuthorView } from './author-view.component';
@@ -55,7 +55,7 @@ export function AuthorClient({
   // Use author post if found, otherwise use author name
   const displayTitle = authorPost?.title || author.name;
   const authorHref = authorPost ? `/${authorPost.slug}` : '#';
-  const { cover } = authorPost ? getImages(authorPost) : { cover: null };
+  const { cover } = getImages(authorPost ?? null);
 
   // Get first name for avatar fallback
   const firstName = author.name.split(' ')[0];
@@ -69,11 +69,11 @@ export function AuthorClient({
       <AuthorView
         authorName={author.name}
         displayTitle={author.name}
-        authorHref='#'
-        cover={null}
+        authorHref={null}
+        cover={{ src: '', altText: '' } as PostFileDto}
         initials={initials}
-        publishedAt={publishedAt}
-        hasAuthorPost={false}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
       />
     );
   }
@@ -85,8 +85,8 @@ export function AuthorClient({
       authorHref={authorHref}
       cover={cover}
       initials={initials}
-      publishedAt={publishedAt}
-      hasAuthorPost={!!authorPost}
+      createdAt={createdAt}
+      updatedAt={updatedAt}
     />
   );
 }
