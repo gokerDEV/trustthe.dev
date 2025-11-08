@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "codegen": "node openapi-codegen.js"
+    "codegen": "node openapi-codegen.js",
+    "up": "git fetch template main && git merge template/main --allow-unrelated-histories -m \"chore: update from template\""
   },
   "dependencies": {
     "@hey-api/client-fetch": "^0.10.0",
