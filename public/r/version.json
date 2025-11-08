@@ -5,9 +5,7 @@
   "type": "registry:component",
   "description": "A component for developers who build with transparency, versioning, and soul.",
   "dependencies": [],
-  "registryDependencies": [
-    "card"
-  ],
+  "registryDependencies": ["card"],
   "files": [
     {
       "type": "registry:component",
@@ -16,10 +14,6 @@
     }
   ],
   "docs": "This component displays a persistent version tag derived from your package.json.\nIt includes information about the project repository, author, recent commit, and tech stack.\nIt promotes developer transparency by surfacing metadata in the UI — useful for bots, curious users, and future maintainers.",
-  "categories": [
-    "version",
-    "developer",
-    "transparency"
-  ],
+  "categories": ["version", "developer", "transparency"],
   "author": "goker <goker@goker.dev>"
 }

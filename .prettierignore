@@ -1,0 +1,20 @@
+
+# Builds / caches
+.next
+out
+build
+dist
+coverage
+.turbo
+.cache
+
+# Deps & locks
+node_modules
+pnpm-lock.yaml
+yarn.lock
+package-lock.json
+
+# Generated / artifacts
+*.snap
+*.min.*
+api/client/

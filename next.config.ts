@@ -1,20 +1,23 @@
-import { abstractCategories } from '@/config/navigation'
-import type { NextConfig } from 'next'
-import { version as VERSION } from './package.json'
+import type { NextConfig } from 'next';
+import { abstractCategories } from './config/navigation';
+import { version as VERSION } from './package.json';
 
 const nextConfig: NextConfig = {
   /* config options here */
   env: {
     VERSION,
-    PROJECT: process.env.PROJECT,
-    DOMAIN: process.env.DOMAIN || process.env.PROJECT || '',
+    PROJECT: process.env.DOMAIN,
+    DOMAIN: process.env.DOMAIN,
     CHAT_API_KEY: process.env.API_KEY,
     CHAT_API_URL: process.env.API_URL + '/chat',
   },
   images: {
+    formats: ['image/avif', 'image/webp'],
     remotePatterns: [
       {
+        protocol: 'https',
         hostname: 'kodkafa.s3.eu-central-1.amazonaws.com',
+        pathname: '/**',
       },
     ],
   },
@@ -25,6 +28,10 @@ const nextConfig: NextConfig = {
   },
   rewrites: async () => ({
     afterFiles: [
+      {
+        source: '/favicon.ico',
+        destination: '/favicon.png',
+      },
       {
         source: '/humans.txt',
         destination: '/api/humans',
@@ -47,14 +54,6 @@ const nextConfig: NextConfig = {
           },
         ])
         .flat(),
-      // {
-      //   source: '/humans.txt',
-      //   destination: '/api/humans',
-      // },
-      // {
-      //   source: '/.well-known/humans.txt',
-      //   destination: '/api/humans',
-      // },
     ],
   }),
   //   afterFiles: [{
@@ -72,6 +71,6 @@ const nextConfig: NextConfig = {
       destination: `/${category}/:path`,
       permanent: true,
     })),
-}
+};
 
-export default nextConfig
+export default nextConfig;

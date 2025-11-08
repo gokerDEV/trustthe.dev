@@ -1,0 +1,188 @@
+alwaysApply: true
+
+<context>
+These rules are for an enterprise-level Next.js App Router application.
+The architecture is "Server-First" (Hybrid):
+
+Initial Load (SEO): All routes are server-rendered (SSR/SSG) for maximum performance and SEO.
+
+Client-Side Hydration (UX): Client-side JavaScript ('use client') is used strategically for UX enhancements (e.g., infinite scrolling, dynamic search) that run after the initial server render.
+</context>
+
+<!-- ───────────── FOUNDATIONS ───────────── -->
+
+<rule id="foundations" severity="error">
+<title>Enterprise Foundations</title>
+<instructions>
+
+SOLID, Clean Code, Reusability: All code must adhere to these principles. Readability and maintainability are the highest priorities.
+
+Strict TypeScript: The any type will NOT be used under any circumstances. Precise types (e.S., unknown, discriminated unions) must always be preferred.
+
+Performance: Unnecessary data fetching or render loops must be avoided. Client-side JS bundle size must be monitored.
+</instructions>
+</rule>
+
+<!-- ───────────── ARCHITECTURE ───────────── -->
+
+<rule id="architecture-hybrid" severity="error">
+<title>Server-First (Hybrid) Architecture</title>
+<instructions>
+
+The application architecture is "Server-First." All initial page loads must be rendered by Server Components (RSC).
+
+The 'use client' directive is ALLOWED, but only for non-critical UX enhancements (e.g., PostPagination, AuthorClient) that are not part of the initial static render.
+
+It is STRICTLY forbidden to use 'use client' for components required for the initial page's SEO-critical content.
+
+A BFF (Backend-for-Frontend) layer (e.g., /api/posts/query) IS USED to provide data to these client-side components.
+</instructions>
+</rule>
+
+<rule id="env-security" severity="error">
+<title>Configuration and Security (Environment)</title>
+<instructions>
+
+All API keys, client_id, client_secret, and other secrets will only be stored in server-side environment variables (.env.local).
+
+The NEXT*PUBLIC* prefix will NOT be used under any circumstances. No secrets may be exposed to the client.
+</instructions>
+</rule>
+
+<!-- ───────────── DATA LAYER ───────────── -->
+
+<rule id="data-layer" severity="error">
+<title>Data Layer (Server vs. Client)</title>
+<instructions>
+
+The data layer is managed using Orval (to generate clients) and Zod (to generate schemas).
+
+1. Server Data (RSC):
+
+Server Components (Page(), generateMetadata, etc.) must fetch data directly using the generated Orval client.
+
+All server-side data must be validated at runtime using its corresponding Zod schema.
+
+2. Client Data (UX Components):
+
+Client Components ('use client') must fetch data from the internal BFF (e.g., /api/posts/query).
+
+Client-side data fetching must use @tanstack/react-query for caching, deduplication, and staleTime management.
+
+</instructions>
+</rule>
+
+<rule id="data-pattern-graceful" severity="error">
+<title>Data Fetching Pattern: fetchAndValidate</title>
+<instructions>
+
+All "graceful fallback" data fetching in Server Components (e.g., in Author, generateMetadata, generateStaticParams) must use the fetchAndValidate utility.
+
+This utility encapsulates all try/catch, status checking, and validation logic, returning a defaultData on failure.
+
+This prevents non-critical components (like an author block) from breaking the entire page render.
+</instructions>
+</rule>
+
+<rule id="i18n-server" severity="error">
+<title>Localization (i18next - Server-Side)</title>
+<instructions>
+
+Localization must use i18next.
+
+All translations must be loaded within Server Components using server-side i18next helpers.
+
+The useTranslation() hook (and therefore 'use client') will NOT be used under any circumstances.
+
+All text (errors, titles, toast messages) must come from i18n keys.
+</instructions>
+</rule>
+
+<!-- ───────────── ERROR HANDLING ───────────── -->
+
+<rule id="error-handling" severity="error">
+<title>Error Handling (Hard vs. Graceful)</title>
+<instructions>
+
+1. Hard Fail (Critical Content):
+
+The main content of a page (e.g., the post in [slug]/page.tsx) must fail hard.
+
+Use call notFound() directly if critical data is missing or invalid.
+
+2. Graceful Fail (Non-Critical Content):
+
+Non-critical components (e.g., Author, RelatedPosts) must use the fetchAndValidate utility to return a defaultData (like null or []) instead of throwing an error.
+
+</instructions>
+</rule>
+
+<!-- ───────────── UI & PERFORMANCE ───────────── -->
+
+<rule id="ui-library" severity="error">
+<title>shadcn/ui Usage</title>
+<instructions>
+
+Always prefer existing components under components/ui/ or components/common/.
+
+New primitives must be installed via npx shadcn@latest add ....
+
+Components must be reusable, and composition must be preferred.
+</instructions>
+</rule>
+
+<rule id="performance-hybrid" severity="warn">
+<title>Performance Hygiene (Hybrid)</title>
+<instructions>
+
+Client: Use client-side memoization (useMemo, useCallback) where appropriate within Client Components to prevent unnecessary re-renders.
+
+Client: Use React.lazy or dynamic() to ensure client-side components (like PostPagination) are only loaded when needed, not on the initial page load.
+</instructions>
+</rule>
+
+<rule id="loading-states-server" severity="warn">
+<title>Loading & Empty States</title>
+<instructions>
+
+Next.js's built-in loading.tsx file (or Suspense) must be used for asynchronous data loading and route transitions.
+
+Empty state components must clearly guide the next action (e.g., "Return to homepage").
+
+Layout shift (CLS) must be avoided.
+</instructions>
+</rule>
+
+<rule id="a11y" severity="warn">
+<title>Accessibility (a11y) & Semantics</title>
+<instructions>
+
+Semantic HTML (e.g., <article>, <button>, <nav>) must be used.
+
+Keyboard navigation and focus management must be ensured.
+
+aria labels must be provided for all interactive elements, including shadcn/ui components.
+</instructions>
+</rule>
+
+<!-- ───────────── PR CHECKLIST ───────────── -->
+
+<rule id="pr-ready-hybrid" severity="info" when="diff|pr">
+<title>PR Readiness Checklist (Hybrid)</title>
+<instructions>
+
+[ ] pnpm run codegen (Orval) has been run; the client compiles with no diff.
+
+[ ] any was not used; strict typing rules are passing.
+
+[ ] There are NO environment variables prefixed with NEXT*PUBLIC*.
+
+[ ] Server Data: Initial page load data is fetched only in Server Components.
+[ ] Server Data: fetchAndValidate utility is used for all graceful server-side fetches.
+[ ] Server Data: ServerErrorBoundary or notFound() is used for all hard-fail server-side fetches.
+
+[ ] Client Data: 'use client' was used only for UX enhancements (e.g., pagination) and not for SEO-critical content.
+[ ] Client Data: Client components use @tanstack/react-query to fetch from the internal BFF.
+[ ] Client Data: Client components are loaded lazily using dynamic().
+</instructions>
+</rule>

@@ -1,43 +1,43 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import path from 'path';
 
 interface RegistryItem {
-  $schema: string
-  name: string
-  title: string
-  type: string
-  description: string
-  dependencies: string[]
-  registryDependencies: string[]
+  $schema: string;
+  name: string;
+  title: string;
+  type: string;
+  description: string;
+  dependencies: string[];
+  registryDependencies: string[];
   files: {
-    type: string
-    path: string
-    content: string
-  }[]
-  docs?: string
-  categories?: string[]
-  author?: string
+    type: string;
+    path: string;
+    content: string;
+  }[];
+  docs?: string;
+  categories?: string[];
+  author?: string;
 }
 
 function generateRegistry(
   componentPath: string,
   options: {
-    name: string
-    title: string
-    description: string
-    dependencies: string[]
-    registryDependencies: string[]
-    docs?: string
-    categories?: string[]
-    author?: string
-    targetPath?: string
-    type: 'registry:component' | 'registry:ui'
-  },
+    name: string;
+    title: string;
+    description: string;
+    dependencies: string[];
+    registryDependencies: string[];
+    docs?: string;
+    categories?: string[];
+    author?: string;
+    targetPath?: string;
+    type: 'registry:component' | 'registry:ui';
+  }
 ) {
   // Read the component file
-  const content = fs.readFileSync(componentPath, 'utf-8')
+  const content = fs.readFileSync(componentPath, 'utf-8');
 
-  const folder = options.type === 'registry:component' ? 'common' : 'ui'
+  const folder = options.type === 'registry:component' ? 'common' : 'ui';
 
   // Create registry item
   const registry: RegistryItem = {
@@ -58,19 +58,19 @@ function generateRegistry(
     docs: options.docs,
     categories: options.categories,
     author: options.author,
-  }
+  };
 
   // Ensure registry directory exists
-  const registryDir = path.join(process.cwd(), 'public/r')
+  const registryDir = path.join(process.cwd(), 'public/r');
   if (!fs.existsSync(registryDir)) {
-    fs.mkdirSync(registryDir, { recursive: true })
+    fs.mkdirSync(registryDir, { recursive: true });
   }
 
   // Write registry file
   fs.writeFileSync(
     path.join(registryDir, `${options.name}.json`),
-    JSON.stringify(registry, null, 2),
-  )
+    JSON.stringify(registry, null, 2)
+  );
 
   // Create component directory in registry
   // const componentDir = path.join(registryDir, options.name);
@@ -84,8 +84,8 @@ function generateRegistry(
   //     content
   // );
 
-  console.log(`✓ Generated registry for ${options.name}`)
-  console.log(`  └─ ${path.join(registryDir, `${options.name}.json`)}`)
+  console.log(`✓ Generated registry for ${options.name}`);
+  console.log(`  └─ ${path.join(registryDir, `${options.name}.json`)}`);
 }
 
 // Example usage for theme customizer
@@ -106,7 +106,7 @@ It promotes developer transparency by surfacing metadata in the UI — useful fo
     categories: ['version', 'developer', 'transparency'],
     author: 'goker <goker@goker.dev>',
   },
-]
+];
 
 // Generate registry for each component
 components.forEach((component) => {
@@ -121,5 +121,5 @@ components.forEach((component) => {
     author: component.author,
     targetPath: component.targetPath,
     type: component.type as 'registry:component' | 'registry:ui',
-  })
-})
+  });
+});

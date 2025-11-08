@@ -1,50 +1,24 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import nextVitals from 'eslint-config-next/core-web-vitals'
+import nextTs from 'eslint-config-next/typescript'
+import prettier from 'eslint-config-prettier/flat'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
 
-const eslintConfig = [
-  ...compat.config({
-    extends: [
-      'next',
-      'next/core-web-vitals',
-      'next/typescript',
-      'plugin:prettier/recommended',
-      'plugin:jsx-a11y/recommended',
-    ],
-    plugins: ['prettier', 'jsx-a11y'],
-    rules: {
-      'prettier/prettier': [
-        'error',
-        {
-          trailingComma: 'all',
-          semi: false,
-          tabWidth: 2,
-          singleQuote: true,
-          printWidth: 80,
-          endOfLine: 'auto',
-          arrowParens: 'always',
-          plugins: ['prettier-plugin-tailwindcss'],
-        },
-        {
-          usePrettierrc: false,
-        },
-      ],
-      'react/react-in-jsx-scope': 'off',
-      'jsx-a11y/alt-text': 'warn',
-      'jsx-a11y/aria-props': 'warn',
-      'jsx-a11y/aria-proptypes': 'warn',
-      'jsx-a11y/aria-unsupported-elements': 'warn',
-      'jsx-a11y/role-has-required-aria-props': 'warn',
-      'jsx-a11y/role-supports-aria-props': 'warn',
-    },
-  }),
-];
+export default defineConfig([
+  ...nextVitals,
+  ...nextTs,
 
-export default eslintConfig;
+  // Prettier: disable stylistic rules that would fight with Prettier
+  // (imported LAST so it can turn things off)
+  prettier,
+
+  // Ignores (Next defaults + your own)
+  globalIgnores([
+    '.next/**',
+    'out/**',
+    'build/**',
+    'next-env.d.ts',
+    'src/api/client/**',
+  ]),
+])
