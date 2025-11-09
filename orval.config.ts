@@ -1,9 +1,11 @@
 import { defineConfig } from 'orval';
 
+const TARGET = process.env.KODKAFA_API_URL + '/doc-json';
+
 export default defineConfig({
   kodkafa: {
     input: {
-      target: `${process.env.API_URL || 'http://localhost:3388'}/doc-json`,
+      target: TARGET,
       override: {
         transformer: './kodkafa/orval-transformer.mjs',
       },
@@ -27,7 +29,7 @@ export default defineConfig({
   },
   kodkafaZod: {
     input: {
-      target: `${process.env.API_URL || 'http://localhost:3388'}/doc-json`,
+      target: TARGET,
       override: {
         transformer: './kodkafa/orval-transformer.mjs',
       },
@@ -37,6 +39,36 @@ export default defineConfig({
       client: 'zod',
       target: './kodkafa/client/schemas',
       fileExtension: '.zod.ts',
+    },
+  },
+  kodkafaQuery: {
+    input: {
+      target: TARGET,
+      override: {
+        transformer: './kodkafa/orval-transformer.mjs',
+      },
+    },
+    output: {
+      target: './kodkafa/client',
+      client: 'react-query',
+      mode: 'tags-split',
+      schemas: './kodkafa/client/schemas',
+      mock: false,
+      override: {
+        mutator: {
+          path: './kodkafa/client/mutator-client.ts',
+          name: 'customInstance',
+        },
+        query: {
+          useQuery: true,
+          useInfinite: true,
+          useMutation: true,
+          signal: true,
+        },
+      },
+    },
+    hooks: {
+      afterAllFilesWrite: 'prettier --write',
     },
   },
 });

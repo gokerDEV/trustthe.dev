@@ -13,9 +13,9 @@ class OAuthTokenManager {
   private readonly apiUrl: string;
 
   private constructor() {
+    this.apiUrl = process.env.KODKAFA_API_URL || '';
     this.clientId = process.env.KODKAFA_CLIENT_ID || '';
     this.clientSecret = process.env.KODKAFA_CLIENT_SECRET || '';
-    this.apiUrl = process.env.API_URL || 'http://localhost:3388';
 
     if (!this.clientId || !this.clientSecret) {
       throw new Error(
