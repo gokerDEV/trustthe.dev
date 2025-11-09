@@ -6,8 +6,8 @@ const nextConfig: NextConfig = {
   /* config options here */
   env: {
     VERSION,
-    PROJECT: process.env.PROJECT,
-    DOMAIN: process.env.DOMAIN || process.env.PROJECT || '',
+    PROJECT: process.env.DOMAIN,
+    DOMAIN: process.env.DOMAIN,
     CHAT_API_KEY: process.env.API_KEY,
     CHAT_API_URL: process.env.API_URL + '/chat',
   },
