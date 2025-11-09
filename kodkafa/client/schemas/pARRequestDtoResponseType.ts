@@ -12,7 +12,6 @@
 export type PARRequestDtoResponseType =
   (typeof PARRequestDtoResponseType)[keyof typeof PARRequestDtoResponseType];
 
- 
 export const PARRequestDtoResponseType = {
   code: 'code',
 } as const;

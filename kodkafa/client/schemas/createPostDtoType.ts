@@ -9,7 +9,6 @@
 export type CreatePostDtoType =
   (typeof CreatePostDtoType)[keyof typeof CreatePostDtoType];
 
- 
 export const CreatePostDtoType = {
   category: 'category',
   post: 'post',

@@ -12,7 +12,6 @@
 export type AddMemberDtoRole =
   (typeof AddMemberDtoRole)[keyof typeof AddMemberDtoRole];
 
- 
 export const AddMemberDtoRole = {
   owner: 'owner',
   admin: 'admin',

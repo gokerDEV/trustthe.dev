@@ -8,7 +8,6 @@
 
 export type PostDtoType = (typeof PostDtoType)[keyof typeof PostDtoType];
 
- 
 export const PostDtoType = {
   category: 'category',
   post: 'post',

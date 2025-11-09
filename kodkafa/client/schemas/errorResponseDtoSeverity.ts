@@ -12,7 +12,6 @@
 export type ErrorResponseDtoSeverity =
   (typeof ErrorResponseDtoSeverity)[keyof typeof ErrorResponseDtoSeverity];
 
- 
 export const ErrorResponseDtoSeverity = {
   LOW: 'LOW',
   MEDIUM: 'MEDIUM',

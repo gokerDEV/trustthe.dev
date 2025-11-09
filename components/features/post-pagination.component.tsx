@@ -120,18 +120,25 @@ export function PostPagination({
           params.set('after', pageParam as string);
         }
 
-        const response = await fetch(`/api/posts/query?${params.toString()}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        // Use BFF proxy pattern: /api/[...proxy]/posts?{params}
+        // This uses query parameters because we're doing a filtered search with multiple filters
+        // The proxy will forward to: {KODKAFA_API_URL}/posts?domain=...&filter[type]=...&limit=...
+        const response = await fetch(
+          `/api/[...proxy]/posts?${params.toString()}`,
+          {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
 
         if (!response.ok) {
           throw new Error('Failed to fetch posts');
         }
 
-        return (await response.json()) as PostsQueryResponse;
+        const result = (await response.json()) as { data: PostsQueryResponse };
+        return result.data;
       },
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {

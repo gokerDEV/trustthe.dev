@@ -9,7 +9,6 @@
 export type PostsQueryControllerFindSitemapSort =
   (typeof PostsQueryControllerFindSitemapSort)[keyof typeof PostsQueryControllerFindSitemapSort];
 
- 
 export const PostsQueryControllerFindSitemapSort = {
   title: 'title',
   slug: 'slug',

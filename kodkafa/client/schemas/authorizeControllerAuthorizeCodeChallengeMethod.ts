@@ -9,7 +9,6 @@
 export type AuthorizeControllerAuthorizeCodeChallengeMethod =
   (typeof AuthorizeControllerAuthorizeCodeChallengeMethod)[keyof typeof AuthorizeControllerAuthorizeCodeChallengeMethod];
 
- 
 export const AuthorizeControllerAuthorizeCodeChallengeMethod = {
   S256: 'S256',
 } as const;

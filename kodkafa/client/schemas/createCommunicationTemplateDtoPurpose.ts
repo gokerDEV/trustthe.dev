@@ -12,7 +12,6 @@
 export type CreateCommunicationTemplateDtoPurpose =
   (typeof CreateCommunicationTemplateDtoPurpose)[keyof typeof CreateCommunicationTemplateDtoPurpose];
 
- 
 export const CreateCommunicationTemplateDtoPurpose = {
   invite: 'invite',
   verify: 'verify',

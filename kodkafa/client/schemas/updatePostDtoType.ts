@@ -9,7 +9,6 @@
 export type UpdatePostDtoType =
   (typeof UpdatePostDtoType)[keyof typeof UpdatePostDtoType];
 
- 
 export const UpdatePostDtoType = {
   category: 'category',
   post: 'post',

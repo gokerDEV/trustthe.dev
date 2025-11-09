@@ -8,7 +8,6 @@
 
 export type PostDtoStatus = (typeof PostDtoStatus)[keyof typeof PostDtoStatus];
 
- 
 export const PostDtoStatus = {
   draft: 'draft',
   hidden: 'hidden',

@@ -12,7 +12,6 @@
 export type OAuthErrorResponseDtoError =
   (typeof OAuthErrorResponseDtoError)[keyof typeof OAuthErrorResponseDtoError];
 
- 
 export const OAuthErrorResponseDtoError = {
   invalid_request: 'invalid_request',
   invalid_client: 'invalid_client',

@@ -9,7 +9,6 @@
 export type PostsQueryControllerFindAllSort =
   (typeof PostsQueryControllerFindAllSort)[keyof typeof PostsQueryControllerFindAllSort];
 
- 
 export const PostsQueryControllerFindAllSort = {
   title: 'title',
   slug: 'slug',

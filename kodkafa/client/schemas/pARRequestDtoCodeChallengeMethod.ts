@@ -12,7 +12,6 @@
 export type PARRequestDtoCodeChallengeMethod =
   (typeof PARRequestDtoCodeChallengeMethod)[keyof typeof PARRequestDtoCodeChallengeMethod];
 
- 
 export const PARRequestDtoCodeChallengeMethod = {
   S256: 'S256',
 } as const;

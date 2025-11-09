@@ -12,7 +12,6 @@
 export type ResendOtpDtoType =
   (typeof ResendOtpDtoType)[keyof typeof ResendOtpDtoType];
 
- 
 export const ResendOtpDtoType = {
   invite: 'invite',
   verify: 'verify',

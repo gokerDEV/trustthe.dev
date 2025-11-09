@@ -9,7 +9,6 @@
 export type PostsControllerFindByTagsSort =
   (typeof PostsControllerFindByTagsSort)[keyof typeof PostsControllerFindByTagsSort];
 
- 
 export const PostsControllerFindByTagsSort = {
   title: 'title',
   slug: 'slug',

@@ -9,7 +9,6 @@
 export type UpdatePostDtoStatus =
   (typeof UpdatePostDtoStatus)[keyof typeof UpdatePostDtoStatus];
 
- 
 export const UpdatePostDtoStatus = {
   draft: 'draft',
   hidden: 'hidden',

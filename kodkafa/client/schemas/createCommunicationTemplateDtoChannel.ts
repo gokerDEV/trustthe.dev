@@ -12,7 +12,6 @@
 export type CreateCommunicationTemplateDtoChannel =
   (typeof CreateCommunicationTemplateDtoChannel)[keyof typeof CreateCommunicationTemplateDtoChannel];
 
- 
 export const CreateCommunicationTemplateDtoChannel = {
   email: 'email',
   sms: 'sms',

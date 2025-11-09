@@ -12,7 +12,6 @@
 export type ConfigurationResponseDtoCategory =
   (typeof ConfigurationResponseDtoCategory)[keyof typeof ConfigurationResponseDtoCategory];
 
- 
 export const ConfigurationResponseDtoCategory = {
   tenant: 'tenant',
   mail: 'mail',

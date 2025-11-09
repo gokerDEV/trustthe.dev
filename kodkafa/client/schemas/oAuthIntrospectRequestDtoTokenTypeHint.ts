@@ -12,7 +12,6 @@
 export type OAuthIntrospectRequestDtoTokenTypeHint =
   (typeof OAuthIntrospectRequestDtoTokenTypeHint)[keyof typeof OAuthIntrospectRequestDtoTokenTypeHint];
 
- 
 export const OAuthIntrospectRequestDtoTokenTypeHint = {
   access_token: 'access_token',
   refresh_token: 'refresh_token',

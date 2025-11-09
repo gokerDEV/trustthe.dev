@@ -49,9 +49,15 @@ export function PostCardClient({
     '4/3': { width: 800, height: 600 },
   }[coverRatio] || { width: 900, height: 300 };
 
-  const authorComponent = author ? (
-    <AuthorClient author={author} createdAt={createdAt} updatedAt={updatedAt} />
-  ) : null;
+  const authorComponent =
+    author && domain ? (
+      <AuthorClient
+        author={author}
+        createdAt={createdAt}
+        updatedAt={updatedAt}
+        domain={domain}
+      />
+    ) : null;
 
   return (
     <PostCardView

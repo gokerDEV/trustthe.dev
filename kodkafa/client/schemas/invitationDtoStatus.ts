@@ -12,7 +12,6 @@
 export type InvitationDtoStatus =
   (typeof InvitationDtoStatus)[keyof typeof InvitationDtoStatus];
 
- 
 export const InvitationDtoStatus = {
   draft: 'draft',
   hidden: 'hidden',

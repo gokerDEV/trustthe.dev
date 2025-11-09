@@ -12,7 +12,6 @@
 export type CreateApiKeyDtoType =
   (typeof CreateApiKeyDtoType)[keyof typeof CreateApiKeyDtoType];
 
- 
 export const CreateApiKeyDtoType = {
   confidential: 'confidential',
   mobile: 'mobile',

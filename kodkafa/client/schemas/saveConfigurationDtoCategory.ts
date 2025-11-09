@@ -12,7 +12,6 @@
 export type SaveConfigurationDtoCategory =
   (typeof SaveConfigurationDtoCategory)[keyof typeof SaveConfigurationDtoCategory];
 
- 
 export const SaveConfigurationDtoCategory = {
   tenant: 'tenant',
   mail: 'mail',

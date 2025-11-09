@@ -12,7 +12,6 @@
 export type CreateOtpDtoType =
   (typeof CreateOtpDtoType)[keyof typeof CreateOtpDtoType];
 
- 
 export const CreateOtpDtoType = {
   invite: 'invite',
   verify: 'verify',

@@ -11,7 +11,6 @@
  */
 export type ApiKeyType = (typeof ApiKeyType)[keyof typeof ApiKeyType];
 
- 
 export const ApiKeyType = {
   confidential: 'confidential',
   mobile: 'mobile',

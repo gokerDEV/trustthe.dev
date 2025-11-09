@@ -9,7 +9,6 @@
 export type PostsControllerFindByDomainSort =
   (typeof PostsControllerFindByDomainSort)[keyof typeof PostsControllerFindByDomainSort];
 
- 
 export const PostsControllerFindByDomainSort = {
   title: 'title',
   slug: 'slug',

@@ -12,7 +12,6 @@
 export type OAuthTokenRequestDtoGrantType =
   (typeof OAuthTokenRequestDtoGrantType)[keyof typeof OAuthTokenRequestDtoGrantType];
 
- 
 export const OAuthTokenRequestDtoGrantType = {
   client_credentials: 'client_credentials',
   authorization_code: 'authorization_code',

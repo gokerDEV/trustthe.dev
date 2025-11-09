@@ -12,7 +12,6 @@
 export type ErrorResponseDtoCategory =
   (typeof ErrorResponseDtoCategory)[keyof typeof ErrorResponseDtoCategory];
 
- 
 export const ErrorResponseDtoCategory = {
   AUTHENTICATION: 'AUTHENTICATION',
   AUTHORIZATION: 'AUTHORIZATION',

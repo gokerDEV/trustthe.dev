@@ -12,7 +12,6 @@
 export type OAuthRevokeRequestDtoTokenTypeHint =
   (typeof OAuthRevokeRequestDtoTokenTypeHint)[keyof typeof OAuthRevokeRequestDtoTokenTypeHint];
 
- 
 export const OAuthRevokeRequestDtoTokenTypeHint = {
   access_token: 'access_token',
   refresh_token: 'refresh_token',

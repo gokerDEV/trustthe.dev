@@ -9,7 +9,6 @@
 export type ProjectDtoScopesItem =
   (typeof ProjectDtoScopesItem)[keyof typeof ProjectDtoScopesItem];
 
- 
 export const ProjectDtoScopesItem = {
   openid: 'openid',
   profile: 'profile',

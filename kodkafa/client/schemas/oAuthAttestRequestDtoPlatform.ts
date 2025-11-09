@@ -12,7 +12,6 @@
 export type OAuthAttestRequestDtoPlatform =
   (typeof OAuthAttestRequestDtoPlatform)[keyof typeof OAuthAttestRequestDtoPlatform];
 
- 
 export const OAuthAttestRequestDtoPlatform = {
   ios: 'ios',
   android: 'android',

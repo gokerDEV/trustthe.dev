@@ -9,7 +9,6 @@
 export type AuthorizeControllerAuthorizeResponseType =
   (typeof AuthorizeControllerAuthorizeResponseType)[keyof typeof AuthorizeControllerAuthorizeResponseType];
 
- 
 export const AuthorizeControllerAuthorizeResponseType = {
   code: 'code',
 } as const;

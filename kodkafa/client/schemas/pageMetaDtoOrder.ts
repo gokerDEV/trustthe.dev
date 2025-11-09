@@ -9,7 +9,6 @@
 export type PageMetaDtoOrder =
   (typeof PageMetaDtoOrder)[keyof typeof PageMetaDtoOrder];
 
- 
 export const PageMetaDtoOrder = {
   asc: 'asc',
   desc: 'desc',

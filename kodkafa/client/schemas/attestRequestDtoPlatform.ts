@@ -12,7 +12,6 @@
 export type AttestRequestDtoPlatform =
   (typeof AttestRequestDtoPlatform)[keyof typeof AttestRequestDtoPlatform];
 
- 
 export const AttestRequestDtoPlatform = {
   ios: 'ios',
   android: 'android',
