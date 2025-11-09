@@ -1,6 +1,6 @@
 import { getAccessToken } from '@/lib/auth/token-manager';
 
-const API_URL = process.env.KODKAFA_API_URL || 'http://localhost:3388';
+const API_URL = process.env.KODKAFA_API_URL;
 
 export const customInstance = async <T>(
   url: string,
