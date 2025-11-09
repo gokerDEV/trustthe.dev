@@ -1,6 +1,4 @@
-import { getClientCredentialsToken } from '@/app/lib/auth-utils';
 import { deleteSession, getSession, updateSession } from '@/app/lib/session';
-import { authControllerRefresh } from '@/kodkafa/client/user-authentication-management/user-authentication-management';
 import { NextRequest, NextResponse } from 'next/server';
 
 // Helper function to refresh the token directly
@@ -12,27 +10,57 @@ async function refreshSessionToken(): Promise<string | null> {
   }
 
   try {
-    const apiToken = await getClientCredentialsToken();
+    const clientResponse = await fetch(
+      `${process.env.KODKAFA_API_URL}/oauth/token`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({
+          grant_type: 'client_credentials',
+          client_id: process.env.KODKAFA_CLIENT_ID!,
+          client_secret: process.env.KODKAFA_CLIENT_SECRET!,
+        }),
+      }
+    );
 
-    const refreshResponse = await authControllerRefresh({
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiToken}`,
-      },
-      body: JSON.stringify({ refresh_token: session.refresh_token }),
-    });
+    if (!clientResponse.ok) {
+      console.error('Proxy: Client credentials failed during token refresh.');
+      await deleteSession();
+      return null;
+    }
 
-    if (refreshResponse.status !== 200) {
+    const { access_token: apiToken } = (await clientResponse.json()) as {
+      access_token: string;
+    };
+
+    const refreshResponse = await fetch(
+      `${process.env.KODKAFA_API_URL}/auth/refresh`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${apiToken}`,
+        },
+        body: JSON.stringify({ refresh_token: session.refresh_token }),
+      }
+    );
+
+    if (!refreshResponse.ok) {
       console.error('Proxy: Token refresh failed.');
       await deleteSession();
       return null;
     }
 
-    const tokens = refreshResponse.data;
+    const tokens = (await refreshResponse.json()) as {
+      access_token: string;
+      refresh_token?: string;
+      expires_in: number;
+    };
+
     const updatedSession = await updateSession({
-      access_token: tokens.access_token || '',
+      access_token: tokens.access_token,
       refresh_token: tokens.refresh_token || session.refresh_token,
-      expires_at: Date.now() + (tokens.expires_in || 3600) * 1000,
+      expires_at: Date.now() + tokens.expires_in * 1000,
     });
 
     return updatedSession?.access_token || null;
@@ -103,14 +131,55 @@ async function handleRequest(
     }
   }
 
+  // Get OAuth API token for public endpoints (like posts)
+  // Server-side uses mutator.ts which gets OAuth token via getAccessToken()
+  // We need to do the same for client-side requests
+  let apiOAuthToken: string | undefined;
+  if (!accessToken) {
+    try {
+      const authString = Buffer.from(
+        `${process.env.KODKAFA_CLIENT_ID}:${process.env.KODKAFA_CLIENT_SECRET}`
+      ).toString('base64');
+
+      const tokenResponse = await fetch(
+        `${process.env.KODKAFA_API_URL}/oauth/token`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            Authorization: `Basic ${authString}`,
+          },
+          body: new URLSearchParams({ grant_type: 'client_credentials' }),
+        }
+      );
+
+      if (tokenResponse.ok) {
+        const tokenData = (await tokenResponse.json()) as {
+          access_token: string;
+        };
+        apiOAuthToken = tokenData.access_token;
+      }
+    } catch (error) {
+      console.error('Proxy: Failed to get OAuth token for API:', error);
+    }
+  }
+
   const headers = new Headers(request.headers);
   headers.delete('cookie'); // Do not forward client cookies to backend
   headers.set('X-Api-Token', process.env.KODKAFA_CLIENT_ID!);
+
+  // Set Authorization header: user token if available, otherwise OAuth API token (like server-side)
   if (accessToken) {
     headers.set('Authorization', `Bearer ${accessToken}`);
     console.log(
-      'Proxy: Authorization header set with token length:',
+      'Proxy: Authorization header set with user token length:',
       accessToken.length
+    );
+  } else if (apiOAuthToken) {
+    headers.set('Authorization', `Bearer ${apiOAuthToken}`);
+    console.log(
+      'Proxy: Authorization header set with API OAuth token length:',
+      apiOAuthToken.length
     );
   } else {
     console.log('Proxy: No access token available');

@@ -2,7 +2,13 @@
 
 import { Button } from '@/components/ui/button';
 import { coverRatios } from '@/config/navigation';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import { customInstance } from '@/kodkafa/client/mutator-client';
+import { getPostsQueryControllerFindAllUrl } from '@/kodkafa/client/posts-query/posts-query';
+import type {
+  PostDto,
+  PostsQueryControllerFindAll200,
+  PostsQueryControllerFindAllParams,
+} from '@/kodkafa/client/schemas';
 import { asPrefix, tagPrefix } from '@/lib/seo/url-slug.utils';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtuosoMasonry } from '@virtuoso.dev/masonry';
@@ -101,44 +107,41 @@ export function PostPagination({
     useInfiniteQuery<PostsQueryResponse>({
       queryKey,
       queryFn: async ({ pageParam }) => {
-        const params = new URLSearchParams({
+        // Use orval-generated client function with proper parameter format
+        // The mutator-client will handle routing through /api/[...proxy]
+        const params: PostsQueryControllerFindAllParams = {
           domain,
-          'filter[type]': 'post',
-          'filter[status]': 'published',
-          limit: paginationLimit.toString(),
-        });
+          type: 'post',
+          status: 'published',
+          limit: paginationLimit,
+        };
 
         if (categoryId) {
-          params.set('filter[categories]', categoryId);
+          params.categories = categoryId;
         }
 
         if (tags) {
-          params.set('filter[tags]', tags);
+          params.tags = tags;
         }
 
         if (pageParam) {
-          params.set('after', pageParam as string);
+          params.after = pageParam as string;
         }
 
-        // Use BFF proxy pattern: /api/[...proxy]/posts?{params}
-        // This uses query parameters because we're doing a filtered search with multiple filters
-        // The proxy will forward to: {KODKAFA_API_URL}/posts?domain=...&filter[type]=...&limit=...
-        const response = await fetch(
-          `/api/[...proxy]/posts?${params.toString()}`,
-          {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }
-        );
+        // Use orval URL builder with client mutator for proper proxy routing
+        const url = getPostsQueryControllerFindAllUrl(params);
+        const response = await customInstance<{
+          data: PostsQueryControllerFindAll200;
+          status: number;
+        }>(url, {
+          method: 'GET',
+        });
 
-        if (!response.ok) {
+        if (response.status !== 200) {
           throw new Error('Failed to fetch posts');
         }
 
-        const result = (await response.json()) as { data: PostsQueryResponse };
-        return result.data;
+        return response.data;
       },
       initialPageParam: undefined,
       getNextPageParam: (lastPage) => {

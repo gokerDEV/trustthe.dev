@@ -10,8 +10,10 @@ export const customInstance = async <T>(
   }
 ): Promise<T> => {
   // Remove leading slash if present and construct proxy URL
+  // Next.js catch-all route app/api/[...proxy]/route.ts matches /api/{path}
+  // The [...proxy] is just the param name, not part of the actual URL
   const cleanUrl = url.startsWith('/') ? url.slice(1) : url;
-  const proxyUrl = `/api/[...proxy]/${cleanUrl}`;
+  const proxyUrl = `/api/${cleanUrl}`;
 
   const response = await fetch(proxyUrl, {
     ...config,
