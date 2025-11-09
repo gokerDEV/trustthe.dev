@@ -10,7 +10,8 @@
     "lint": "eslint --fix",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,css,md}\"",
     "codegen": "orval",
-    "codegen:watch": "orval --watch"
+    "codegen:watch": "orval --watch",
+    "up": "git fetch template main && git merge template/main --allow-unrelated-histories -m \"chore: update from template\""
   },
   "dependencies": {
     "@markdoc/markdoc": "^0.5.4",
