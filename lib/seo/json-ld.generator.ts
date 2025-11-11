@@ -11,7 +11,7 @@ import {
   ORGANIZATION_URL,
   SITE_NAME,
 } from '@/config/constants';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import {
   AboutPage,
   Article,

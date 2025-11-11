@@ -1,7 +1,7 @@
 'use client';
 
 import { AuthorClient } from '@/components/features/author-client.component';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import { getImages } from '@/lib/image.utils';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import { PostCardView } from './post-card-view.component';

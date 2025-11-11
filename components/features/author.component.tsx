@@ -1,8 +1,8 @@
-import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
-import type { AuthorDto, PostDto } from '@/kodkafa/client/schemas';
-import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
+import { postsControllerFindOneBySlug } from '@/kodkafa/ssr/posts/posts';
+import type { AuthorDto, PostDto } from '@/kodkafa/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/zod/kodkafaApi.zod';
 import { getApiDomain } from '@/lib/api/domain';
-import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
+import { fetchAndValidate } from '@/lib/api/fetch-and-validate';
 import { getImages } from '@/lib/image.utils';
 import { AuthorView } from './author-view.component';
 

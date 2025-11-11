@@ -8,17 +8,26 @@ import { navigation } from '@/config/navigation';
 import { QueryProvider } from '@/providers/query-provider';
 import '@/styles/globals.css';
 import { Analytics } from '@vercel/analytics/react';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Fira_Mono, Hanken_Grotesk, Noto_Sans } from 'next/font/google';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
+const sans = Noto_Sans({
+  variable: '--font-custom-sans',
+  subsets: ['latin-ext'],
+  weight: ['100', '400', '600', '800'],
   display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const mono = Fira_Mono({
+  variable: '--font-custom-mono',
   subsets: ['latin'],
+  weight: ['400'],
+  display: 'swap',
+});
+
+const display = Hanken_Grotesk({
+  variable: '--font-custom-display',
+  subsets: ['latin-ext'],
+  weight: ['900'],
   display: 'swap',
 });
 
@@ -39,7 +48,10 @@ export default function RootLayout({
   };
 
   return (
-    <html lang={lang}>
+    <html
+      lang={lang}
+      className={`${sans.variable} ${mono.variable} ${display.variable}`}
+    >
       <head>
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link
@@ -62,7 +74,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} flex min-h-screen flex-col overscroll-x-contain antialiased`}
+        className={`flex min-h-screen flex-col overscroll-x-contain antialiased`}
       >
         <QueryProvider>
           <Header navigation={navigation} />

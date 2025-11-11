@@ -5,9 +5,9 @@ import { Categories } from '@/components/features/categories.component';
 import { LazyMediaGallery } from '@/components/features/lazy-media-gallery.component';
 import { ShareButtons } from '@/components/features/share-buttons.component';
 import { Tags } from '@/components/features/tags.component';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import { getDescription, getImages } from '@/lib/image.utils';
-import { parseMarkdown } from '@/lib/markdown';
+import { markdownToPlainText, parseMarkdown } from '@/lib/markdown';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -21,7 +21,10 @@ export async function Post({ post }: { post: PostDto }) {
 
   const { cover, images } = getImages(post);
   const markdown = parseMarkdown(post?.content || '');
-  const stats = readingTime(String(markdown?.toString()));
+  const plainText = markdownToPlainText(post?.content || '');
+  const stats = readingTime(plainText);
+
+  console.log(markdown);
   const publishedAt =
     post.updatedAt > post.createdAt ? post.updatedAt : post.createdAt;
   const description = getDescription(post?.content || '');
@@ -37,9 +40,13 @@ export async function Post({ post }: { post: PostDto }) {
 
   return (
     <>
-      <article itemScope itemType='https://schema.org/Article' className='pb-8'>
+      <article
+        itemScope
+        itemType='https://schema.org/Article'
+        className='mx-auto max-w-7xl pb-8'
+      >
         <header>
-          <h1 className='mb-2 text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100'>
+          <h1 className='font-display mb-2 text-3xl font-bold text-gray-900 md:text-4xl dark:text-gray-100'>
             {post.title}
           </h1>
           <p className='mb-6 flex flex-wrap items-center gap-2 text-sm text-gray-500'>

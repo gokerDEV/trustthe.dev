@@ -2,7 +2,7 @@ import Breadcrumb from '@/components/common/breadcrumb.component';
 import { Category } from '@/components/features/category.component';
 import { Post } from '@/components/features/post.component';
 import Profile from '@/components/features/profile.component';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 
 type PostContentProps = {
   post: PostDto;

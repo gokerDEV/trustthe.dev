@@ -80,38 +80,6 @@ function getTokenManager(): OAuthTokenManager {
   return tokenManagerInstance;
 }
 
-export async function getAccessToken(): Promise<string> {
+export async function getClientCredentialsToken(): Promise<string> {
   return getTokenManager().getToken();
-}
-
-/**
- * Extract projectId from JWT token
- * Backend includes projectId in token - we decode it here for endpoints that still require it
- */
-export async function getProjectIdFromToken(): Promise<string> {
-  const token = await getAccessToken();
-
-  try {
-    // JWT format: header.payload.signature
-    const parts = token.split('.');
-    if (parts.length !== 3) {
-      throw new Error('Invalid JWT token format');
-    }
-
-    // Decode payload (base64url)
-    const payload = parts[1];
-    const decoded = Buffer.from(payload, 'base64url').toString('utf-8');
-    const parsed = JSON.parse(decoded) as {
-      projectId?: string;
-      project_id?: string;
-      sub?: string;
-    };
-
-    // Try different possible field names
-    return parsed.projectId || parsed.project_id || parsed.sub || '';
-  } catch (error) {
-    console.error('Failed to extract projectId from token:', error);
-    // Fallback: return empty string (backend should handle this)
-    return '';
-  }
 }

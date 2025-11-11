@@ -3,6 +3,9 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --font-sans: var(--font-custom-sans), sans-serif;
+  --font-mono: var(--font-custom-mono), monospace;
+  --font-display: var(--font-custom-display), sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -168,11 +171,11 @@
 
   article > h1,
   section > h1 {
-    @apply mt-8 mb-4 text-3xl leading-tight font-bold text-neutral-900 dark:text-neutral-100;
+    @apply font-display mt-8 mb-4 text-3xl leading-tight font-extralight text-neutral-900 dark:text-neutral-100;
   }
 
   section > h2 {
-    @apply mt-6 mb-3 text-2xl leading-snug font-semibold text-neutral-900 dark:text-neutral-100;
+    @apply font-display mt-6 mb-3 text-2xl leading-snug font-semibold text-neutral-900 dark:text-neutral-100;
   }
 
   section > h3 {

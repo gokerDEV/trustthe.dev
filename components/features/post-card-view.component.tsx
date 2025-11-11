@@ -1,7 +1,7 @@
 import { Categories } from '@/components/features/categories.component';
 import { Tags } from '@/components/features/tags.component';
 import { Card, CardContent } from '@/components/ui/card';
-import type { CategoryDto } from '@/kodkafa/client/schemas';
+import type { CategoryDto } from '@/kodkafa/schemas';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -86,7 +86,7 @@ export function PostCardView({
         <CardContent className='rounded-b-lg pt-2 [&_.categories]:justify-end'>
           <header>
             <h3
-              className='mt-2 line-clamp-2 text-lg leading-tight font-semibold text-gray-900 dark:text-gray-200'
+              className='font-display mt-2 line-clamp-2 text-lg leading-tight font-bold text-gray-900 dark:text-gray-200'
               itemProp='headline'
             >
               <Link

@@ -2,7 +2,7 @@
 // Utility functions for metadata generation
 
 import { BASE_URL, OG_HEIGHT, OG_WIDTH, SITE_NAME } from '@/config/constants';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import { getImages } from '@/lib/image.utils';
 import type { ImageData } from './metadata.types'; // Adjust path
 import { asUrl } from './url-slug.utils';

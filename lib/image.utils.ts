@@ -1,4 +1,4 @@
-import type { PostDto, PostFileDto } from '@/kodkafa/client/schemas';
+import type { PostDto, PostFileDto } from '@/kodkafa/schemas';
 import { imageTypes } from './types';
 
 export function getImages(note: Partial<PostDto> | null) {
