@@ -2,13 +2,11 @@
 
 import { Button } from '@/components/ui/button';
 import { coverRatios } from '@/config/navigation';
-import { customInstance } from '@/kodkafa/client/mutator-client';
-import { getPostsQueryControllerFindAllUrl } from '@/kodkafa/client/posts-query/posts-query';
+import { postsQueryControllerFindAll } from '@/kodkafa/rq/posts-query/posts-query';
 import type {
   PostDto,
-  PostsQueryControllerFindAll200,
   PostsQueryControllerFindAllParams,
-} from '@/kodkafa/client/schemas';
+} from '@/kodkafa/schemas';
 import { asPrefix, tagPrefix } from '@/lib/seo/url-slug.utils';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { VirtuosoMasonry } from '@virtuoso.dev/masonry';
@@ -129,16 +127,10 @@ export function PostPagination({
         }
 
         // Use orval URL builder with client mutator for proper proxy routing
-        const url = getPostsQueryControllerFindAllUrl(params);
-        const response = await customInstance<{
-          data: PostsQueryControllerFindAll200;
-          status: number;
-        }>(url, {
-          method: 'GET',
-        });
+        const response = await postsQueryControllerFindAll(params);
 
         if (response.status !== 200) {
-          throw new Error('Failed to fetch posts');
+          throw new Error(`API error: ${response.status}`);
         }
 
         return response.data;

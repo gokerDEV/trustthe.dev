@@ -9,8 +9,6 @@ code[class*='language-'],
 pre[class*='language-'] {
   background: #27212e;
   color: #ffffff;
-  font-family:
-    Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace; /* this is the default */
   /* The following properties are standard, please leave them as they are */
   font-size: 1em;
   direction: ltr;

@@ -1,5 +1,5 @@
 import { abstractCategories } from '@/config/navigation';
-import type { CategoryDto } from '@/kodkafa/client/schemas';
+import type { CategoryDto } from '@/kodkafa/schemas';
 
 const abstractCategoriesRegex = abstractCategories.map((i) => i[0]).join('|');
 const abstractCategoriesPrefixRegex = abstractCategories

@@ -1,13 +1,16 @@
 import { BASE_URL } from '@/config/constants';
-import { postsAnalyticsControllerGetPostStatistics } from '@/kodkafa/client/posts-analytics/posts-analytics';
-import { postsQueryControllerFindSitemap } from '@/kodkafa/client/posts-query/posts-query';
-import { postsQueryControllerFindSitemapResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
+import { postsAnalyticsControllerGetPostStatistics } from '@/kodkafa/ssr/posts-analytics/posts-analytics';
+import { postsQueryControllerFindSitemap } from '@/kodkafa/ssr/posts-query/posts-query';
+import { postsQueryControllerFindSitemapResponse } from '@/kodkafa/zod/kodkafaApi.zod';
 import { getApiDomain } from '@/lib/api/domain';
 import { asUrl } from '@/lib/seo/url-slug.utils';
 import type { MetadataRoute } from 'next';
 
 const POSTS_PER_SITEMAP = 50000; // Google's limit
 const API_LIMIT = 10000; // Sitemap API max limit
+
+// Revalidate sitemap every 24 hours (86400 seconds)
+// export const revalidate = 86400;
 
 /**
  * Generate sitemap IDs
@@ -17,9 +20,14 @@ const API_LIMIT = 10000; // Sitemap API max limit
 export async function generateSitemaps(): Promise<Array<{ id: number }>> {
   try {
     // Fetch post statistics to get total published count
+    // Next.js extended fetch API supports 'next' and 'cache' parameters
+    // These are passed through ssrMutator to the fetch call
     const response = await postsAnalyticsControllerGetPostStatistics({
-      next: { revalidate: 36000 },
+      next: { revalidate: 360000 },
       cache: 'force-cache',
+    } as RequestInit & {
+      next?: { revalidate?: number };
+      cache?: RequestCache;
     });
 
     if (response.status !== 200) {

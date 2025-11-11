@@ -17,5 +17,5 @@ package-lock.json
 # Generated / artifacts
 *.snap
 *.min.*
-kodkafa/client/
+kodkafa
 styles/fontello

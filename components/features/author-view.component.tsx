@@ -52,7 +52,7 @@ export function AuthorView({
         </Avatar>
       )}
       <div className='grow'>
-        <p className='text-sm font-medium text-gray-900 dark:text-gray-200'>
+        <p className='text-sm font-medium'>
           {authorHref ? (
             <Link href={authorHref} className='hover:underline'>
               Created by{' '}
@@ -65,7 +65,7 @@ export function AuthorView({
             </>
           )}
         </p>
-        <div className='text-muted-foreground flex items-center gap-2 text-sm'>
+        <div className='text-muted-foreground flex items-center gap-2 text-xs'>
           <DaysAgo date={createdAt} />
           {createdAt !== updatedAt && (
             <>

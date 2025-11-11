@@ -1,9 +1,8 @@
 import { PostCard } from '@/components/features/post-card.component';
 import { PINNED_POSTS } from '@/config/constants';
-import { postsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';
-import type { PostDto } from '@/kodkafa/client/schemas';
-import { postsControllerFindOneBySlugResponse } from '@/kodkafa/client/schemas/posts/posts.zod';
-import { validateApiResponse } from '@/lib/api/validation.utils';
+import { postsControllerFindOneBySlug } from '@/kodkafa/ssr/posts/posts';
+import type { PostDto } from '@/kodkafa/schemas';
+import { postsControllerFindOneBySlugResponse } from '@/kodkafa/zod/kodkafaApi.zod';
 import { Logger } from '@/lib/logger';
 
 export async function PinnedPosts() {
@@ -14,17 +13,14 @@ export async function PinnedPosts() {
       try {
         const response = await postsControllerFindOneBySlug(domain, slug);
         if (response.status === 200) {
-          const validationResult = validateApiResponse(
-            response.data,
-            postsControllerFindOneBySlugResponse,
-            `pinned post ${slug}`
-          );
+          const validationResult =
+            postsControllerFindOneBySlugResponse.safeParse(response.data);
 
           if (validationResult.success) {
             list.push(validationResult.data);
           } else {
             // Graceful fallback: use raw data if validation fails
-            const fallbackPost = validationResult.rawData as PostDto;
+            const fallbackPost = response.data as PostDto;
             if (fallbackPost) {
               list.push(fallbackPost);
             }

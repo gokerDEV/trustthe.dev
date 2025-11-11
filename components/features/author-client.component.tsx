@@ -1,6 +1,6 @@
 'use client';
 
-import type { AuthorDto, PostDto, PostFileDto } from '@/kodkafa/client/schemas';
+import type { AuthorDto, PostDto, PostFileDto } from '@/kodkafa/schemas';
 import { getImages } from '@/lib/image.utils';
 // Note: After running `pnpm run codegen`, import the generated hook:
 // import { usePostsControllerFindOneBySlug } from '@/kodkafa/client/posts/posts';

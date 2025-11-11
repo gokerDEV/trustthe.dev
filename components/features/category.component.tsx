@@ -2,20 +2,20 @@ import { Markdown } from '@/components/common/markdown.component';
 import { PostCard } from '@/components/features/post-card.component';
 import { PostPaginationWrapper } from '@/components/features/post-pagination-wrapper.component';
 import { coverRatios } from '@/config/navigation';
-import { postsQueryControllerFindAll } from '@/kodkafa/client/posts-query/posts-query';
+import { postsQueryControllerFindAll } from '@/kodkafa/ssr/posts-query/posts-query';
 import type {
   PageMetaDto,
   PostDto,
   PostsQueryControllerFindAll200,
-} from '@/kodkafa/client/schemas';
+} from '@/kodkafa/schemas';
 import { getApiDomain } from '@/lib/api/domain';
 import { parseMarkdown } from '@/lib/markdown';
 import { asPrefix } from '@/lib/seo/url-slug.utils';
 import { cn } from '@/lib/utils';
 import { notFound } from 'next/navigation';
 
-import { postsQueryControllerFindAllResponse } from '@/kodkafa/client/schemas/posts-query/posts-query.zod';
-import { fetchAndValidate } from '@/lib/api/safe-fetch.utils';
+import { postsQueryControllerFindAllResponse } from '@/kodkafa/zod/kodkafaApi.zod';
+import { fetchAndValidate } from '@/lib/api/fetch-and-validate';
 import { CollectionPageJsonLd } from './json-ld.component';
 
 /**

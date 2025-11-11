@@ -12,7 +12,7 @@ import {
   TWITTER_CARD_TYPE,
   TWITTER_HANDLE,
 } from '@/config/constants';
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import { Metadata } from 'next';
 import { OgType } from './metadata.types'; // Adjust path
 import { getCanonicalUrl, getImageData, getPageTitle } from './metadata.utils'; // Adjust path

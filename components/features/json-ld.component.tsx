@@ -1,4 +1,4 @@
-import type { PostDto } from '@/kodkafa/client/schemas';
+import type { PostDto } from '@/kodkafa/schemas';
 import {
   jsonLdGenerator,
   JsonLdGeneratorOptions,
