@@ -1,3 +1,5 @@
+import { getClientCredentialsToken } from '@/lib/auth/token-manager';
+
 export type HttpMethod = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 
 export type QueryParams = Record<
@@ -18,6 +20,15 @@ export interface FetchOptions<TBody>
   cache?: RequestCache;
 }
 
+/**
+ * Type helper to pass next.revalidate and cache through RequestInit
+ * Used when calling generated SSR functions that accept RequestInit
+ */
+export type FetchOptionsWithNext = RequestInit & {
+  next?: { revalidate?: number | false; tags?: string[] };
+  cache?: RequestCache;
+};
+
 function buildQuery(params?: QueryParams): string {
   if (!params) return '';
   const usp = new URLSearchParams();
@@ -29,31 +40,18 @@ function buildQuery(params?: QueryParams): string {
   return q.length > 0 ? `?${q}` : '';
 }
 
-function getBaseUrl(): string {
-  // Build time ve runtime için base URL
-  // Vercel'de VERCEL_URL kullanılır, local'de localhost
-  if (process.env.VERCEL_URL) {
-    return `https://${process.env.VERCEL_URL}`;
-  }
-  if (process.env.NEXT_PUBLIC_BASE_URL) {
-    return process.env.NEXT_PUBLIC_BASE_URL;
-  }
-  // Default: localhost (development ve build time için)
-  return 'http://localhost:3000';
+function isProxyUrl(url: string): boolean {
+  return url.startsWith('/api/');
 }
 
-function toAbsoluteUrl(url: string): string {
-  // Zaten mutlak URL ise olduğu gibi döndür
-  if (url.startsWith('http://') || url.startsWith('https://')) {
-    return url;
+function convertProxyUrlToBackendUrl(proxyUrl: string): string {
+  // /api/posts/goker.me/by-slug/goker -> posts/goker.me/by-slug/goker
+  const path = proxyUrl.replace(/^\/api\//, '');
+  const apiBase = process.env.KODKAFA_API_URL;
+  if (!apiBase) {
+    throw new Error('KODKAFA_API_URL environment variable is required');
   }
-  // Relative URL'yi mutlak URL'ye çevir
-  const baseUrl = getBaseUrl();
-  const cleanUrl = url.startsWith('/') ? url : `/${url}`;
-
-  console.log('baseUrl', baseUrl);
-  console.log('cleanUrl', cleanUrl);
-  return `${baseUrl}${cleanUrl}`;
+  return `${apiBase.replace(/\/+$/, '')}/${path}`;
 }
 
 export async function ssrMutator<TResponse, TBody = unknown>(
@@ -61,15 +59,103 @@ export async function ssrMutator<TResponse, TBody = unknown>(
   options?: FetchOptions<TBody>
 ): Promise<TResponse> {
   const query = buildQuery(options?.params);
+  const method = options?.method ?? (options?.body ? 'POST' : 'GET');
 
-  console.log('url', url);
-  const absoluteUrl = toAbsoluteUrl(url);
+  // SSR context'te proxy URL'lerini backend'e direkt çevir
+  // Bu, production build'de kendi sunucusuna istek yapma sorununu çözer
+  if (isProxyUrl(url)) {
+    const backendUrl = convertProxyUrlToBackendUrl(url);
+    const targetUrl = `${backendUrl}${query}`;
+
+    // SSR'da client credentials token kullan
+    const headers = new Headers();
+    if (options?.headers) {
+      if (options.headers instanceof Headers) {
+        options.headers.forEach((value, key) => {
+          headers.set(key, value);
+        });
+      } else if (Array.isArray(options.headers)) {
+        options.headers.forEach(([key, value]) => {
+          headers.set(key, value);
+        });
+      } else {
+        Object.entries(options.headers).forEach(([key, value]) => {
+          if (value) {
+            headers.set(
+              key,
+              Array.isArray(value) ? value.join(', ') : String(value)
+            );
+          }
+        });
+      }
+    }
+
+    if (!headers.has('authorization')) {
+      // Lazy token loading - only fetch when needed
+      // This prevents DYNAMIC_SERVER_USAGE errors during static generation
+      const token = await getClientCredentialsToken();
+      headers.set('authorization', `Bearer ${token}`);
+    }
+
+    // Determine cache strategy for static generation compatibility:
+    // - If cache is explicitly set, use it
+    // - If next.revalidate is provided, use 'default' to allow static generation
+    // - Otherwise, use 'default' to allow static generation (not 'no-store')
+    // Note: 'default' allows Next.js to statically generate pages even for external API calls
+    // 'no-store' forces dynamic rendering which breaks static generation
+    let cacheStrategy: RequestCache = 'default';
+
+    if (options?.cache !== undefined) {
+      // Explicit cache option takes precedence
+      cacheStrategy = options.cache;
+    } else if (options?.next?.revalidate !== undefined) {
+      // If revalidate is set, use 'default' to allow static generation
+      cacheStrategy = 'default';
+    }
+    // Default to 'default' (not 'no-store') to allow static generation
+
+    const init: RequestInit = {
+      method,
+      headers,
+      body: options?.body ? JSON.stringify(options.body) : undefined,
+      cache: cacheStrategy,
+    };
+
+    const res = await fetch(targetUrl, init);
+    const ct = res.headers.get('content-type') ?? '';
+
+    if (ct.includes('application/json')) {
+      const json = await res.json();
+      return {
+        status: res.status,
+        data: json,
+      } as TResponse;
+    }
+
+    if (!res.ok) {
+      const text = await res.text();
+      throw new Error(text || `HTTP ${res.status}`);
+    }
+
+    return {
+      status: res.status,
+      data: await res.text(),
+    } as unknown as TResponse;
+  }
+
+  // Proxy URL değilse, mevcut davranışı koru (relative URL için)
+  // Bu durumda Next.js'in internal fetch'i kullanılır
+  const absoluteUrl =
+    url.startsWith('http://') || url.startsWith('https://')
+      ? url
+      : url.startsWith('/')
+        ? url
+        : `/${url}`;
+
   const init: RequestInit = {
-    method: options?.method ?? (options?.body ? 'POST' : 'GET'),
+    method,
     headers: options?.headers,
     body: options?.body ? JSON.stringify(options.body) : undefined,
-    // SSR tarafında token yönetimi BFF'de; cache politika kontrolü burada:
-    // cache: 'no-store',
     credentials: 'include',
   };
 
@@ -82,14 +168,12 @@ export async function ssrMutator<TResponse, TBody = unknown>(
 
   if (ct.includes('application/json')) {
     const json = await res.json();
-    // Response'u { status, data } formatına çevir
     return {
       status: res.status,
       data: json,
     } as TResponse;
   }
 
-  // JSON olmayan response'lar için
   if (!res.ok) {
     const text = await res.text();
     throw new Error(text || `HTTP ${res.status}`);
