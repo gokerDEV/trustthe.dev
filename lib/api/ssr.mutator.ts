@@ -97,18 +97,22 @@ export async function ssrMutator<TResponse, TBody = unknown>(
       headers.set('authorization', `Bearer ${token}`);
     }
 
-    // Determine cache strategy:
-    // - If next.revalidate is provided, use 'default' to allow static generation
+    // Determine cache strategy for static generation compatibility:
     // - If cache is explicitly set, use it
-    // - Otherwise, default to 'no-store' for dynamic requests
-    // Note: For external API calls, 'default' allows Next.js to statically generate
-    // the page even though the fetch itself won't be cached by Next.js
-    const cacheStrategy: RequestCache =
-      options?.cache ??
-      (options?.next?.revalidate !== undefined &&
-      options.next.revalidate !== false
-        ? 'default'
-        : 'no-store');
+    // - If next.revalidate is provided, use 'default' to allow static generation
+    // - Otherwise, use 'default' to allow static generation (not 'no-store')
+    // Note: 'default' allows Next.js to statically generate pages even for external API calls
+    // 'no-store' forces dynamic rendering which breaks static generation
+    let cacheStrategy: RequestCache = 'default';
+
+    if (options?.cache !== undefined) {
+      // Explicit cache option takes precedence
+      cacheStrategy = options.cache;
+    } else if (options?.next?.revalidate !== undefined) {
+      // If revalidate is set, use 'default' to allow static generation
+      cacheStrategy = 'default';
+    }
+    // Default to 'default' (not 'no-store') to allow static generation
 
     const init: RequestInit = {
       method,
