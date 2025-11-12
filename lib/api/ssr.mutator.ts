@@ -20,6 +20,15 @@ export interface FetchOptions<TBody>
   cache?: RequestCache;
 }
 
+/**
+ * Type helper to pass next.revalidate and cache through RequestInit
+ * Used when calling generated SSR functions that accept RequestInit
+ */
+export type FetchOptionsWithNext = RequestInit & {
+  next?: { revalidate?: number | false; tags?: string[] };
+  cache?: RequestCache;
+};
+
 function buildQuery(params?: QueryParams): string {
   if (!params) return '';
   const usp = new URLSearchParams();
@@ -88,11 +97,24 @@ export async function ssrMutator<TResponse, TBody = unknown>(
       headers.set('authorization', `Bearer ${token}`);
     }
 
+    // Determine cache strategy:
+    // - If next.revalidate is provided, use 'default' to allow static generation
+    // - If cache is explicitly set, use it
+    // - Otherwise, default to 'no-store' for dynamic requests
+    // Note: For external API calls, 'default' allows Next.js to statically generate
+    // the page even though the fetch itself won't be cached by Next.js
+    const cacheStrategy: RequestCache =
+      options?.cache ??
+      (options?.next?.revalidate !== undefined &&
+      options.next.revalidate !== false
+        ? 'default'
+        : 'no-store');
+
     const init: RequestInit = {
       method,
       headers,
       body: options?.body ? JSON.stringify(options.body) : undefined,
-      cache: options?.cache ?? 'no-store',
+      cache: cacheStrategy,
     };
 
     const res = await fetch(targetUrl, init);
